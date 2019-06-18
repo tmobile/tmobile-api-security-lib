@@ -1,0 +1,89 @@
+#!groovy
+def props = ''
+def buildNumber = ''
+node('mesos') {
+    checkout scm
+    props = readYaml file: 'project.yaml'
+    library 'pipeline-build'
+    buildNumber = common.getJenkinsBuildNumber()
+
+    stage('build') {
+        mavenBuild {
+            artifactBuildNumber = buildNumber
+            appVersion = props.appVersion
+        }
+    }
+
+    def percentClassCoverageReq = props.percentClassCoverageReq // if less than this value job will be marked as UNSTABLE
+    def percentComplexityCoverageReq = props.percentComplexityCoverageReq // if less than this value job will be marked as UNSTABLE
+    def percentInstructionCoverageReq = props.percentInstructionCoverageReq // if less than this value job will be marked as UNSTABLE
+    def percentLineCoverageReq = props.percentLineCoverageReq // if less than this value job will be marked as UNSTABLE
+    def percentMethodCoverageReq = props.percentMethodCoverageReq // if less than this value job will be marked as UNSTABLE
+    def percentBranchCoverageReq = props.percentBranchCoverageReq // if less than this value job will be marked as UNSTABLE
+
+    stage('JaCoCo') {
+        step([$class                    : 'JacocoPublisher',
+              changeBuildStatus         : true,
+              maximumBranchCoverage     : percentBranchCoverageReq,
+              maximumClassCoverage      : percentClassCoverageReq,
+              maximumComplexityCoverage : percentComplexityCoverageReq,
+              maximumInstructionCoverage: percentInstructionCoverageReq,
+              maximumLineCoverage       : percentLineCoverageReq,
+              maximumMethodCoverage     : percentMethodCoverageReq])
+    }
+
+    if (currentBuild.result.equalsIgnoreCase('UNSTABLE')) {
+        echo "JaCoCo report build result ${currentBuild.result}"
+        currentBuild.result = 'ABORTED'
+        error 'JaCoCo coverages not sufficient.  check the report'
+    }
+
+    stage('Sonar Scan') {
+        sonar {
+            buildType = 'MAVEN'
+            runScan = true
+            artifactBuildNumber = buildNumber
+        }
+    }
+}
+
+// Quality CHECK SHOULD RUN OUTSIDE OF A NODE
+stage('Quality Check') {
+    // sonar doc https://bitbucket.service.edp.t-mobile.com/projects/PEJ/repos/sonarscan/browse
+    library 'pipeline-build'  // REQUIRED TO MAKE sonar GLOBAL FUNCTION AVAILABLE
+    buildNumber = common.getJenkinsBuildNumber()
+    sonar {
+        runQualityGate = false
+        artifactBuildNumber = buildNumber
+    }
+}
+
+node('mesos') {
+	props = readYaml file: 'project.yaml'
+    library 'pipeline-artifact'
+    buildNumber = common.getJenkinsBuildNumber()
+    
+	stage('Artifact Upload') {
+	    sh "scp pom.xml ${props.artifactId}-${props.appVersion}.${buildNumber}.pom"
+	    uploadBuildArtifacts {
+	        groupId = props.groupId
+	        artifactId = props.artifactId
+	        versionToUpload = "${props.appVersion}.${buildNumber}"
+	        artifactoryRepository = 'libs-release-local'
+	        artifactoryServerURL = 'https://artifactory.service.edp.t-mobile.com/artifactory'
+	        buildArtifactType = 'jar'
+	        artifacts = ['*.jar', '*.pom']
+	    }
+	}
+	stage('Upload Artifact to Corporate Maven Repository') {
+	    dir ('WORKSPACE'){
+			library 'pipeline-artifact'
+			groupIdURI = props.groupId.replace(".", "/")
+			println groupIdURI
+			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'svc_apc_dev_cicd', passwordVariable: 'pass', usernameVariable: 'user']]) {
+				sh "curl -k -u '${user}':'${pass}' -X PUT 'http://artifactory.corporate.t-mobile.com:80/artifactory/apc-maven-release-local/${groupIdURI}/${props.artifactId}/${props.appVersion}.${buildNumber}/${props.artifactId}-${props.appVersion}.${buildNumber}.jar' -T '${WORKSPACE}/target/${props.artifactId}-${props.appVersion}.${buildNumber}.jar'"
+				sh "curl -k -u '${user}':'${pass}' -X PUT 'http://artifactory.corporate.t-mobile.com:80/artifactory/apc-maven-release-local/${groupIdURI}/${props.artifactId}/${props.appVersion}.${buildNumber}/${props.artifactId}-${props.appVersion}.${buildNumber}.pom' -T '${WORKSPACE}/${props.artifactId}-${props.appVersion}.${buildNumber}.pom'"
+			}
+		}
+   }
+}
