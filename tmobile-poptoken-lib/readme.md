@@ -14,11 +14,12 @@ Body {
 }
 Signature: <digitalSignature>
 ```
-(./pop_token_sequence_diagram.png)
+![PoP Token Sequence Diagram](/pop_token_sequence_diagram.png)
+
 
 ### PoP Token Builder Library
 
-For more information on PoP token builder library, please refer to the readme [PoP Token Builder Library Readme.md](./lib-tmobile-oss-poptoken-builder/readme.md)
+For more information on PoP token builder library, please refer to the readme file - [PoP Token Builder Library Readme.md](./lib-tmobile-oss-poptoken-builder/readme.md)
 
 ### PoP Token Validator Library
-For more information on PoP token validator library, please refer to the readme [PoP Token Validator Library Readme](./lib-tmobile-oss-poptoken-validator/readme.md)
+For more information on PoP token validator library, please refer to the readme file - [PoP Token Validator Library Readme.md](./lib-tmobile-oss-poptoken-validator/readme.md)
