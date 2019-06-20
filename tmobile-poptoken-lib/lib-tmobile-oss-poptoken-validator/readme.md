@@ -2,33 +2,16 @@
   
 ---
   
-###  Using the PoP Token Validator Library
-Add a following maven dependency in pom.xml to perform the TAAP PoP validation.
+### Build/Install PoP Token Builder Library
+
+Execute following command to build the PoP token builder library.
 
 ```
-<dependency>
-	<groupId>com.tmobile.security.taap</groupId>
-	<artifactId>lib-tmobile-poptoken-validator</artifactId>
-	<version>[1.0.0, 1.0.1)</version>
-</dependency>
-```  
-
-The PoP Token Validator Library is available in EDP Maven repository (https://artifactory.service.edp.t-mobile.com) as well as in Corporate Maven Repository (https://artifactory.corporate.t-mobile.com).
-
-For setting up the EDP Maven SSL certificate and Maven settings.xml, please refer to https://qwiki.internal.t-mobile.com/display/EITA/Maven+Setup.
-
-<br>
-
-**Note: In order to get the latest version of this library for the version range specified in the maven dependency configuration, the -U option should be used while building the microservice code, e.g. `mvn clean install -U`. On Jenkins this can be achieved by configuring mavenGoals in project.yaml as `mavenGoals: clean install -U`.**
-
-<br>
-
-```
-mavenGoals: clean install -U
+mavenGoals: clean install
 ```
 
 <br>
-  
+
 ---
 
 ### Implementation Details  
@@ -304,18 +287,3 @@ Validates the PoP token with RSA public key.
    * `PopTokenValidatorException` — If the PoP token cannot be validated
   
 ---
-  
-### Overriding Default Accepted Leeway
-The default 10 seconds accepted leeway can be modified by overriding the `PopTokenValidator.getAcceptedLeewaySeconds()` method.  This leeway is applied to 'Not Before', 'Issued At' and 'Expires At' claims.
-
-Below is a sample code snippet which shows how to override the accepted leeway.
-
-```
-PopTokenValidator popTokenValidator = new PopTokenValidator() {
-    
-    @Override
-    protected long getAcceptedLeewaySeconds() {
-        return 20;
-    }
-}
-```

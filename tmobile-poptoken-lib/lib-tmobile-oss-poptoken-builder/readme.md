@@ -2,29 +2,12 @@
   
 ---
   
-###  Using the PoP Token Builder Library
-Add a following maven dependency in pom.xml to build the TAAP PoP token.
+### Build/Install PoP Token Builder Library
+
+Execute following command to build the PoP token builder library.
 
 ```
-<dependency>
-	<groupId>com.tmobile.security.taap</groupId>
-	<artifactId>lib-tmobile-poptoken-builder</artifactId>
-	<version>[1.0.0, 1.0.1)</version>
-</dependency>
-```
-
-The PoP Token Builder Library is available in EDP Maven repository (https://artifactory.service.edp.t-mobile.com) as well as in Corporate Maven Repository (https://artifactory.corporate.t-mobile.com).
-
-For setting up the EDP Maven SSL certificate and Maven settings.xml, please refer to https://qwiki.internal.t-mobile.com/display/EITA/Maven+Setup.
-
-<br>
-
-**Note: In order to get the latest version of this library for the version range specified in the maven dependency configuration, the -U option should be used while building the microservice code, e.g. `mvn clean install -U`. On Jenkins this can be achieved by configuring mavenGoals in project.yaml as `mavenGoals: clean install -U`.**
-
-<br>
-
-```
-mavenGoals: clean install -U
+mavenGoals: clean install
 ```
 
 <br>
@@ -360,17 +343,3 @@ public class PopTokenBuilderDemoWithRsaPrivateKeyTest {
     }
 }
 ```
-  
----
-  
-###  PoP Token Builder Demo App
-
-For PoP Token Builder Demo App refer to [pop-token-builder-demo-app](https://bitbucket.service.edp.t-mobile.com/projects/DIAPIC/repos/pop-token-builder-demo-app/browse).
-
-This demo app contains the following classes to demonstrate how to build the PoP token for OAuth request and for the functional requests.
-
-* PopTokenBuilderForOAuthTokenClientCredentialsGrantTypeRequest - Demonstrates how to build the PoP token while invoking the `/oauth2/v4/tokens` endpoint for client credentials grant type.
-* PopTokenBuilderForCreateOrderFunctionalRequest - Demonstrates how to build the PoP token while invoking the functional API endpoint.
-  
----
-  
