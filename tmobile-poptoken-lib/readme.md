@@ -14,7 +14,7 @@ Body {
 }
 Signature: <digitalSignature>
 ```
-![PoP Token Sequence Diagram](/pop_token_sequence_diagram.png)
+![PoP Token Sequence Diagram](./pop_token_sequence_diagram.png)
 
 
 ### PoP Token Builder Library
