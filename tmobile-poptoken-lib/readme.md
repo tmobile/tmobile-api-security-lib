@@ -8,6 +8,7 @@ Proof of possession (PoP) provides a mechanism to bind key material to access to
 
 Proof of possession (PoP) helps enabling the message integrity and also helps avoiding the transaction reply and token theft.  For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway.
 
+
 ## PoP Token Flow
 
 ![PoP Token Sequence Diagram](./images/pop_token_sequence_diagram.png)
@@ -21,7 +22,7 @@ Header: {alg, type}
 Body { 
   iat: <epoch time> 
   exp: <epoch time> 
-  ehts: <authorization; content_type; uri; http-method; body> => All request headers, URI, HTTP method and body fields used to create hash. 
+  ehts: <authorization; content_type; uri; http-method; body> => All request headers, URI, HTTP method and body fields used to create hash
   edts: <Base64UrlSafeEncoding[SHA256(all ehts claim values as a concatenated string)]">
   jti: <unique identifier> 
   v: "v1"

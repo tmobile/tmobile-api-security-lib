@@ -6,7 +6,7 @@
 Execute following command to build the PoP token builder library.
 
 ```
-mavenGoals: clean install
+mvn clean install
 ```
 
 
@@ -47,7 +47,7 @@ The following table shows the processing time taken by PoP token builder for var
 The following Java JUnit test describes how to build the PoP using private key PEM string.  
   
 ```
-package com.tmobile.security.taap.poptoken.builder.demo;
+package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;
 
@@ -56,8 +56,8 @@ import java.util.LinkedHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.tmobile.security.taap.poptoken.builder.PopTokenBuilder;
-import com.tmobile.security.taap.poptoken.builder.exception.PopTokenBuilderException;
+import com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder;
+import com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException;
 
 public class PopTokenBuilderDemoWithPrivateKeyPemStringTest {
 
@@ -120,7 +120,7 @@ public class PopTokenBuilderDemoWithPrivateKeyPemStringTest {
 The following Java JUnit test describes how to build the PoP using the encrypted private key PEM string.  
   
 ```
-package com.tmobile.security.taap.poptoken.builder.demo;
+package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;
 
@@ -129,8 +129,8 @@ import java.util.LinkedHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.tmobile.security.taap.poptoken.builder.PopTokenBuilder;
-import com.tmobile.security.taap.poptoken.builder.exception.PopTokenBuilderException;
+import com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder;
+import com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException;
 
 public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordTest {
 
@@ -265,7 +265,7 @@ public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordTest 
 The following Java JUnit test describes how to build the PoP using RSAPrivateKey.
   
 ```
-package com.tmobile.security.taap.poptoken.builder.demo;
+package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;
 
@@ -275,9 +275,9 @@ import java.util.LinkedHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import com.tmobile.security.taap.poptoken.builder.PopTokenBuilder;
-import com.tmobile.security.taap.poptoken.builder.exception.PopTokenBuilderException;
-import com.tmobile.security.taap.poptoken.builder.utils.PopTokenBuilderUtils;
+import com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder;
+import com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException;
+import com.tmobile.oss.security.taap.poptoken.builder.utils.PopTokenBuilderUtils;
 
 public class PopTokenBuilderDemoWithRsaPrivateKeyTest {
 

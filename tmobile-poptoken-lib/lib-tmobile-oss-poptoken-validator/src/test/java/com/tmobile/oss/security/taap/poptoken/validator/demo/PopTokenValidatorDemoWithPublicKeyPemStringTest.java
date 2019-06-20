@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.tmobile.oss.security.taap.poptoken.validator.PopEhtsKey;
 import com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenValidatorException;
@@ -23,15 +24,15 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
     @Test
     public void validatePopTokenWithPublicKeyPemString() {
 
-        String popToken = "eyJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiSFU0VVk2cTUxOElQNmt2YkpITURzUm11SllialdpZEtMWHpRS1c5R3hXRT0iLCJ2IjoidjEiLCJleHAiOjE1Mzc0MDQzNTMsImVodHMiOiJDb250ZW50LVR5cGU7QXV0aG9yaXphdGlvbiIsImlhdCI6MTUzNzQwNDIzMywianRpIjoiNjdlMTA4ZGEtOTBjZi00YzNiLWIwMjMtNTA4Mjc2Yjc0OTA2In0.csI2uOC8nKWNbnLxj8nwD5KTUHgjf7BKuRqtcUXX5EdejOLKqjci7295WYWZUMDSgQV3jqNgbPFRyc7e5cwOuT098CNCFYx6tFYWFRcZViGSeEkSbsxTe9_H1iwQjt2GI7iotaGTw02FXTZ06nVeljd3076CNGE9lFFjJ9y8FdpiGbUtdG3kCRAJ1KPLya9xHrTSXqpI0TBpa3chJ7D1PdDadAPOlMqP_C-UqkrrQzUi5GT2lcc-q_-EVaQGIulmkY1dy5ns57BMyFyvFiSKdyZRhTuBZgcJEROZM_eG-DY6S5TOlSxDP16SWF0liN2L1h5CWAsmSssMAZODhz6_LA";
+        String popToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiRmtHalFWWWNuZ0VkZ3lPa3BiQjFUVWI2X19jenFib25wUVZDc2Y1Y3J3RSIsInYiOiJ2MSIsImV4cCI6MTU2MTA3MjIyNywiZWh0cyI6IkNvbnRlbnQtVHlwZTtBdXRob3JpemF0aW9uO3VyaTtodHRwLW1ldGhvZDtib2R5IiwiaWF0IjoxNTYxMDcyMTA3LCJqdGkiOiI2ZDlmOGQ3Zi01ZTM3LTRiNWItYTJiMC00M2E0YzllY2Q2ODkifQ.k7DYvg7kGYE8OosqkvGBAkktATbRcr1YdqefX5N0bc_yWTLd_1TXseZ6e2dr7E9UkDwN4FfZ8hbm8IF7oQy3BOgws5kt_u_x-HluGlESQLIsX1BoNGGrCyDX7gBgeDc-P0z70UJXi5r_VJz8WLoEyp3ZS14I3HlSJAuYwdTvf207j3Chj5iCA9B6TfRORbc-3ua35K_3OL8WckXfUGpkLDitDvA_BXxN4_pMCrTXBEYCxhWl4ZJcIuL3T8uGPFkug_Vcz_Wojdv4BauY-M_elfcXpM6-D_L8dE5hWrSAXZPnRN36rb0QhYeXO80zFtY3SuM0-CoC6_EoaVhZ28VCAA";
 
         String publicKeyPemString = "-----BEGIN PUBLIC KEY-----" + LINE_SEPARATOR //
-                + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiQAMi3pPpY0fPAu7pJZf" + LINE_SEPARATOR //
-                + "dp/HunsMtFgS7R7pHAmHJO6ejC7aVcSK8DM4yEAjQC1IbwkIKPINbXC+OiJSVzFk" + LINE_SEPARATOR //
-                + "o6YZNnVeOZKwtpOnFFZMUGpzX6H15Ty7bph+f4a/za2Awgl0X5sZTO2WvEeoHMr1" + LINE_SEPARATOR //
-                + "ziUx0bwvts5MVxFpa6M062eTbQv9c45KHr0Lm/UBC2r9TccR2lhrboDFe608OUe9" + LINE_SEPARATOR //
-                + "a7YQe6G2yz8rXjugF1/qHaLYnvEln+DkHaq/mH70AHFndnmfbjDV/lTpxa5eGZh3" + LINE_SEPARATOR //
-                + "7syDMdEbzpFkPHs80XPeJx4GjZW/In0wD37+9+mBVLA2JHZFyeRAB+hpHMIvlLbR" + LINE_SEPARATOR //
+                + "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr6yrypbkrAT+4m0yU5sz" + LINE_SEPARATOR //
+                + "udm0Cm0NM5AOxU1x7Nx9hYRYrxbh+LFamxBGAKhO3Ej2ORfWyXtw1BuVXxheHGC9" + LINE_SEPARATOR //
+                + "CnNCozCh3OX15Rf23z+JeI2jGfa+JxiQ4qRBl53hMDOMEWp745aOr/bKOwnM6FCT" + LINE_SEPARATOR //
+                + "DlcKb/8N0ydJiiuX3gk2JX5pmZtiKgHsIaX/4O65fF42r4pRKw23RouCyqjTTWqt" + LINE_SEPARATOR //
+                + "OYrZSHFKwTp7VhCYXmjf87B6GO23YIF/TVJfkZ+b1LBKg+RTUqFeJgEvjEZka0Ug" + LINE_SEPARATOR //
+                + "r/t/tRzZsTLRMG38ENd0KDbsqtmILcLL7bCglyzdPS1HmOQIQwO7zKN8tZjNrGvO" + LINE_SEPARATOR //
                 + "SwIDAQAB" + LINE_SEPARATOR //
                 + "-----END PUBLIC KEY-----" + LINE_SEPARATOR; //
 
@@ -72,6 +73,12 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
             return "application/json";
         } else if (ehtsKey.equals("Authorization")) {
             return "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS";
+        } else if (ehtsKey.equals(PopEhtsKey.HTTP_METHOD.keyName())) {
+            return "post";
+        } else if (ehtsKey.equals(PopEhtsKey.URI.keyName())) {
+            return "/commerce/v1/orders";
+        } else if (ehtsKey.equals(PopEhtsKey.BODY.keyName())) {
+            return "{\"orderId\": 100, \"product\": \"Mobile Phone\"}";
         } else {
             return null;
         }
