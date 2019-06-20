@@ -1,3 +1,5 @@
+![PoP Token Sequence Diagram](./pop_token_sequence_diagram.png)
+
 ### PoP Token Libraries
 Using a standard JWT as a bearer token for these flows still has the same security vulnerabilities as prior formats; attackers can still steal them or modify transactions. A stolen JWT can be used to create new requests. With TAAP, T-Mobile uses a Proof of Possession Token (PoP Token) to bind the access token to the rest of the request using a digital signature.
 
@@ -14,8 +16,6 @@ Body {
 }
 Signature: <digitalSignature>
 ```
-![PoP Token Sequence Diagram](./pop_token_sequence_diagram.png)
-
 
 ### PoP Token Builder Library
 
