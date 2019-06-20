@@ -1,8 +1,7 @@
-## T-Mobile PoP Token Validator
+# T-Mobile PoP Token Validator
+
   
----
-  
-### Build/Install PoP Token Builder Library
+## Build/Install PoP Token Builder Library
 
 Execute following command to build the PoP token builder library.
 
@@ -10,11 +9,8 @@ Execute following command to build the PoP token builder library.
 mavenGoals: clean install
 ```
 
-<br>
-
----
-
-### Implementation Details  
+  
+## Implementation Details  
 The T-Mobile PoP Validator library performs the following validations:
 
 * Validates the exp (expiration time) claim to ensure the token is still valid (uses 10 seconds of leeway time).
@@ -25,18 +21,16 @@ The T-Mobile PoP Validator library performs the following validations:
 
 * If the API request body is very large or data is being streamed then the "body" should not be added to ehts/edts while building/validating the PoP token.
 
----
-
-### Determining the ehts Key Name
+  
+## Determining the ehts Key Name
 
 * For HTTP request URI, "uri" should be used as ehts key name, `PopEhtsKey.URI.keyName()`. For "uri" ehts value, the URI and query string of the request URL should be put in the ehts key-value map. Example: If the URL is `https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000` then only `/commerce/v1/orders?account-number=0000000000` should be used as ehts value. The query parameter values part of "uri" ehts value should be in URL encoded format. 
 * For HTTP method, "http-method" should be used as ehts key name, `PopEhtsKey.HTTP_METHOD.keyName()`.  
 * For HTTP request headers, the header name should be used as ehts key name.  
 * For HTTP request body, "body" should be used as ehts key name, `PopEhtsKey.BODY.keyName()`.  
 
----
   
-### PoP Token Validator Performance Test Results
+## PoP Token Validator Performance Test Results
 The following table shows the processing time taken by PoP token validation for various test cases.
   
 | Test Name                           | Total Processing Time For 1000 Calls | Avg Processing Time For 1 Call |
@@ -46,10 +40,9 @@ The following table shows the processing time taken by PoP token validation for 
 | PoP token with 10K request payload  | 777 ms                               | ~1 ms                          |
 | PoP token with 100K request payload | 1999 ms                              | ~2 ms                          |
 | PoP token with 1M request payload   | 16111 ms                             | ~16 ms                         |
+
   
----
-    
-### Validating the PoP Token Using Public Key PEM String
+## Validating the PoP Token Using Public Key PEM String
 The following Java JUnit test describes how to validate the PoP token with the public key PEM string.
 
 ```
@@ -133,9 +126,9 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
     }
 }
 ```
-### Javadoc for validatePopTokenWithPublicKeyPemString Method
+## Javadoc for validatePopTokenWithPublicKeyPemString Method
 
-#### `public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+### `public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
 
 Validates the PoP token with public key PEM string.
 
@@ -164,10 +157,9 @@ Validates the PoP token with public key PEM string.
    * `PopTokenSignatureVerificationException` — If the PoP token signature resulted invalid
    * `PopTokenInvalidEdtsHashException` — If the edts (external data to sign) hash is invalid
    * `PopTokenValidatorException` — If the PoP token cannot be validated
-  
----
-  
-### Validating the PoP Token Using RSAPublicKey  
+
+
+## Validating the PoP Token Using RSAPublicKey  
 The following Java JUnit test describes how to validate the PoP token with the RSAPublicKey.  
   
 ```
@@ -255,9 +247,9 @@ public class PopTokenValidatorDemoWithRsaPublicKeyTest {
     }
 }
 ```
-### Javadoc for validatePopTokenWithRsaPublicKey Method
+## Javadoc for validatePopTokenWithRsaPublicKey Method
 
-#### `public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+### `public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
 
 Validates the PoP token with RSA public key.
 
@@ -285,5 +277,3 @@ Validates the PoP token with RSA public key.
    * `PopTokenSignatureVerificationException` — If the PoP token signature resulted invalid
    * `PopTokenInvalidEdtsHashException` — If the edts (external data to sign) hash is invalid
    * `PopTokenValidatorException` — If the PoP token cannot be validated
-  
----

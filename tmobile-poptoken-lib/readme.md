@@ -8,11 +8,12 @@ Proof of possession (PoP) provides a mechanism to bind key material to access to
 
 Proof of possession (PoP) helps enabling the message integrity and to avoid transaction reply and token theft.  For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway.
 
-### PoP Token Flow
+## PoP Token Flow
 
 ![PoP Token Sequence Diagram](./images/pop_token_sequence_diagram.png)
 
-### PoP Token Format
+
+## PoP Token Format
 
 The format of the PoP token used by T-Mobile is:
 ```
@@ -28,12 +29,14 @@ Body {
 Signature: <digitalSignature>
 ```
 
-### PoP Token Builder Library
+
+## PoP Token Builder Library
 The PoP token builder library can be used to create a PoP token.
 
 For more information on PoP token builder library, please refer to the readme file - [PoP Token Builder Library Readme.md](./lib-tmobile-oss-poptoken-builder/readme.md).
 
-### PoP Token Validator Library
+
+## PoP Token Validator Library
 
 The PoP token validator library can be used to validate a PoP token.
 
