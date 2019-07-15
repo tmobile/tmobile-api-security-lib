@@ -64,7 +64,7 @@ public class PopTokenBuilderTest {
         assertNotNull("ExpireAt (exp) is null", signedPopToken.getExpiresAt());
         assertEquals("Token validity duration is invalid", PopTokenBuilder.POP_TOKEN_VALIDITY_DURATION_IN_MILLIS,
                 ((signedPopToken.getExpiresAt().getTime() - signedPopToken.getIssuedAt().getTime())));
-        assertEquals("v1", signedPopToken.getClaim("v").asString());
+        assertEquals("1", signedPopToken.getClaim("v").asString());
         assertNotNull("Unique identifer (jti) is null", signedPopToken.getClaim("jti").asString());
 
         // verify with the matching public key, this should succeed
@@ -154,7 +154,7 @@ public class PopTokenBuilderTest {
         assertNotNull("ExpireAt (exp) is null", signedPopToken.getExpiresAt());
         assertEquals("Token validity duration is invalid", PopTokenBuilder.POP_TOKEN_VALIDITY_DURATION_IN_MILLIS,
                 ((signedPopToken.getExpiresAt().getTime() - signedPopToken.getIssuedAt().getTime())));
-        assertEquals("v1", signedPopToken.getClaim("v").asString());
+        assertEquals("1", signedPopToken.getClaim("v").asString());
         assertNotNull("Unique identifer (jti) is null", signedPopToken.getClaim("jti").asString());
 
         // verify with the matching public key, this should succeed
@@ -246,7 +246,7 @@ public class PopTokenBuilderTest {
         assertNotNull("ExpireAt (exp) is null", signedPopToken.getExpiresAt());
         assertEquals("Token validity duration is invalid", PopTokenBuilder.POP_TOKEN_VALIDITY_DURATION_IN_MILLIS,
                 ((signedPopToken.getExpiresAt().getTime() - signedPopToken.getIssuedAt().getTime())));
-        assertEquals("v1", signedPopToken.getClaim("v").asString());
+        assertEquals("1", signedPopToken.getClaim("v").asString());
         assertNotNull("Unique identifer (jti) is null", signedPopToken.getClaim("jti").asString());
 
         // verify with the matching public key, this should succeed
@@ -289,7 +289,7 @@ public class PopTokenBuilderTest {
         assertNotNull("ExpireAt (exp) is null", signedPopToken.getExpiresAt());
         assertEquals("Token validity duration is invalid", PopTokenBuilder.POP_TOKEN_VALIDITY_DURATION_IN_MILLIS,
                 ((signedPopToken.getExpiresAt().getTime() - signedPopToken.getIssuedAt().getTime())));
-        assertEquals("v1", signedPopToken.getClaim("v").asString());
+        assertEquals("1", signedPopToken.getClaim("v").asString());
         assertNotNull("Unique identifer (jti) is null", signedPopToken.getClaim("jti").asString());
 
         // verify with the matching public key, this should succeed
@@ -330,7 +330,7 @@ public class PopTokenBuilderTest {
         assertNotNull("ExpireAt (exp) is null", signedPopToken.getExpiresAt());
         assertEquals("Token validity duration is invalid", PopTokenBuilder.POP_TOKEN_VALIDITY_DURATION_IN_MILLIS,
                 ((signedPopToken.getExpiresAt().getTime() - signedPopToken.getIssuedAt().getTime())));
-        assertEquals("v1", signedPopToken.getClaim("v").asString());
+        assertEquals("1", signedPopToken.getClaim("v").asString());
         assertNotNull("Unique identifer (jti) is null", signedPopToken.getClaim("jti").asString());
 
         // verify with the different public key, this should not succeed
