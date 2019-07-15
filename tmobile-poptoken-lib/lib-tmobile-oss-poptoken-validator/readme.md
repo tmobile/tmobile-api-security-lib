@@ -24,7 +24,7 @@ The T-Mobile PoP Validator library performs the following validations:
   
 ## Determining the ehts Key Name
 
-* For HTTP request URI, "uri" should be used as ehts key name, `PopEhtsKey.URI.keyName()`. For "uri" ehts value, the URI and query string of the request URL should be put in the ehts key-value map. Example: If the URL is `https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000` then only `/commerce/v1/orders?account-number=0000000000` should be used as ehts value. The query parameter values part of "uri" ehts value should be in URL encoded format. 
+* For HTTP request URI, "uri" should be used as ehts key name, `PopEhtsKey.URI.keyName()`. For "uri" ehts value, the URI and query string of the request URL should be put in the ehts key-value map. Example: If the URL is `https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000` then only `/commerce/v1/orders?account-number=0000000000` should be used as ehts value. The query parameter values part of "uri" ehts value should not be in URL encoded format. 
 * For HTTP method, "http-method" should be used as ehts key name, `PopEhtsKey.HTTP_METHOD.keyName()`.  
 * For HTTP request headers, the header name should be used as ehts key name.  
 * For HTTP request body, "body" should be used as ehts key name, `PopEhtsKey.BODY.keyName()`.  
@@ -150,7 +150,7 @@ Validates the PoP token with public key PEM string.
      For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
      "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
      "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
-     of "uri" ehts should be in URL encoded format.</li>
+     of "uri" ehts should not be in URL encoded format.</li>
      <li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
      <li>For HTTP request headers, the header name should be used as ehts key name.</li>
      <li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
@@ -279,7 +279,7 @@ Validates the PoP token with RSA public key.
      For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
      "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
      "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
-     of "uri" ehts should be in URL encoded format.</li>
+     of "uri" ehts should not be in URL encoded format.</li>
      <li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
      <li>For HTTP request headers, the header name should be used as ehts key name.</li>
      <li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>

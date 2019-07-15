@@ -60,7 +60,7 @@ public class PopTokenValidator {
      *            For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
      *            "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
      *            "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
-     *            of "uri" ehts should be in URL encoded format.</li>
+     *            of "uri" ehts should not be in URL encoded format.</li>
      *            <li>For HTTP method, "http-method" should be used as ehts key name,
      *            <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
      *            <li>For HTTP request headers, the header name should be used as ehts key name.</li>
@@ -106,7 +106,7 @@ public class PopTokenValidator {
      *            For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
      *            "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
      *            "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
-     *            of "uri" ehts should be in URL encoded format.</li>
+     *            of "uri" ehts should not be in URL encoded format.</li>
      *            <li>For HTTP method, "http-method" should be used as ehts key name,
      *            <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
      *            <li>For HTTP request headers, the header name should be used as ehts key name.</li>
