@@ -29,7 +29,7 @@ public class PopTokenValidatorTestHelper {
                 .withClaim("ehts", buildEhtsString(ehtsKeyValueMap)) //
                 .withClaim("edts", calculateEdtsSha256Base64Hash(ehtsKeyValueMap)) //
                 .withClaim("jti", UUID.randomUUID().toString()) //
-                .withClaim("v", "v1") //
+                .withClaim("v", "1") //
                 .withIssuedAt(tokenIssuedAtDate) //
                 .withExpiresAt(new Date(tokenIssuedAtDate.getTime() + (tokenValidForSeconds * 1000))) //
                 .sign(buildRsa256Algorithm(rsaPrivateKey, null)); //
