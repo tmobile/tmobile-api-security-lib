@@ -25,7 +25,7 @@ Body {
   ehts: <authorization; content_type; uri; http-method; body> => All request headers, URI, HTTP method and body fields used to create hash
   edts: <Base64UrlSafeEncoding[SHA256(all ehts claim values as a concatenated string)]">
   jti: <unique identifier> 
-  v: "v1"
+  v: "1"
 }
 Signature: <digitalSignature>
 ```
