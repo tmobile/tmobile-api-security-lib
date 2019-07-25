@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.tmobile.oss.security.taap.poptoken.builder.exception.PopPrivateKeyParseException;
 import com.tmobile.oss.security.taap.poptoken.builder.testutils.PopTokenBuilderTestUtils;
-import com.tmobile.oss.security.taap.poptoken.builder.utils.PopTokenBuilderUtils;
 
 public class PopTokenBuilderUtilsTest {
 
@@ -173,21 +172,6 @@ public class PopTokenBuilderUtilsTest {
         // perform an action
         RSAPrivateKey rsaPrivateKey = PopTokenBuilderUtils.encryptedKeyPemStringToRsaPrivateKey(des3EncryptedPrivateKeyPemString,
                 privateKeyPassword);
-
-        // validate the results
-        assertNotNull("The rsaPrivateKey should not be null", rsaPrivateKey);
-    }
-
-    @Test
-    public void encryptedKeyPemStringToRsaPrivateKeyWithPassword__validPrivateKeyPemStringWithoutLineSeparators__successfullyReturnsRsaPrivateKey()
-            throws Exception {
-
-        // setup the data
-        String encryptedPrivateKeyPemStringWithoutLineSeparators = aes256EncryptedPrivateKeyPemString.replaceAll(LINE_SEPARATOR, "");
-
-        // perform an action
-        RSAPrivateKey rsaPrivateKey = PopTokenBuilderUtils
-                .encryptedKeyPemStringToRsaPrivateKey(encryptedPrivateKeyPemStringWithoutLineSeparators, privateKeyPassword);
 
         // validate the results
         assertNotNull("The rsaPrivateKey should not be null", rsaPrivateKey);

@@ -6,17 +6,12 @@ import java.util.LinkedHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.tmobile.oss.security.taap.poptoken.builder.PopEhtsKey;
 import com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder;
 import com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException;
 
 public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordNoRequestPayloadPerfTest {
-
-    private static final Logger logger = LoggerFactory
-            .getLogger(PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordNoRequestPayloadPerfTest.class);
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
@@ -69,13 +64,8 @@ public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordNoReq
             buildPopTokenWithEncryptedPrivateKeyPemString(aes256EncryptedPrivateKeyPemString, privateKeyPassword);
         }
 
-        long actualProcessingTime = System.currentTimeMillis() - startTime;
-        long expectedProcessingTime = 20000L;
-
-        logger.info("buildPopTokenWithAes256EncryptedPrivateKeyPemString -> actual processing time: " + actualProcessingTime + " ms"); //
-        assertTrue("Should not have taken more than " + expectedProcessingTime
-                + " millis for 1000 validations, actual processing time: " + actualProcessingTime,
-                (actualProcessingTime <= expectedProcessingTime)); //
+        long endTime = System.currentTimeMillis();
+        assertTrue("Actual processing time is " + (endTime - startTime) + " ms", (endTime - startTime) <= 35000);
     }
 
     @Test
@@ -126,14 +116,8 @@ public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordNoReq
         for (int i = 0; i < 1000; i++) {
             buildPopTokenWithEncryptedPrivateKeyPemString(des3EncryptedPrivateKeyPemString, privateKeyPassword);
         }
-
-        long actualProcessingTime = System.currentTimeMillis() - startTime;
-        long expectedProcessingTime = 20000L;
-
-        logger.info("buildPopTokenWithDes3EncryptedPrivateKeyPemString -> actual processing time: " + actualProcessingTime + " ms"); //
-        assertTrue("Should not have taken more than " + expectedProcessingTime
-                + " millis for 1000 validations, actual processing time: " + actualProcessingTime,
-                (actualProcessingTime <= expectedProcessingTime)); //
+        long endTime = System.currentTimeMillis();
+        assertTrue("Actual processing time is " + (endTime - startTime) + " ms", (endTime - startTime) <= 35000);
     }
 
     // ===== helper methods ===== //

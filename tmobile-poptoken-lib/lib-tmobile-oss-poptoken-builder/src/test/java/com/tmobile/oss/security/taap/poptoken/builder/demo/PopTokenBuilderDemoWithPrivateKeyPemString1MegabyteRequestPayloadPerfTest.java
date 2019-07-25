@@ -20,8 +20,7 @@ public class PopTokenBuilderDemoWithPrivateKeyPemString1MegabyteRequestPayloadPe
             .getLogger(PopTokenBuilderDemoWithPrivateKeyPemString1MegabyteRequestPayloadPerfTest.class);
 
     private static final int NUM_BYTES_IN_ONE_MEGABYTE = 1 * 1024 * 1024;
-    private static final String ONE_MEGABYTE_REQUEST_PAYLOAD = PopTokenBuilderTestUtils
-            .createRequestPayload(NUM_BYTES_IN_ONE_MEGABYTE);
+    private static final String ONE_MEGABYTE_REQUEST_PAYLOAD = PopTokenBuilderTestUtils.createRequestPayload(NUM_BYTES_IN_ONE_MEGABYTE);
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     @Test
@@ -62,13 +61,11 @@ public class PopTokenBuilderDemoWithPrivateKeyPemString1MegabyteRequestPayloadPe
             buildPopTokenWithPrivateKeyPemString(privateKeyPemString);
         }
 
-        long actualProcessingTime = System.currentTimeMillis() - startTime;
-        long expectedProcessingTime = 35000L;
+        long endTime = System.currentTimeMillis();
 
-        logger.info("PopTokenBuilderDemoWithPrivateKeyPemString1MegabyteRequestPayloadPerfTest -> actualProcessingTime: "
-                + actualProcessingTime + " ms"); //
-        assertTrue("Should not have taken more than " + expectedProcessingTime + " millis for 1000 validations, actualProcessingTime: "
-                + actualProcessingTime, (actualProcessingTime <= expectedProcessingTime)); //
+        logger.info("PopTokenBuilderDemoWithPrivateKeyPemString1MegabytePayloadPerfTest -> actual processing time: "
+                + (endTime - startTime) + " ms");
+        assertTrue("Actual processing time is " + (endTime - startTime) + " ms", (endTime - startTime) <= 45000);
     }
 
     // ===== helper methods ===== //

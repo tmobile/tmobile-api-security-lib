@@ -57,13 +57,11 @@ public class PopTokenBuilderDemoWithPrivateKeyPemStringNoRequestPayloadPerfTest 
             buildPopTokenWithPrivateKeyPemString(privateKeyPemString);
         }
 
-        long actualProcessingTime = System.currentTimeMillis() - startTime;
-        long expectedProcessingTime = 20000L;
+        long endTime = System.currentTimeMillis();
 
-        logger.info("PopTokenBuilderDemoWithPrivateKeyPemStringNoRequestPayloadPerfTest -> actualProcessingTime: "
-                + actualProcessingTime + " ms"); //
-        assertTrue("Should not have taken more than " + expectedProcessingTime + " millis for 1000 validations, actualProcessingTime: "
-                + actualProcessingTime, (actualProcessingTime <= expectedProcessingTime)); //
+        logger.info("PopTokenBuilderDemoWithPrivateKeyPemStringNoRequestPayloadPerfTest -> actual processing time: "
+                + (endTime - startTime) + " ms");
+        assertTrue("Actual processing time is " + (endTime - startTime) + " ms", (endTime - startTime) <= 25000);
     }
 
     // ===== helper methods ===== //

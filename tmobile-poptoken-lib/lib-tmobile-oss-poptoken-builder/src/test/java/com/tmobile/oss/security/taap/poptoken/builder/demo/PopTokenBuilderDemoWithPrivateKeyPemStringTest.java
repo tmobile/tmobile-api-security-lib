@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tmobile.oss.security.taap.poptoken.builder.PopEhtsKey;
 import com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder;
@@ -13,38 +15,40 @@ import com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderE
 
 public class PopTokenBuilderDemoWithPrivateKeyPemStringTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(PopTokenBuilderDemoWithPrivateKeyPemStringTest.class);
+
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     @Test
     public void buildPopTokenWithPrivateKeyPemString() throws PopTokenBuilderException {
 
         String privateKeyPemString = "-----BEGIN PRIVATE KEY-----" + LINE_SEPARATOR //
-                + "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN" + LINE_SEPARATOR //
-                + "slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4" + LINE_SEPARATOR //
-                + "8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM" + LINE_SEPARATOR //
-                + "3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy" + LINE_SEPARATOR //
-                + "RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO" + LINE_SEPARATOR //
-                + "yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo" + LINE_SEPARATOR //
-                + "wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV" + LINE_SEPARATOR //
-                + "Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb" + LINE_SEPARATOR //
-                + "AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO" + LINE_SEPARATOR //
-                + "KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK" + LINE_SEPARATOR //
-                + "WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB" + LINE_SEPARATOR //
-                + "oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO" + LINE_SEPARATOR //
-                + "5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq" + LINE_SEPARATOR //
-                + "H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh" + LINE_SEPARATOR //
-                + "0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG" + LINE_SEPARATOR //
-                + "IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m" + LINE_SEPARATOR //
-                + "9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx" + LINE_SEPARATOR //
-                + "oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE" + LINE_SEPARATOR //
-                + "ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq" + LINE_SEPARATOR //
-                + "3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+" + LINE_SEPARATOR //
-                + "GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8" + LINE_SEPARATOR //
-                + "52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V" + LINE_SEPARATOR //
-                + "+vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT" + LINE_SEPARATOR //
-                + "f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh" + LINE_SEPARATOR //
-                + "P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk" + LINE_SEPARATOR //
-                + "zHNmq7/VPITL5UgtZ5nk6g==" + LINE_SEPARATOR //
+                + "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCr9gryaGU6iPEw" + LINE_SEPARATOR //
+                + "/27c5v6VgFliRvBOfmwTWW61XjGQL5Jaj7KKqCKWJIXyniEQQ1bbaMlJ+ymIiobv" + LINE_SEPARATOR //
+                + "Mo4QQUh9+NBYHJJfz86NFbTC3VgLXCetHy4REqobGFO8Bb2DEqIlMhhlNSLtEmGx" + LINE_SEPARATOR //
+                + "NhHHMCen6nJ7AQa9W5vr8S7uffHmfQF7X/5BtvqP40k8038BDnaeB71I5HubrC0d" + LINE_SEPARATOR //
+                + "jom0/kgzytEZfEZUE32mBFJpjl2ZWBJoMd61tfarCzUEFHcMyMQDQnhSq6jwFdIx" + LINE_SEPARATOR //
+                + "tl8Dy+fq+hmzdj58mRZoM2aQb3KYNajKe9JKeJKwWwwOwQzAxmC08qkR5wTAA8vT" + LINE_SEPARATOR //
+                + "rjJ2hryDAgMBAAECggEAeKi2u6q2xODL5CaHAqduoTYjActm2JzqdpU9EjPasSJA" + LINE_SEPARATOR //
+                + "Hh1QGOyrABD2j+uWpZOqgV/ARZHfbbhNv88IUa2NER8iCYFaz7G/a818PXMUUTxD" + LINE_SEPARATOR //
+                + "dr03FLG0/DgQoRCiDjNn5JOG/JTRQemw9KhMxygp2y+tTlPFB98cw+xCkwN6Vc/g" + LINE_SEPARATOR //
+                + "ZNhhvvrIIp7tj78fQUD2m8QdCIZ6M2nE84Rqxcpp4iLZsZSHtmuVzCb769bfs804" + LINE_SEPARATOR //
+                + "U0Q6xveNIDQi6/GPpBtiZU2zekkc/CNQ1yIGwk1//MN3ae5R8Y62+BVrpwO2FjNP" + LINE_SEPARATOR //
+                + "ZQQfa8ZgPT4y9DauYSp5wf4SWAPsR9Z+Jy8kHfz6eQKBgQDS7G9o5FmqWLhNYCwg" + LINE_SEPARATOR //
+                + "ddIRDXGoQOoVfw9uufX43K/QlCyXdttO8ZZq+jxfaW3jm2hx5OrpVVIGQnCXA1yO" + LINE_SEPARATOR //
+                + "sZMHbAsDMH1AXEttSTsnR7jEkMFrD6oakNYZxIptj4NVe7TZ4+DxCNvEugUKedpc" + LINE_SEPARATOR //
+                + "Z5BCyaivmo+Uab8Yode5yB62NQKBgQDQtfuNg1+OZDXdyma4J4HDQmvNOVlrI7Aq" + LINE_SEPARATOR //
+                + "QRhSb/ZrwGSGFyr0avLkdHlKzgIMt+zrtDmaWrzu4+JrivNggutelPpntiN6mhoY" + LINE_SEPARATOR //
+                + "9c3Q/kVZ4reK8RpL7SN9C0WAnTWMQfS4vgByrzkTnnxZzkE2CTsLS3Xc84vP0vXD" + LINE_SEPARATOR //
+                + "282frAue1wKBgQCQSJqBl0tbAuu4SmSFI/O6JIcuQJGgeNV2uhDv1w8R0HqcdfrZ" + LINE_SEPARATOR //
+                + "ituJfHoWDonUW/fbiWvEh8/fZk2cj/kdx407U4ZI/T+A6mHSdXjYivByzk7xTLrh" + LINE_SEPARATOR //
+                + "B1jeMZs8DSMbM89oCcFTQOsNLO7L1sUv1sxRU59n2IQFUz0cvYFTnficTQKBgByf" + LINE_SEPARATOR //
+                + "mKxDxCsnGywbwhKneGhrB5XRs62560MgQlGsAUOt0xuAuedjc4RZZPkZX7aW0utQ" + LINE_SEPARATOR //
+                + "gEXnA9pPbpIJMG+gBN+n1t+6XwtFbybVLzDmbmRxb3KitlSLZT6U+Sc2aE2gDgv4" + LINE_SEPARATOR //
+                + "It+XoGBMcAlw/AiJI4vdAYEX9ai+6e2+i2jGk6FpAoGAVqTL33m5GiA5r2ZjMPNt" + LINE_SEPARATOR //
+                + "MnmvcP9otFVVJjOyQvEzkWIui9yCpM0n0UhNO20CxuqLkflUOdMjVmVAAeFVgeLe" + LINE_SEPARATOR //
+                + "KRIa4zrqAnhs++vg4g+9Jme5c1nQMQZYHnNYj+KvNZEdriDofBm7DKroVWd0fEn1" + LINE_SEPARATOR //
+                + "307np4UkLYIbZhCArTpVAV4=" + LINE_SEPARATOR //
                 + "-----END PRIVATE KEY-----" + LINE_SEPARATOR; //
 
         // STEP 1: Build the LinkedHashMap of ehts (external headers to sign) key and values
@@ -60,10 +64,9 @@ public class PopTokenBuilderDemoWithPrivateKeyPemStringTest {
                 .setEhtsKeyValueMap(ehtsKeyValueMap) //
                 .signWith(privateKeyPemString) //
                 .build();
-        
-        System.out.println(popToken);
 
         // verify the popToken has text
+        logger.info("popToken: " + popToken);
         assertTrue(StringUtils.isNotBlank(popToken));
     }
 }

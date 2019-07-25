@@ -1,19 +1,24 @@
 package com.tmobile.oss.security.taap.poptoken.builder.utils;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
+import java.security.Security;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 
-import javax.crypto.Cipher;
-import javax.crypto.EncryptedPrivateKeyInfo;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openssl.PEMParser;
+import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+import org.bouncycastle.openssl.jcajce.JceOpenSSLPKCS8DecryptorProviderBuilder;
+import org.bouncycastle.operator.InputDecryptorProvider;
+import org.bouncycastle.operator.OperatorCreationException;
+import org.bouncycastle.pkcs.PKCS8EncryptedPrivateKeyInfo;
+import org.bouncycastle.pkcs.PKCSException;
 
 import com.tmobile.oss.security.taap.poptoken.builder.exception.PopPrivateKeyParseException;
 
@@ -21,6 +26,10 @@ import com.tmobile.oss.security.taap.poptoken.builder.exception.PopPrivateKeyPar
  * Provides the helper methods for building the PoP token.
  */
 public class PopTokenBuilderUtils {
+
+    static {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     protected static final String PKCS_1_PRIVATE_KEY_PREFIX = "-----BEGIN RSA PRIVATE KEY-----";
     protected static final String PKCS_1_PRIVATE_KEY_SUFFIX = "-----END RSA PRIVATE KEY-----";
@@ -87,13 +96,7 @@ public class PopTokenBuilderUtils {
         try {
             if (encryptedPrivateKeyPemString.startsWith(PKCS_8_ENCRYPTED_PRIVATE_KEY_PREFIX)
                     && encryptedPrivateKeyPemString.contains(PKCS_8_ENCRYPTED_PRIVATE_KEY_SUFFIX)) {
-
-                encryptedPrivateKeyPemString = encryptedPrivateKeyPemString.substring(PKCS_8_ENCRYPTED_PRIVATE_KEY_PREFIX.length(),
-                        encryptedPrivateKeyPemString.indexOf(PKCS_8_ENCRYPTED_PRIVATE_KEY_SUFFIX));
-                encryptedPrivateKeyPemString = sanitizePrivateKeyPemString(encryptedPrivateKeyPemString);
-
-                byte[] keyBytes = toBase64DecodedBytes(encryptedPrivateKeyPemString);
-                return buildRsaPrivateKey(keyBytes, privateKeyPassword);
+                return buildRsaPrivateKey(encryptedPrivateKeyPemString, privateKeyPassword);
             } else {
                 throw new PopPrivateKeyParseException(
                         "The encryptedPrivateKeyPemString contains unsupported format, only PKCS#8 format is currently supported");
@@ -124,24 +127,31 @@ public class PopTokenBuilderUtils {
     /**
      * Builds the RSAPrivateKey using the specified PKCS8 encrypted private key bytes and privateKeyPassword
      * 
-     * @param encryptedPrivateKeyBytes The encrypted PKCS8 private key bytes
+     * @param encryptedPrivateKeyPemString The encrypted PKCS8 private key PEM string
      * @param privateKeyPassword The private key password
      * @return The RSA private key
-     * @throws IOException If error occurs while initiating EncryptedPrivateKeyInfo
-     * @throws GeneralSecurityException If error occurs while creating the RSA private key
+     * @throws OperatorCreationException If InputDecryptorProvider cannot be built
+     * @throws PKCSException If private key cannot be decrypted
+     * @throws IOException If PEM string cannot be parsed
      */
-    private static RSAPrivateKey buildRsaPrivateKey(byte[] encryptedPrivateKeyBytes, String privateKeyPassword)
-            throws IOException, GeneralSecurityException {
-        EncryptedPrivateKeyInfo encryptedPrivateKeyInfo = new EncryptedPrivateKeyInfo(encryptedPrivateKeyBytes);
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(encryptedPrivateKeyInfo.getAlgName());
-        SecretKey secretKey = keyFactory.generateSecret(new PBEKeySpec(privateKeyPassword.toCharArray()));
+    private static RSAPrivateKey buildRsaPrivateKey(String encryptedPrivateKeyPemString, String privateKeyPassword)
+            throws OperatorCreationException, PKCSException, IOException {
 
-        Cipher cipher = Cipher.getInstance(encryptedPrivateKeyInfo.getAlgName());
-        cipher.init(javax.crypto.Cipher.DECRYPT_MODE, secretKey, encryptedPrivateKeyInfo.getAlgParameters());
-        PKCS8EncodedKeySpec pkcs8EncodedKeySpec = encryptedPrivateKeyInfo.getKeySpec(cipher);
+        PEMParser pemParser = null;
+        try {
+            pemParser = new PEMParser(new StringReader(encryptedPrivateKeyPemString));
+            PKCS8EncryptedPrivateKeyInfo pkcs8EncryptedPrivateKeyInfo = (PKCS8EncryptedPrivateKeyInfo) pemParser.readObject();
 
-        KeyFactory rsaKeyFactory = KeyFactory.getInstance("RSA");
-        return (RSAPrivateKey) rsaKeyFactory.generatePrivate(pkcs8EncodedKeySpec);
+            JcaPEMKeyConverter converter = new JcaPEMKeyConverter();
+            InputDecryptorProvider decryptionProv = new JceOpenSSLPKCS8DecryptorProviderBuilder()
+                    .build(privateKeyPassword.toCharArray());
+            PrivateKeyInfo privateKeyInfo = pkcs8EncryptedPrivateKeyInfo.decryptPrivateKeyInfo(decryptionProv);
+            return (RSAPrivateKey) converter.getPrivateKey(privateKeyInfo);
+        } finally {
+            if (pemParser != null) {
+                pemParser.close();
+            }
+        }
     }
 
     /**
