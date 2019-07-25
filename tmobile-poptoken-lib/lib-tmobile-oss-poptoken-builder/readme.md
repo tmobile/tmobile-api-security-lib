@@ -85,6 +85,13 @@ openssl rsa -in private_key_des3_with_password_pkcs8.pem -passin pass:foobar -ou
 
 ```
 
+**Minimum Java Requirement for Encrypted Private Keys:**
+
+In order to use **AES256** or **DES3** encrypted private keys, it is required to either use Java version >= 8u161 OR have the Java Cryptographic Extension (JCE) Unlimited Strength Jurisdiction Policy Files installed. Please checkout following links for more information.
+
+https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8170157
+https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html
+
   
 ## PoP Token Builder Performance Test Results
 The following table shows the processing time taken by PoP token builder for various test cases.
