@@ -76,7 +76,7 @@ public class PopTokenBuilderDemoWithPrivateKeyPemString1MegabyteRequestPayloadPe
         ehtsKeyValueMap.put("Content-Type", "application/json");
         ehtsKeyValueMap.put("Authorization", "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
         ehtsKeyValueMap.put(PopEhtsKey.URI.keyName(), "/commerce/v1/orders"); // URL = https://api.t-mobile.com/commerce/v1/orders
-        ehtsKeyValueMap.put(PopEhtsKey.HTTP_METHOD.keyName(), "post");
+        ehtsKeyValueMap.put(PopEhtsKey.HTTP_METHOD.keyName(), "POST");
         ehtsKeyValueMap.put(PopEhtsKey.BODY.keyName(), ONE_MEGABYTE_REQUEST_PAYLOAD);
 
         // STEP 2: Generate PoP token using PoPTokenBuilder

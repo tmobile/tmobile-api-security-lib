@@ -178,7 +178,7 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
         } else if (ehtsKey.equals("Authorization")) {
             return "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS";
         } else if (ehtsKey.equals(PopEhtsKey.HTTP_METHOD.keyName())) {
-            return "post";
+            return "POST";
         } else if (ehtsKey.equals(PopEhtsKey.URI.keyName())) {
             return "/commerce/v1/orders";
         } else if (ehtsKey.equals(PopEhtsKey.BODY.keyName())) {
@@ -307,7 +307,7 @@ public class PopTokenValidatorDemoWithRsaPublicKeyTest {
         } else if (ehtsKey.equals("Authorization")) {
             return "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS";
         } else if (ehtsKey.equals(PopEhtsKey.HTTP_METHOD.keyName())) {
-            return "post";
+            return "POST";
         } else if (ehtsKey.equals(PopEhtsKey.URI.keyName())) {
             return "/commerce/v1/orders";
         } else if (ehtsKey.equals(PopEhtsKey.BODY.keyName())) {
