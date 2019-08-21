@@ -10,4 +10,4 @@ Proof of possession (PoP) provides a mechanism to bind key material to access to
 
 Proof of possession (PoP) helps enabling the message integrity and also helps avoiding the transaction reply and token theft.  For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway.
 
-For more information on PoP token libraries, please refer to the readme file - [PoP Token Library Readme.md](./poptoken-lib/readme.md).
+For more information on PoP token libraries, please refer to the readme file - [PoP Token Library Readme.md](./poptoken-lib).
