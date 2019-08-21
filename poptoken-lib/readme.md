@@ -42,4 +42,4 @@ For more information on PoP token builder library, please refer to the readme fi
 
 The PoP token validator library can be used to validate a PoP token.
 
-For more information on PoP token validator library, please refer to the readme file - [PoP Token Validator Library Readme.md](./poptoken-builder/readme.md).
+For more information on PoP token validator library, please refer to the readme file - [PoP Token Validator Library Readme.md](./poptoken-validator/readme.md).
