@@ -6,6 +6,7 @@ import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.HashMap;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -13,6 +14,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.auth0.jwk.Jwk;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopPublicKeyParseException;
 
 /**
@@ -30,6 +34,8 @@ public class PopTokenValidatorUtils {
 
     protected static final String PKCS_1_PUBLIC_KEY_PREFIX = "-----BEGIN RSA PUBLIC KEY-----";
     protected static final String PKCS_1_PUBLIC_KEY_SUFFIX = "-----END RSA PUBLIC KEY-----";
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * Converts the public key PEM string to RSAPublicKey.
@@ -72,6 +78,32 @@ public class PopTokenValidatorUtils {
         } catch (Exception ex) {
             throw new PopPublicKeyParseException(
                     "Error occurred while converting publicKeyPemString to RSAPublicKey, error: " + ex.toString(), ex);
+        }
+    }
+
+    /**
+     * Converts the JWK string to RSAPublicKey.
+     * 
+     * @param jwkString The public key PEM string
+     * @return The RSAPublicKey
+     * @throws PopPublicKeyParseException If the jwkString cannot be parsed or cannot be converted to RSAPublicKey
+     * @throws IllegalArgumentException If the jwkString is null or empty
+     */
+    public static RSAPublicKey jwkStringToRsaPublicKey(String jwkString) throws PopPublicKeyParseException {
+
+        if (StringUtils.isBlank(jwkString)) {
+            throw new IllegalArgumentException("The jwkString should not be null or empty");
+        }
+
+        try {
+            TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {
+            };
+            HashMap<String, Object> jwkMap = objectMapper.readValue(jwkString, typeRef);
+            Jwk jwk = Jwk.fromValues(jwkMap);
+            return (RSAPublicKey) jwk.getPublicKey();
+        } catch (Exception ex) {
+            throw new PopPublicKeyParseException("Error occurred while converting jwkString to RSAPublicKey, error: " + ex.toString(),
+                    ex);
         }
     }
 

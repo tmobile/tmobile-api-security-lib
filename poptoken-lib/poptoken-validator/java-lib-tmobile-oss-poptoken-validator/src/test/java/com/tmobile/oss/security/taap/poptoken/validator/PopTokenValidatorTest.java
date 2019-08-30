@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Base64;
@@ -22,10 +23,11 @@ import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.InvalidPopTokenException;
+import com.tmobile.oss.security.taap.poptoken.validator.exception.PopPublicKeyParseException;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenInvalidEdtsHashException;
 import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenSignatureVerificationException;
@@ -136,6 +138,132 @@ public class PopTokenValidatorTest {
         try {
             // perform an action
             PopTokenValidator.newInstance().validatePopTokenWithPublicKeyPemString("pop-token", publicKeyPemString, null);
+            fail("The IllegalArgumentException should have been thrown");
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(IllegalArgumentException.class, ex.getClass());
+            assertEquals(
+                    "The ehtsKeyValueMap should not be null or empty and should not contain any null or empty ehts keys or values",
+                    ex.getMessage());
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__validInput__validatesSuccessfully() throws Exception {
+
+        // setup the data
+        KeyPair rsaKeyPair = PopTokenValidatorTestHelper.createRsaKeyPair();
+        String publicKeyJwkString = rsaPublicKeyToJwkString((RSAPublicKey) rsaKeyPair.getPublic(), UUID.randomUUID().toString());
+        RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) rsaKeyPair.getPrivate();
+
+        LinkedHashMap<String, String> ehtsKeyValueMap = new LinkedHashMap<String, String>();
+        ehtsKeyValueMap.put("Content-Type", "application/json");
+        ehtsKeyValueMap.put("Authorization", "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
+
+        String popToken = PopTokenValidatorTestHelper.createPopToken(ehtsKeyValueMap, new Date(), 120, rsaPrivateKey);
+
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString(popToken, publicKeyJwkString, ehtsKeyValueMap);
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            fail("No exception should have been thrown");
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__nullPopTokenInput__throwsIllegalArgumentException() throws Exception {
+        // setup the data
+        KeyPair rsaKeyPair = PopTokenValidatorTestHelper.createRsaKeyPair();
+        String publicKeyJwkString = rsaPublicKeyToJwkString((RSAPublicKey) rsaKeyPair.getPublic(), UUID.randomUUID().toString());
+
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString(null, publicKeyJwkString, new HashMap<>());
+            fail("The IllegalArgumentException should have been thrown");
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(IllegalArgumentException.class, ex.getClass());
+            assertEquals("The popToken should not be null or empty", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__invalidPopTokenInput__throwsInvalidPopTokenException() throws Exception {
+        // setup the data
+        KeyPair rsaKeyPair = PopTokenValidatorTestHelper.createRsaKeyPair();
+        String publicKeyJwkString = rsaPublicKeyToJwkString((RSAPublicKey) rsaKeyPair.getPublic(), UUID.randomUUID().toString());
+
+        String popToken = "INVALID PoP Token";
+
+        LinkedHashMap<String, String> ehtsKeyValueMap = new LinkedHashMap<String, String>();
+        ehtsKeyValueMap.put("Content-Type", "application/json");
+        ehtsKeyValueMap.put("Authorization", "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
+
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString(popToken, publicKeyJwkString, ehtsKeyValueMap);
+            fail("The InvalidPopTokenException should have been thrown");
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(InvalidPopTokenException.class, ex.getClass());
+            assertTrue("The actual error message: " + ex.getMessage(), ex.getMessage().startsWith("Couldn't decode the token"));
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__nullPublicKeyInput__throwsIllegalArgumentException() throws Exception {
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString("popToken", null, new HashMap<>());
+            fail("The IllegalArgumentException should have been thrown");
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(IllegalArgumentException.class, ex.getClass());
+            assertEquals("The publicKeyJwkString should not be null or empty", ex.getMessage());
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__invalidPublicKeyInput__throwsIllegalArgumentException() throws Exception {
+        // setup the data
+        KeyPair rsaKeyPair = PopTokenValidatorTestHelper.createRsaKeyPair();
+        String publicKeyJwkString = "INVALID JWK STRING";
+        RSAPrivateKey rsaPrivateKey = (RSAPrivateKey) rsaKeyPair.getPrivate();
+
+        LinkedHashMap<String, String> ehtsKeyValueMap = new LinkedHashMap<String, String>();
+        ehtsKeyValueMap.put("Content-Type", "application/json");
+        ehtsKeyValueMap.put("Authorization", "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
+
+        String popToken = PopTokenValidatorTestHelper.createPopToken(ehtsKeyValueMap, new Date(), 120, rsaPrivateKey);
+
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString(popToken, publicKeyJwkString, ehtsKeyValueMap);
+            fail("The PopPublicKeyParseException should have been thrown");
+        } catch (Exception ex) {
+            // validate the results
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(PopPublicKeyParseException.class, ex.getClass());
+            assertTrue("The actual error message: " + ex.getMessage(),
+                    ex.getMessage().startsWith("Error occurred while converting jwkString to RSAPublicKey"));
+        }
+    }
+
+    @Test
+    public void validatePopTokenWithPublicKeyJwkString__nullEhtsKeyValueMap__throwsIllegalArgumentException() throws Exception {
+        // setup the data
+        KeyPair rsaKeyPair = PopTokenValidatorTestHelper.createRsaKeyPair();
+        String publicKeyJwkString = rsaPublicKeyToJwkString((RSAPublicKey) rsaKeyPair.getPublic(), UUID.randomUUID().toString());
+
+        try {
+            // perform an action
+            PopTokenValidator.newInstance().validatePopTokenWithPublicKeyJwkString("pop-token", publicKeyJwkString, null);
             fail("The IllegalArgumentException should have been thrown");
         } catch (Exception ex) {
             // validate the results
@@ -594,5 +722,17 @@ public class PopTokenValidatorTest {
             assertTrue("Actual error message: " + ex.getMessage(),
                     ex.getMessage().startsWith("Error occurred while parsing the PoP token"));
         }
+    }
+
+    // ===== helper methods ===== //
+    private String rsaPublicKeyToJwkString(RSAPublicKey rsaPublicKey, String kid) throws JsonProcessingException {
+        LinkedHashMap<String, String> jwkMap = new LinkedHashMap<>();
+        jwkMap.put("alg", "RS256");
+        jwkMap.put("e", Base64.encodeBase64URLSafeString(rsaPublicKey.getPublicExponent().toByteArray()));
+        jwkMap.put("n", Base64.encodeBase64URLSafeString(rsaPublicKey.getModulus().toByteArray()));
+        jwkMap.put("kid", kid);
+        jwkMap.put("kty", "RSA");
+        jwkMap.put("use", "sig");
+        return objectMapper.writeValueAsString(jwkMap);
     }
 }

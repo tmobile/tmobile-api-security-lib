@@ -94,6 +94,52 @@ public class PopTokenValidator {
     }
 
     /**
+     * Validates the PoP token with public key JWK string.
+     * 
+     * @param popToken The PoP token string
+     * @param publicKeyJwkString The public key JWK string to verify the PoP token signature
+     * @param ehtsKeyValueMap The map containing the values for all the ehts (external headers to sign) keys.
+     *            <p>
+     *            Determining the ehts key name:
+     *            <ul>
+     *            <li>For HTTP request URI, "uri" should be used as ehts key name, <code>PopEhtsKey.URI.keyName()</code>. <br>
+     *            For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
+     *            "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
+     *            "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
+     *            of "uri" ehts should not be in URL encoded format.</li>
+     *            <li>For HTTP method, "http-method" should be used as ehts key name,
+     *            <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
+     *            <li>For HTTP request headers, the header name should be used as ehts key name.</li>
+     *            <li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
+     *            </ul>
+     *            <p>
+     * @throws IllegalArgumentException If the popToken is null or empty, <br>
+     *             publicKeyJwkString is null or empty or ehtsKeyValueMap is invalid
+     * @throws InvalidPopTokenException If the PoP token is invalid and so cannot be decoded
+     * @throws PopTokenExpiredException If the PoP token is expired
+     * @throws PopTokenSignatureVerificationException If the PoP token signature resulted invalid
+     * @throws PopTokenInvalidEdtsHashException If the edts (external data to sign) hash is invalid
+     * @throws PopTokenValidatorException If the PoP token cannot be validated
+     */
+    public void validatePopTokenWithPublicKeyJwkString(String popToken, String publicKeyJwkString, Map<String, String> ehtsKeyValueMap)
+            throws PopTokenValidatorException {
+        
+        if (StringUtils.isBlank(popToken)) {
+            throw new IllegalArgumentException("The popToken should not be null or empty");
+        }
+        if (StringUtils.isBlank(publicKeyJwkString)) {
+            throw new IllegalArgumentException("The publicKeyJwkString should not be null or empty");
+        }
+        if (ehtsKeyValueMap == null || ehtsKeyValueMap.isEmpty() || doesContainAnyEmptyKeysOrValues(ehtsKeyValueMap)) {
+            throw new IllegalArgumentException(
+                    "The ehtsKeyValueMap should not be null or empty and should not contain any null or empty ehts keys or values");
+        }
+        
+        RSAPublicKey rsaPublicKey = PopTokenValidatorUtils.jwkStringToRsaPublicKey(publicKeyJwkString);
+        validatePopTokenWithRsaPublicKey(popToken, rsaPublicKey, ehtsKeyValueMap);
+    }
+
+    /**
      * Validates the PoP token with RSA public key.
      * 
      * @param popToken The PoP token string

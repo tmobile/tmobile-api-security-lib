@@ -84,7 +84,6 @@ openssl rsa -in private_key_des3_with_password_pkcs8.pem -passin pass:foobar -ou
 
 ```
 
-
   
 ## PoP Token Validator Performance Test Results
 The following table shows the processing time taken by PoP token validation for various test cases.
@@ -189,6 +188,7 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
     }
 }
 ```
+  
 ## Javadoc for validatePopTokenWithPublicKeyPemString Method
 
 ### `public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
@@ -220,10 +220,135 @@ Validates the PoP token with public key PEM string.
    * `PopTokenSignatureVerificationException` — If the PoP token signature resulted invalid
    * `PopTokenInvalidEdtsHashException` — If the edts (external data to sign) hash is invalid
    * `PopTokenValidatorException` — If the PoP token cannot be validated
+ 
+ 
+## Validating the PoP Token Using Public Key JWK String
+The following Java JUnit test describes how to validate the PoP token with public key JWK string.
 
+```
+package com.tmobile.oss.security.taap.poptoken.validator.demo;
 
-## Validating the PoP Token Using RSAPublicKey  
-The following Java JUnit test describes how to validate the PoP token with the RSAPublicKey.  
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.tmobile.oss.security.taap.poptoken.validator.PopEhtsKey;
+import com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator;
+import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException;
+import com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenValidatorException;
+
+public class PopTokenValidatorDemoWithPublicKeyJwkStringTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(PopTokenValidatorDemoWithPublicKeyJwkStringTest.class);
+    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    @Test
+    public void validatePopTokenWithRsaPublicKey() throws Exception {
+
+        String popToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiYWZxR1dBYlNldlRQMm0zOHF1QmpDOHBBMkhjeFpYRzR6cEZDUFNoVHRTbyIsInYiOiIxIiwiZXhwIjoxNTY3MjAzMjAxLCJlaHRzIjoiQ29udGVudC1UeXBlO0F1dGhvcml6YXRpb247dXJpO2h0dHAtbWV0aG9kO2JvZHkiLCJpYXQiOjE1NjcyMDMwODEsImp0aSI6IjgzZWNiY2QyLTU4ODMtNDRjNy05NDcwLTcxZTAyZTViZTBkYyJ9.IPVCvaUbTs98MpYG2JfDNnziYa1nhJfihcabL-jgLPIGkf1T0IqqHdpihLnRl65Fj_Y3elJrbVCP5odRtVmr8EKmsNVlQykVFfTuXvswv_d3xnlNVghEkYlMnomoa_e_FiKSgUAdz-42iZsBl3Vjql4V1igk2MdiKaGGmKDavi-pe_kU8jPdHIWlogE6SkHVtTJ31dDdzh3ijAPqizIyueZ2J10EvEojPnMzPryKrkybrVAQyb1hSvqCmxQth_1L0IyXKkXrpqdY7SoX03yRDFH2kBODZcHAIxNxQn6XAWC9z_RS8y6cGeTUlGH_jXKPqCpdfKD5UIeFdrPkcawiCw";
+
+        String publicKeyJwkString = "{" + LINE_SEPARATOR //
+                + "  \"alg\": \"RS256\"," + LINE_SEPARATOR //
+                + "  \"e\": \"AQAB\"," + LINE_SEPARATOR //
+                + "  \"n\": \"maGCOzVBAqcAD6JhOb5YYdhiKWlvVotTOzCsu6VxK2Uzb2tKhVYGd5hpgB_MFkbH64YPqIAn-IN7IUwvbkP4pDLF0kZ6uGAo1zFfmbACFlgBgB8HciMS1_zBCBnhtpPSm8K-6Ik66i20g6VfZ9HVyXxB8fcEO1fLgxz6Je_TF-TTXWtLMWaGE6zLFT0SJox5O3EsrstzwFDh1MNjba9Thn4PoOkn4rrT8nSdPRTRxphaLBR-ch3gVvykOSLJqVrmcQxJwAiCcNlIMXFgjpVpnY4n9Nz9wDHznr_a-qOI2w8nSGIHIdhT8wRj4Cf72DS1huIwIrMw1LQzM_hl7ZuGQw==\","
+                + LINE_SEPARATOR //
+                + "  \"kid\": \"dfad17ce-073b-4421-9944-fc9477c2bd63\"," + LINE_SEPARATOR //
+                + "  \"kty\": \"RSA\"," + LINE_SEPARATOR //
+                + "  \"use\": \"sig\"" + LINE_SEPARATOR //
+                + "}"; // LINE_SEPARATOR //
+
+        try {
+            // STEP 1: Create an instance of PoPTokenValidator
+            PopTokenValidator popTokenValidator = PopTokenValidator.newInstance();
+
+            // STEP 2: Get the list of ehts (external headers to sign) keys from the pop token string
+            List<String> ehtsKeys = popTokenValidator.getEhtsKeys(popToken);
+
+            // STEP 3: Build map of ehts (external headers to sign) key-value pairs by reading the required values from HTTP request
+            Map<String, String> ehtsValuesMap = new HashMap<>();
+            for (String ehtsKey : ehtsKeys) {
+                ehtsValuesMap.put(ehtsKey, getEhtsValue(ehtsKey));
+            }
+
+            // STEP 4: Validate the PoP token using PopTokenValidator.validatePopTokenWithPublicKeyJwkString method, this method will throw
+            // PopTokenValidatorException if the PoP token is invalid or the PoP token cannot be validated
+            popTokenValidator.validatePopTokenWithPublicKeyJwkString(popToken, publicKeyJwkString, ehtsValuesMap);
+            fail("The PopTokenValidatorException should have been thrown as the this is an expired token");
+        } catch (PopTokenValidatorException ex) {
+            logger.error("Error occurred while executing the test case, error: " + ex.toString(), ex);
+            assertEquals(PopTokenExpiredException.class, ex.getClass());
+        }
+    }
+
+    // ===== helper methods ===== //
+
+    /**
+     * This implementation is provided only for demonstrating the PoP token validation, in real use case these values should be read
+     * from the HTTP request.
+     * 
+     * @param ehtsKey The ehts key
+     * @return The value for the ehts key
+     */
+    private String getEhtsValue(String ehtsKey) {
+        if (ehtsKey.equals("Content-Type")) {
+            return "application/json";
+        } else if (ehtsKey.equals("Authorization")) {
+            return "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS";
+        } else if (ehtsKey.equals(PopEhtsKey.HTTP_METHOD.keyName())) {
+            return "POST";
+        } else if (ehtsKey.equals(PopEhtsKey.URI.keyName())) {
+            return "/commerce/v1/orders";
+        } else if (ehtsKey.equals(PopEhtsKey.BODY.keyName())) {
+            return "{\"orderId\": 100, \"product\": \"Mobile Phone\"}";
+        } else {
+            return null;
+        }
+    }
+}
+```
+  
+## Javadoc for validatePopTokenWithPublicKeyJwkString Method
+
+### `public void validatePopTokenWithPublicKeyJwkString(String popToken, String publicKeyJwkString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+
+Validates the PoP token with public key JWK string.
+
+ * **Parameters:**
+   * `popToken` — The PoP token string
+   * `publicKeyJwktring` — The public key JWK string to verify the PoP token signature
+   * `ehtsKeyValueMap` — The map containing the values for all the ehts (external headers to sign) keys.
+     <p>
+     Determining the ehts key name:
+     <ul>
+     <li>For HTTP request URI, "uri" should be used as ehts key name, <code>PopEhtsKey.URI.keyName()</code>. <br>
+     For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
+     "https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
+     "/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
+     of "uri" ehts should not be in URL encoded format.</li>
+     <li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
+     <li>For HTTP request headers, the header name should be used as ehts key name.</li>
+     <li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
+     </ul>
+     <p>
+ * **Exceptions:**
+   * `IllegalArgumentException` — If the popToken is null or empty, <br>
+     publicKeyJwkString is null or empty or ehtsKeyValueMap is invalid
+   * `InvalidPopTokenException` — If the PoP token is invalid and so cannot be decoded
+   * `PopTokenExpiredException` — If the PoP token is expired
+   * `PopTokenSignatureVerificationException` — If the PoP token signature resulted invalid
+   * `PopTokenInvalidEdtsHashException` — If the edts (external data to sign) hash is invalid
+   * `PopTokenValidatorException` — If the PoP token cannot be validated
+   
+   
+## Validating the PoP Token Using RSAPublicKey
+The following Java JUnit test describes how to validate the PoP token with the RSAPublicKey.
   
 ```
 package com.tmobile.oss.security.taap.poptoken.validator.demo;
@@ -282,7 +407,7 @@ public class PopTokenValidatorDemoWithRsaPublicKeyTest {
             // STEP 4: Create RSAPublicKey from publicKeyPemString
             RSAPublicKey rsaPublicKey = PopTokenValidatorUtils.keyPemStringToRsaPublicKey(publicKeyPemString);
 
-            // STEP 5: Validate the PoP token using PopTokenValidator.validatePopToken method, this method will throw
+            // STEP 5: Validate the PoP token using PopTokenValidator.validatePopTokenWithRsaPublicKey method, this method will throw
             // PopTokenValidatorException if the PoP token is invalid or the PoP token cannot be validated
             popTokenValidator.validatePopTokenWithRsaPublicKey(popToken, rsaPublicKey, ehtsValuesMap);
             fail("The PopTokenValidatorException should have been thrown as the this is an expired token");
@@ -318,6 +443,7 @@ public class PopTokenValidatorDemoWithRsaPublicKeyTest {
     }
 }
 ```
+  
 ## Javadoc for validatePopTokenWithRsaPublicKey Method
 
 ### `public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
