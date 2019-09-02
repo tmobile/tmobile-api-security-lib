@@ -1,15 +1,13 @@
-## T-Mobile PoP Token Builder JavaScript Library
+# T-Mobile PoP Token Builder JavaScript Library
   
----
-  
-###  Using the PoP Token Builder JavaScript Library
+##  Using the PoP Token Builder JavaScript Library
 
 Link to the below JavaScript libraries in any HTML/client page
 
 1. jsrsasign-all-min.js (available in root directory of this repository)
 2. poptoken-builder.js (available in root directory of this repository)
 
-### Implementation Details
+## Implementation Details
 
 The T-Mobile PoP Token Builder library follows the following logic for creating the PoP token.
 
@@ -17,17 +15,13 @@ The T-Mobile PoP Token Builder library follows the following logic for creating 
 * Signs the PoP token using the specified RSA private key.
 * Creates the PoP token with 2 minutes of validity period.
 
----
-
-### Determining the ehts Key Name:
+## Determining the ehts Key Name:
 
 * All required header and body fields and its values need to be defined. 
 * For HTTP request URI, "uri" should be used as ehts key name. Example: If the URL is `https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000` then only `/commerce/v1/orders?account-number=0000000000` should be used as ehts value. The query parameter values part of "uri" ehts value should be in URL encoded format. 
 * For HTTP method, "http-method" should be used as ehts key name.  
 * For HTTP request headers, the header name should be used as ehts key name.  
 * For HTTP request body, "body" should be used as ehts key name.  
-
----
 
 ## Supported Key Format
 
@@ -49,9 +43,7 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
 
 ```
   
---- 
-  
-###  Building the PoP Token Using Private Key PEM String
+##  Building the PoP Token Using Private Key PEM String
 
 The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete HTML/JS code, please refer to [poptoken-builder-test.html](poptoken-builder-test.html). 
  
