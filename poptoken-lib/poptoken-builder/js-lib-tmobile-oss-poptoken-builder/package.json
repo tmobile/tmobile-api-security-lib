@@ -1,0 +1,14 @@
+{
+  "name": "tmo-poptoken-builder",
+  "version": "1.0.0",
+  "description": "T-Mobile PoP Token Builder",
+  "main": "indexPopTokenBuilder.js",
+  "private": true,
+  "author": [],
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "jsrsasign": "^8.0.12"
+  }
+}

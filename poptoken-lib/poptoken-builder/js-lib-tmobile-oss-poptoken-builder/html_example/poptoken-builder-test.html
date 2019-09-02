@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta name="description" content="jsjws : pure JavaScript implementation of JSON Web Signature" />
+  <title>PoP Token Builder with Private key</title>
+
+  <script language="JavaScript" type="text/javascript" src="../js_lib/jsrsasign-all-min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="../poptoken-builder.js"></script>
+
+  <script language="JavaScript" type="text/javascript">
+
+    function _doSign() {
+      //Generate pop Token in the textarea
+      var formTest = document.popTokenBuilderForm;
+      var popToken = '';
+
+      var ehtsKeyValuMap = new Map();
+      setEhtsKeyValueMap(ehtsKeyValuMap);
+
+      popToken = buildPopToken(ehtsKeyValuMap, document.popTokenBuilderForm.privateKey.value);
+      formTest.popTokenTest.value = popToken;
+    }
+
+    //Set Map values as required
+    function setEhtsKeyValueMap(mapEhtsKeyValue) {
+      mapEhtsKeyValue.set('Content-Type', document.popTokenBuilderForm.contentType.value);
+      mapEhtsKeyValue.set('Authorization', document.popTokenBuilderForm.authorization.value);
+      mapEhtsKeyValue.set('uri', document.popTokenBuilderForm.uri.value);
+      mapEhtsKeyValue.set('http-method', document.popTokenBuilderForm.httpMethod.value);
+      mapEhtsKeyValue.set('body', document.popTokenBuilderForm.body.value);
+    }
+
+  </script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+      <h2 id="project_title">PoP Token Builder with Private Key</h2>
+    </header>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <!-- now editing -->
+      <form name="popTokenBuilderForm">
+        <b>Step 1 => Set Claims:</b>
+        <br />
+
+        <p>
+          <input name="contentType" type="text" size="70" value="application/json" /> Content-Type<br />
+          <input name="authorization" type="text" size="70" value="Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" /> Authorization<br />
+          <input name="uri" type="text" size="70" value="/commerce/v1/orders" /> URI<br />
+          <input name="httpMethod" type="text" size="70" value="POST" /> HTTP-Method<br />
+          <input name="body" type="text" size="70" value='{"orderId": 100, "product": "Mobile Phone"}' /> Body
+          <br /><br />
+          <b>Step2 => Set Private Key PEM String:<b><br />
+              Signature algorithm: RS256<br /><br />
+              <textarea name="privateKey" cols="70" rows="10">-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN
+slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4
+8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM
+3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy
+RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO
+yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo
+wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV
+Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb
+AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO
+KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK
+WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB
+oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO
+5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq
+H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh
+0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG
+IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m
+9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx
+oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE
+ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq
+3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+
+GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8
+52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V
++vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT
+f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh
+P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk
+zHNmq7/VPITL5UgtZ5nk6g==
+-----END PRIVATE KEY-----</textarea><br />
+              <br />
+              <b>Step 3 => Press "Generate PoP Token" Button to Create a PoP token </b><br />
+              <input type="button" value="Generate PoP Token" onClick="_doSign();" /> <br /><br />
+              <textarea name="popTokenTest" cols="70" rows="3"></textarea><br />
+    </section>
+  </div>
+</body>
+
+</html>
