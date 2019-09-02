@@ -37,7 +37,7 @@ The T-Mobile PoP Token Builder library follows the following logic for creating 
 
 PoP token builder and validator libraries are currently supporting PKCS8 key format.
 
-** Using Non Encrypted Keys: **
+**Using Non Encrypted Keys:**
 
 Below commands shows how to create private and public keys in PKCS8 format:
 

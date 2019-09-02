@@ -2,16 +2,16 @@
   
 ##  Using the PoP Token Builder JavaScript Library
 
-** Using it in HTML/Client UI page:**
+**Using it in HTML/Client UI page:**
 
 Link to the below JavaScript libraries in an HTML/client UI page.
 
-1. [poptoken-builder.js](./poptoken-builder.js)
-2. [jsrsasign-all-min.js](./js-lib/jsrsasign-all-min.js)
+1. [poptoken-builder.js](./poptoken-builder.js) (available in js_lib directory)
+2. [jsrsasign-all-min.js](./js-lib/jsrsasign-all-min.js) (available in root directory)
 
 Refer to [poptoken-builder-test.html](./html_example/poptoken-builder-test.html) to find out how to use the PoP token builder library in an HTML page.
 
-** Using it in Node.js Application :**
+**Using it in Node.js Application :**
 
 Install the node modules using the following command.
 
@@ -43,7 +43,7 @@ The T-Mobile PoP Token Builder library follows the following logic for creating 
 
 PoP token builder and validator libraries are currently supporting PKCS8 key format.
 
-** Using Non Encrypted Keys: **
+**Using Non Encrypted Keys:**
 
 Below commands shows how to create private and public keys in PKCS8 format:
 
