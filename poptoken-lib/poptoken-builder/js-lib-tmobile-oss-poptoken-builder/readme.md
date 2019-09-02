@@ -2,10 +2,26 @@
   
 ##  Using the PoP Token Builder JavaScript Library
 
-Link to the below JavaScript libraries in any HTML/client page
+** Using it in HTML/Client UI page:**
 
-1. jsrsasign-all-min.js (available in root directory of this repository)
-2. poptoken-builder.js (available in root directory of this repository)
+Link to the below JavaScript libraries in an HTML/client UI page.
+
+1. [poptoken-builder.js](./poptoken-builder.js)
+2. [jsrsasign-all-min.js](./js-lib/jsrsasign-all-min.js)
+
+Refer to [poptoken-builder-test.html](./html_example/poptoken-builder-test.html) to find out how to use the PoP token builder library in an HTML page.
+
+** Using it in Node.js Application :**
+
+Install the node modules using the following command.
+
+```
+npm install
+```
+
+The above command will create `node_modules` directory and will install the necessary node modules in it.
+
+Refer to [index-poptoken-builder.js](./node_example/index-poptoken-builder.js) to find out how to use the PoP token builder library in a Node.js application.
 
 ## Implementation Details
 
@@ -45,7 +61,7 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
   
 ##  Building the PoP Token Using Private Key PEM String
 
-The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete HTML/JS code, please refer to [poptoken-builder-test.html](poptoken-builder-test.html). 
+The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete HTML/JS code, please refer to [poptoken-builder-test.html](poptoken-builder-test.html).
  
 ```
 // Link the required JavaScript files
@@ -103,5 +119,3 @@ setEhtsKeyValueMap(ehtsKeyValuMap);
 popToken = buildPopToken(ehtsKeyValuMap, privateKeyPemString);
 
 ```
- 
----
