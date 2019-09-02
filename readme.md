@@ -1,9 +1,7 @@
 # T-Mobile API Security Libraries
 
 ## Overview
-T-Mobile API Security Libraries provides the libraries which can help accelerating implementing the API security within your enterprise.
-
-This project provides the libraries which can be leverages to implement the API security within your enterpries. Currently it provides the PoP (Proof of Possession) token builder and validator related libraries. Proof of possession (PoP) helps enabling the message integrity and also helps avoiding the transaction reply and token theft. For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway. The PoP token builder libraries are available in multiple langugate.
+"T-Mobile API Security Libraries" provides the libraries which can be leveraged to implement the API security within your enterpries. Currently it provides the PoP (Proof of Possession) token builder and validator related libraries. Proof of possession (PoP) helps enabling the message integrity and also helps avoiding the transaction reply and token theft. For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway. The PoP token builder libraries are available in multiple langugate.
 
 ## Directory Structure
 
