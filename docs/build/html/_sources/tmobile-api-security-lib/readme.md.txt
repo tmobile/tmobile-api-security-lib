@@ -55,4 +55,4 @@ Signature: <digitalSignature>
 
 ## License
 
-The T-Mobile API security libraries are released under the [Apache 2.0 License](https://github.com/tmobile/tmobile-api-security-lib/blob/master/LICENSE).
+The T-Mobile API security libraries are released under the <a href="https://github.com/tmobile/tmobile-api-security-lib/blob/master/LICENSE" target="_blank">Apache 2.0 License</a>.
