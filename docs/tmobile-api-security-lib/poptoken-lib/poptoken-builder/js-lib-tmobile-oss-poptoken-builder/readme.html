@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JavaScript - PoP Token Builder Library &mdash; T-Mobile API Security Libraries  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Android - PoP Token Builder Library" href="../android-lib-tmobile-oss-poptoken-builder/readme.html" />
+    <link rel="prev" title="Java - PoP Token Builder Library" href="../java-lib-tmobile-oss-poptoken-builder/readme.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> T-Mobile API Security Libraries
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">T-Mobile API Security Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java-lib-tmobile-oss-poptoken-builder/readme.html">Java - PoP Token Builder Library</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">JavaScript - PoP Token Builder Library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#determining-the-ehts-key-name">Determining the ehts Key Name:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-key-format">Supported Key Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-pop-token-builder-javascript-library-in-html-client-ui-page">Using the PoP Token Builder JavaScript Library in HTML/Client UI Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-pop-token-builder-library-in-node-js-application">Using the PoP Token Builder Library in Node.js Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../android-lib-tmobile-oss-poptoken-builder/readme.html">Android - PoP Token Builder Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ios-lib-tmobile-oss-poptoken-builder/readme.html">iOS - PoP Token Builder Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../poptoken-validator/java-lib-tmobile-oss-poptoken-validator/readme.html">Java - PoP Token Validator Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">T-Mobile API Security Libraries</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+      <li>JavaScript - PoP Token Builder Library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/tmobile-api-security-lib/poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder/readme.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="javascript-pop-token-builder-library">
+<h1>JavaScript - PoP Token Builder Library<a class="headerlink" href="#javascript-pop-token-builder-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>The T-Mobile PoP Token Builder library follows the following logic for creating the PoP token.</p>
+<ul class="simple">
+<li><p>Sets up the edts (external data to sign) / ehts (external headers to sign) claims in PoP token using the specified ehts key-value map. The library uses SHA256 algorithm for calculating the edts and then the final edts value is encoded using Base64 URL encoding.</p></li>
+<li><p>Signs the PoP token using the specified RSA private key.</p></li>
+<li><p>Creates the PoP token with 2 minutes of validity period.</p></li>
+</ul>
+</div>
+<div class="section" id="determining-the-ehts-key-name">
+<h2>Determining the ehts Key Name:<a class="headerlink" href="#determining-the-ehts-key-name" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>All required header and body fields and its values need to be defined.</p></li>
+<li><p>For HTTP request URI, “uri” should be used as ehts key name. Example: If the URL is <code class="docutils literal notranslate"><span class="pre">https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000</span></code> then only <code class="docutils literal notranslate"><span class="pre">/commerce/v1/orders?account-number=0000000000</span></code> should be used as ehts value. The query parameter values part of “uri” ehts value should be in URL encoded format.</p></li>
+<li><p>For HTTP method, “http-method” should be used as ehts key name.</p></li>
+<li><p>For HTTP request headers, the header name should be used as ehts key name.</p></li>
+<li><p>For HTTP request body, “body” should be used as ehts key name.</p></li>
+</ul>
+</div>
+<div class="section" id="supported-key-format">
+<h2>Supported Key Format<a class="headerlink" href="#supported-key-format" title="Permalink to this headline">¶</a></h2>
+<p>PoP token builder and validator libraries are currently supporting PKCS8 key format.</p>
+<p><strong>Using Non Encrypted Keys:</strong></p>
+<p>Below commands shows how to create private and public keys in PKCS8 format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates private key in PKCS1 format</span>
+<span class="n">openssl</span> <span class="n">genrsa</span> <span class="o">-</span><span class="n">out</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs1</span><span class="o">.</span><span class="n">pem</span> <span class="mi">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+<span class="n">openssl</span> <span class="n">pkcs8</span> <span class="o">-</span><span class="n">topk8</span> <span class="o">-</span><span class="n">inform</span> <span class="n">PEM</span> <span class="o">-</span><span class="ow">in</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs1</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">outform</span> <span class="n">PEM</span> <span class="o">-</span><span class="n">nocrypt</span> <span class="o">-</span><span class="n">out</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs8</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="c1"># Creates public key in PKCS8 format</span>
+<span class="n">openssl</span> <span class="n">rsa</span> <span class="o">-</span><span class="ow">in</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs8</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">outform</span> <span class="n">PEM</span> <span class="o">-</span><span class="n">pubout</span> <span class="o">-</span><span class="n">out</span> <span class="n">public</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-pop-token-builder-javascript-library-in-html-client-ui-page">
+<h2>Using the PoP Token Builder JavaScript Library in HTML/Client UI Page<a class="headerlink" href="#using-the-pop-token-builder-javascript-library-in-html-client-ui-page" title="Permalink to this headline">¶</a></h2>
+<p><strong>Link to the below JavaScript libraries in an HTML/client UI page:</strong></p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">poptoken-builder.js</span></code> (available in js_lib directory)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jsrsasign-all-min.js</span></code> (available in root directory)</p></li>
+</ol>
+<p><strong>Sample Code:</strong></p>
+<p>The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete HTML/JS code, please refer to poptoken-builder-test.html available in html_example directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Link</span> <span class="n">the</span> <span class="n">required</span> <span class="n">JavaScript</span> <span class="n">files</span>
+<span class="o">&lt;</span><span class="n">script</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;JavaScript&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;./jsrsasign-all-min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">script</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;JavaScript&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;./poptoken-builder.js&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+
+<span class="o">//</span> <span class="n">The</span> <span class="n">below</span> <span class="n">command</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">PKCS8</span> <span class="n">private</span> <span class="n">key</span> <span class="n">pem</span> <span class="n">string</span>
+<span class="o">//</span> <span class="n">openssl</span> <span class="n">genrsa</span> <span class="o">-</span><span class="n">out</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs1</span><span class="o">.</span><span class="n">pem</span> <span class="mi">2048</span>
+<span class="o">//</span> <span class="n">openssl</span> <span class="n">pkcs8</span> <span class="o">-</span><span class="n">topk8</span> <span class="o">-</span><span class="n">inform</span> <span class="n">PEM</span> <span class="o">-</span><span class="ow">in</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs1</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">outform</span> <span class="n">PEM</span> <span class="o">-</span><span class="n">nocrypt</span> <span class="o">-</span><span class="n">out</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs8</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">//</span> <span class="n">openssl</span> <span class="n">rsa</span> <span class="o">-</span><span class="ow">in</span> <span class="n">private</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">pkcs8</span><span class="o">.</span><span class="n">pem</span> <span class="o">-</span><span class="n">outform</span> <span class="n">PEM</span> <span class="o">-</span><span class="n">pubout</span> <span class="o">-</span><span class="n">out</span> <span class="n">public</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span>
+
+<span class="n">var</span> <span class="n">privateKeyPemString</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;-----BEGIN PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;+vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;zHNmq7/VPITL5UgtZ5nk6g==</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+<span class="s2">&quot;-----END PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">STEP</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Build</span> <span class="n">the</span> <span class="n">Javascript</span> <span class="n">Map</span> <span class="n">of</span> <span class="n">ehts</span> <span class="p">(</span><span class="n">external</span> <span class="n">headers</span> <span class="n">to</span> <span class="n">sign</span><span class="p">)</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">values</span>
+<span class="n">mapehtsKeyValue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+<span class="n">mapehtsKeyValue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&#39;</span><span class="p">);</span>
+<span class="n">mapehtsKeyValue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span> <span class="s1">&#39;/commerce/v1/orders&#39;</span><span class="p">);</span>
+<span class="n">mapehtsKeyValue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;http-method&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+<span class="n">mapehtsKeyValue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;{&quot;orderId&quot;: 100, &quot;product&quot;: &quot;Mobile Phone&quot;}&#39;</span><span class="p">);</span>
+
+<span class="n">The</span> <span class="n">validity</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">minutes</span> <span class="n">has</span> <span class="n">been</span> <span class="n">defined</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">method</span><span class="o">.</span> <span class="n">It</span> <span class="n">can</span> <span class="n">be</span> <span class="n">changed</span> <span class="k">as</span> <span class="n">required</span><span class="o">.</span>
+
+<span class="o">//</span> <span class="n">STEP</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Generate</span> <span class="n">PoP</span> <span class="n">token</span> <span class="n">using</span> <span class="n">PoPTokenBuilder</span>
+<span class="n">var</span> <span class="n">popToken</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">ehtsKeyValuMap</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Map</span><span class="p">();</span>
+<span class="n">setEhtsKeyValueMap</span><span class="p">(</span><span class="n">ehtsKeyValuMap</span><span class="p">);</span>
+<span class="n">popToken</span> <span class="o">=</span> <span class="n">buildPopToken</span><span class="p">(</span><span class="n">ehtsKeyValuMap</span><span class="p">,</span> <span class="n">privateKeyPemString</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-pop-token-builder-library-in-node-js-application">
+<h2>Using the PoP Token Builder Library in Node.js Application<a class="headerlink" href="#using-the-pop-token-builder-library-in-node-js-application" title="Permalink to this headline">¶</a></h2>
+<p><strong>Install the node modules using the following command:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The above command will create <code class="docutils literal notranslate"><span class="pre">node_modules</span></code> directory and will install the necessary node modules in it.</p>
+<p><strong>Sample Code:</strong></p>
+<p>The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete Node.js sample code, please refer to index-poptoken-builder.js available in node_example directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">popTokenBuilderUtil</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;../poptoken-builder-node&#39;</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">popToken</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">var</span> <span class="n">ehtsKeyValueMap</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Map</span><span class="p">();</span>
+
+<span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
+<span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">,</span> <span class="s1">&#39;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&#39;</span><span class="p">);</span>
+<span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span> <span class="s1">&#39;/commerce/v1/orders&#39;</span><span class="p">);</span>
+<span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;http-method&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+<span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;{&quot;orderId&quot;: 100, &quot;product&quot;: &quot;Mobile Phone&quot;}&#39;</span><span class="p">);</span>
+
+<span class="n">var</span> <span class="n">privateKeyPemStr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;-----BEGIN PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;+vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;zHNmq7/VPITL5UgtZ5nk6g==</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;-----END PRIVATE KEY-----</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+
+<span class="n">popToken</span> <span class="o">=</span> <span class="n">popTokenBuilderUtil</span><span class="o">.</span><span class="n">buildPopToken</span><span class="p">(</span><span class="n">ehtsKeyValueMap</span><span class="p">,</span> <span class="n">privateKeyPemStr</span><span class="p">);</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The JWT for the given RSA PEM is - &quot;</span> <span class="o">+</span> <span class="n">popToken</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../android-lib-tmobile-oss-poptoken-builder/readme.html" class="btn btn-neutral float-right" title="Android - PoP Token Builder Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../java-lib-tmobile-oss-poptoken-builder/readme.html" class="btn btn-neutral float-left" title="Java - PoP Token Builder Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

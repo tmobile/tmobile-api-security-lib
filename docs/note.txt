@@ -1,0 +1,6 @@
+source content:
+
+./source
+./make.bat
+./Makefile
+./note.txt
