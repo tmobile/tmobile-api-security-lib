@@ -1,4 +1,4 @@
-# T-Mobile PoP Token Builder JavaScript Library
+# JavaScript - PoP Token Builder Library
   
 ##  Using the PoP Token Builder JavaScript Library
 

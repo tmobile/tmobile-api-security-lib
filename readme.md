@@ -34,6 +34,40 @@ Proof of possession (PoP) helps enabling the message integrity and also helps av
 
 For more information on PoP token libraries, please refer to the readme file - [PoP Token Library Readme.md](./poptoken-lib).
 
+#### PoP Token Flow
+
+![PoP Token Sequence Diagram](./images/pop_token_sequence_diagram.png)
+
+
+#### PoP Token Format
+
+The format of the PoP token used by T-Mobile is:
+```
+Header: {alg, type} 
+Body { 
+  iat: <epoch time> 
+  exp: <epoch time> 
+  ehts: <authorization; content_type; uri; http-method; body> => All request headers, URI, HTTP method and body fields used to create hash
+  edts: <Base64UrlSafeEncoding[SHA256(all ehts claim values as a concatenated string)]">
+  jti: <unique identifier> 
+  v: "1"
+}
+Signature: <digitalSignature>
+```
+
+#### PoP Token Builder Library
+
+The PoP token builder library can be used to create a PoP token.
+
+For more information on PoP token builder library, please refer to the - [PoP Token Builder Library](./poptoken-lib/poptoken-builder).
+
+
+#### PoP Token Validator Library
+
+The PoP token validator library can be used to validate a PoP token.
+
+For more information on PoP token validator library, please refer to the - [PoP Token Validator Library](./poptoken-lib/poptoken-validator).
+
 ## License
 
 The T-Mobile API security libraries are released under the [Apache 2.0 License](./LICENSE).

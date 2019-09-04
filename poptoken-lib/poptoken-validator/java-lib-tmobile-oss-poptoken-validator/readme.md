@@ -1,4 +1,4 @@
-# T-Mobile PoP Token Validator
+# Java - PoP Token Validator Library
 
   
 ## Build/Install PoP Token Validator Library
