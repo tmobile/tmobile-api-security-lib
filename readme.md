@@ -6,20 +6,17 @@
 
 ## Directory Structure
 
-<div style="font-family:Consolas; font-size:1em;background-color:WhiteSmoke">
-<br>
-└───<a href="https://github.com/tmobile/tmobile-api-security-lib" target="_blank">tmobile-api-security-lib</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# T-Mobile API Security Lib Parent Directory<br>
-&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib" target="_blank">poptoken-lib</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Lib Parent Directory<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder" target="_blank">poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Builder Lib Parent Directory<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/java-lib-tmobile-oss-poptoken-builder" target="_blank">java-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Java PoP Token Builder Lib<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder" target="_blank">js-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# JavaScript PoP Token Builder Lib<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/android-lib-tmobile-oss-poptoken-builder" target="_blank">android-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;# Android PoP Token Builder Lib<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/ios-lib-tmobile-oss-poptoken-builder" target="_blank">ios-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# iOS PoP Token Builder Lib<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-validator" target="_blank">poptoken-validator</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Validator Lib Parent Directory<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-validator/java-lib-tmobile-oss-poptoken-validator" target="_blank">java-lib-tmobile-oss-poptoken-validator</a>&nbsp;&nbsp;# Java PoP Token Validator Lib<br>
-<br>
-</div>
-
+```
+└── tmobile-api-security-lib                                # T-Mobile API Security Lib Parent Directory
+    └── poptoken-lib                                        # PoP Token Lib Parent Directory
+        ├── poptoken-builder                                # PoP Token Builder Lib Parent Directory
+        │   ├── java-lib-tmobile-oss-poptoken-builder       # Java PoP Token Builder Lib
+        │   ├── js-lib-tmobile-oss-poptoken-builder         # JavaScript PoP Token Builder Lib
+        │   ├── android-lib-tmobile-oss-poptoken-builder    # Android PoP Token Builder Lib
+        │   └── ios-lib-tmobile-oss-poptoken-builder        # iOS PoP Token Builder Lib
+        └── poptoken-validator                              # PoP Token Validator Lib Parent Directory
+            └── java-lib-tmobile-oss-poptoken-validator     # Java PoP Token Validator Lib
+```
 
 ## Available Libraries 
 
