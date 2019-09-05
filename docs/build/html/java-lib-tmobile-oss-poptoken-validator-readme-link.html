@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Java - PoP Token Validator Library &mdash; T-Mobile API Security Libraries  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PoP Token Validator Libraries" href="poptoken-validator.index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> T-Mobile API Security Libraries
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tmobile-api-security-lib-readme-link.html">T-Mobile API Security Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poptoken-builder.index.html">PoP Token Builder Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="poptoken-validator.index.html">PoP Token Validator Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Java - PoP Token Validator Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-install-pop-token-validator-library">Build/Install PoP Token Validator Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determining-the-ehts-key-name">Determining the ehts Key Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-key-format">Supported Key Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pop-token-validator-performance-test-results">PoP Token Validator Performance Test Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-the-pop-token-using-public-key-pem-string">Validating the PoP Token Using Public Key PEM String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javadoc-for-validatepoptokenwithpublickeypemstring-method">Javadoc for validatePopTokenWithPublicKeyPemString Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-the-pop-token-using-public-key-jwk-string">Validating the PoP Token Using Public Key JWK String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javadoc-for-validatepoptokenwithpublickeyjwkstring-method">Javadoc for validatePopTokenWithPublicKeyJwkString Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-the-pop-token-using-rsapublickey">Validating the PoP Token Using RSAPublicKey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javadoc-for-validatepoptokenwithrsapublickey-method">Javadoc for validatePopTokenWithRsaPublicKey Method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">T-Mobile API Security Libraries</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poptoken-validator.index.html">PoP Token Validator Libraries</a> &raquo;</li>
+        
+      <li>Java - PoP Token Validator Library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="java-pop-token-validator-library">
+<h1>Java - PoP Token Validator Library<a class="headerlink" href="#java-pop-token-validator-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-install-pop-token-validator-library">
+<h2>Build/Install PoP Token Validator Library<a class="headerlink" href="#build-install-pop-token-validator-library" title="Permalink to this headline">¶</a></h2>
+<p>Execute following command to build the PoP token validator library.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn clean install
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>The T-Mobile PoP Validator library performs the following validations:</p>
+<ul class="simple">
+<li><p>Validates the exp (expiration time) claim to ensure the token is still valid (uses 10 seconds of leeway time).</p></li>
+<li><p>Validates the signature using the specified public key.</p></li>
+<li><p>Validates the edts (external data to sign) / ehts (external headers to sign) by recalculating the SHA256 hash and comparing it with the actual edts claim value.</p></li>
+<li><p>Current PoP token builder and validator libraries support RSA PKCS8 format key for signing and validating the PoP tokens.</p></li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>If the API request body is very large or data is being streamed then the “body” should not be added to ehts/edts while building/validating the PoP token.</p></li>
+</ul>
+</div>
+<div class="section" id="determining-the-ehts-key-name">
+<h2>Determining the ehts Key Name<a class="headerlink" href="#determining-the-ehts-key-name" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>For HTTP request URI, “uri” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.URI.keyName()</span></code>. For “uri” ehts value, the URI and query string of the request URL should be put in the ehts key-value map. Example: If the URL is <code class="docutils literal notranslate"><span class="pre">https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000</span></code> then only <code class="docutils literal notranslate"><span class="pre">/commerce/v1/orders?account-number=0000000000</span></code> should be used as ehts value. The query parameter values part of “uri” ehts value should not be in URL encoded format.</p></li>
+<li><p>For HTTP method, “http-method” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.HTTP_METHOD.keyName()</span></code>.</p></li>
+<li><p>For HTTP request headers, the header name should be used as ehts key name.</p></li>
+<li><p>For HTTP request body, “body” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.BODY.keyName()</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="supported-key-format">
+<h2>Supported Key Format<a class="headerlink" href="#supported-key-format" title="Permalink to this headline">¶</a></h2>
+<p>PoP token builder and validator libraries are currently supporting PKCS8 key format.</p>
+<p><strong>Using Non Encrypted Keys:</strong></p>
+<p>Below commands shows how to create private and public keys in PKCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates private key in PKCS1 format</span>
+openssl genrsa -out private-key-pkcs1.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private-key-pkcs1.pem -outform PEM -nocrypt -out private-key-pkcs8.pem
+
+<span class="c1"># Creates public key in PKCS8 format</span>
+openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+<p><strong>Using AES256 Encrypted Keys:</strong></p>
+<p>Below commands shows how to create AES256 encrypted private key and public key in PCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates encrypted private key in PKCS1 format</span>
+openssl genrsa -aes256 -passout pass:foobar -out private_key_aes256_with_password.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private_key_aes256_with_password.pem -outform PEM -out private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar
+
+<span class="c1"># Creates public key</span>
+openssl rsa -in private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+<p><strong>Using DES3 Encrypted Keys:</strong></p>
+<p>Below commands shows how to create DES3 encrypted private key and public key in PKCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates encrypted private key in PKCS1 format</span>
+openssl genrsa -des3 -passout pass:foobar -out private_key_des3_with_password.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private_key_des3_with_password.pem -outform PEM -out private_key_des3_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar
+
+<span class="c1"># Creates public key</span>
+openssl rsa -in private_key_des3_with_password_pkcs8.pem -passin pass:foobar -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+</div>
+<div class="section" id="pop-token-validator-performance-test-results">
+<h2>PoP Token Validator Performance Test Results<a class="headerlink" href="#pop-token-validator-performance-test-results" title="Permalink to this headline">¶</a></h2>
+<p>The following table shows the processing time taken by PoP token validation for various test cases.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Test Name</p></th>
+<th class="head"><p>Total Processing Time For 1000 Calls</p></th>
+<th class="head"><p>Avg Processing Time For 1 Call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PoP token with no request payload</p></td>
+<td><p>549 ms</p></td>
+<td><p>~1 ms</p></td>
+</tr>
+<tr class="row-odd"><td><p>PoP token with 1K request payload</p></td>
+<td><p>540 ms</p></td>
+<td><p>~1 ms</p></td>
+</tr>
+<tr class="row-even"><td><p>PoP token with 10K request payload</p></td>
+<td><p>777 ms</p></td>
+<td><p>~1 ms</p></td>
+</tr>
+<tr class="row-odd"><td><p>PoP token with 100K request payload</p></td>
+<td><p>1999 ms</p></td>
+<td><p>~2 ms</p></td>
+</tr>
+<tr class="row-even"><td><p>PoP token with 1M request payload</p></td>
+<td><p>16111 ms</p></td>
+<td><p>~16 ms</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="validating-the-pop-token-using-public-key-pem-string">
+<h2>Validating the PoP Token Using Public Key PEM String<a class="headerlink" href="#validating-the-pop-token-using-public-key-pem-string" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to validate the PoP token with the public key PEM string.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertEquals</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.fail</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopEhtsKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenValidatorException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenValidatorDemoWithPublicKeyPemStringTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">PopTokenValidatorDemoWithPublicKeyPemStringTest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">validatePopTokenWithPublicKeyPemString</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="s">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiRmtHalFWWWNuZ0VkZ3lPa3BiQjFUVWI2X19jenFib25wUVZDc2Y1Y3J3RSIsInYiOiJ2MSIsImV4cCI6MTU2MTA3MjIyNywiZWh0cyI6IkNvbnRlbnQtVHlwZTtBdXRob3JpemF0aW9uO3VyaTtodHRwLW1ldGhvZDtib2R5IiwiaWF0IjoxNTYxMDcyMTA3LCJqdGkiOiI2ZDlmOGQ3Zi01ZTM3LTRiNWItYTJiMC00M2E0YzllY2Q2ODkifQ.k7DYvg7kGYE8OosqkvGBAkktATbRcr1YdqefX5N0bc_yWTLd_1TXseZ6e2dr7E9UkDwN4FfZ8hbm8IF7oQy3BOgws5kt_u_x-HluGlESQLIsX1BoNGGrCyDX7gBgeDc-P0z70UJXi5r_VJz8WLoEyp3ZS14I3HlSJAuYwdTvf207j3Chj5iCA9B6TfRORbc-3ua35K_3OL8WckXfUGpkLDitDvA_BXxN4_pMCrTXBEYCxhWl4ZJcIuL3T8uGPFkug_Vcz_Wojdv4BauY-M_elfcXpM6-D_L8dE5hWrSAXZPnRN36rb0QhYeXO80zFtY3SuM0-CoC6_EoaVhZ28VCAA&quot;</span><span class="o">;</span>
+
+        <span class="n">String</span> <span class="n">publicKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN PUBLIC KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr6yrypbkrAT+4m0yU5sz&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;udm0Cm0NM5AOxU1x7Nx9hYRYrxbh+LFamxBGAKhO3Ej2ORfWyXtw1BuVXxheHGC9&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;CnNCozCh3OX15Rf23z+JeI2jGfa+JxiQ4qRBl53hMDOMEWp745aOr/bKOwnM6FCT&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;DlcKb/8N0ydJiiuX3gk2JX5pmZtiKgHsIaX/4O65fF42r4pRKw23RouCyqjTTWqt&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;OYrZSHFKwTp7VhCYXmjf87B6GO23YIF/TVJfkZ+b1LBKg+RTUqFeJgEvjEZka0Ug&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;r/t/tRzZsTLRMG38ENd0KDbsqtmILcLL7bCglyzdPS1HmOQIQwO7zKN8tZjNrGvO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;SwIDAQAB&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END PUBLIC KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// STEP 1: Create an instance of PoPTokenValidator</span>
+            <span class="n">PopTokenValidator</span> <span class="n">popTokenValidator</span> <span class="o">=</span> <span class="n">PopTokenValidator</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+
+            <span class="c1">// STEP 2: Get the list of ehts (external headers to sign) keys from the pop token string</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeys</span> <span class="o">=</span> <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">getEhtsKeys</span><span class="o">(</span><span class="n">popToken</span><span class="o">);</span>
+
+            <span class="c1">// STEP 3: Build map of ehts (external headers to sign) key-value pairs by reading the required values from HTTP request</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsValuesMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span> <span class="o">:</span> <span class="n">ehtsKeys</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">ehtsValuesMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">,</span> <span class="n">getEhtsValue</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">));</span>
+            <span class="o">}</span>
+
+            <span class="c1">// STEP 4: Validate the PoP token using PopTokenValidator.validatePopTokenWithPublicKeyPemString method, this method will</span>
+            <span class="c1">// throw PopTokenValidatorException if the PoP token is invalid or the PoP token cannot be validated</span>
+            <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">validatePopTokenWithPublicKeyPemString</span><span class="o">(</span><span class="n">popToken</span><span class="o">,</span> <span class="n">publicKeyPemString</span><span class="o">,</span> <span class="n">ehtsValuesMap</span><span class="o">);</span>
+            <span class="n">fail</span><span class="o">(</span><span class="s">&quot;The PopTokenValidatorException should have been thrown as the this is an expired token&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">PopTokenValidatorException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;Error occurred while executing the test case, error: &quot;</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">ex</span><span class="o">);</span>
+            <span class="n">assertEquals</span><span class="o">(</span><span class="n">PopTokenExpiredException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">ex</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// ===== helper methods ===== //</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * This implementation is provided only for demonstrating the PoP token validation, in real use case these values should be read</span>
+<span class="cm">     * from the HTTP request.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param ehtsKey The ehts key</span>
+<span class="cm">     * @return The value for the ehts key</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getEhtsValue</span><span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;application/json&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;POST&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="javadoc-for-validatepoptokenwithpublickeypemstring-method">
+<h2>Javadoc for validatePopTokenWithPublicKeyPemString Method<a class="headerlink" href="#javadoc-for-validatepoptokenwithpublickeypemstring-method" title="Permalink to this headline">¶</a></h2>
+<p><strong>public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map&lt;String, String&gt; ehtsKeyValueMap) throws PopTokenValidatorException</strong></p>
+<p>Validates the PoP token with public key PEM string.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">popToken</span></code> — The PoP token string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">publicKeyPemString</span></code> — The public key PEM string to verify the PoP token signature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ehtsKeyValueMap</span></code> — The map containing the values for all the ehts (external headers to sign) keys.
+<span class="raw-html-m2r"><p></span>
+Determining the ehts key name:
+<span class="raw-html-m2r"><ul>
+<li>For HTTP request URI, "uri" should be used as ehts key name, <code>PopEhtsKey.URI.keyName()</code>. <br>
+For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
+"https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
+"/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
+of "uri" ehts should not be in URL encoded format.</li>
+<li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
+<li>For HTTP request headers, the header name should be used as ehts key name.</li>
+<li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
+</ul></span></p>
+<p></li>
+</ul>
+</li>
+<li><p><strong>Exceptions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code> — If the popToken is null or empty, <span class="raw-html-m2r"><br></span>
+publicKeyPemString is null or empty or ehtsKeyValueMap is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InvalidPopTokenException</span></code> — If the PoP token is invalid and so cannot be decoded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenExpiredException</span></code> — If the PoP token is expired</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenSignatureVerificationException</span></code> — If the PoP token signature resulted invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenInvalidEdtsHashException</span></code> — If the edts (external data to sign) hash is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenValidatorException</span></code> — If the PoP token cannot be validated</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="validating-the-pop-token-using-public-key-jwk-string">
+<h2>Validating the PoP Token Using Public Key JWK String<a class="headerlink" href="#validating-the-pop-token-using-public-key-jwk-string" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to validate the PoP token with public key JWK string.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertEquals</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.fail</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopEhtsKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenValidatorException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenValidatorDemoWithPublicKeyJwkStringTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">PopTokenValidatorDemoWithPublicKeyJwkStringTest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">validatePopTokenWithRsaPublicKey</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="s">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiYWZxR1dBYlNldlRQMm0zOHF1QmpDOHBBMkhjeFpYRzR6cEZDUFNoVHRTbyIsInYiOiIxIiwiZXhwIjoxNTY3MjAzMjAxLCJlaHRzIjoiQ29udGVudC1UeXBlO0F1dGhvcml6YXRpb247dXJpO2h0dHAtbWV0aG9kO2JvZHkiLCJpYXQiOjE1NjcyMDMwODEsImp0aSI6IjgzZWNiY2QyLTU4ODMtNDRjNy05NDcwLTcxZTAyZTViZTBkYyJ9.IPVCvaUbTs98MpYG2JfDNnziYa1nhJfihcabL-jgLPIGkf1T0IqqHdpihLnRl65Fj_Y3elJrbVCP5odRtVmr8EKmsNVlQykVFfTuXvswv_d3xnlNVghEkYlMnomoa_e_FiKSgUAdz-42iZsBl3Vjql4V1igk2MdiKaGGmKDavi-pe_kU8jPdHIWlogE6SkHVtTJ31dDdzh3ijAPqizIyueZ2J10EvEojPnMzPryKrkybrVAQyb1hSvqCmxQth_1L0IyXKkXrpqdY7SoX03yRDFH2kBODZcHAIxNxQn6XAWC9z_RS8y6cGeTUlGH_jXKPqCpdfKD5UIeFdrPkcawiCw&quot;</span><span class="o">;</span>
+
+        <span class="n">String</span> <span class="n">publicKeyJwkString</span> <span class="o">=</span> <span class="s">&quot;{&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;alg\&quot;: \&quot;RS256\&quot;,&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;e\&quot;: \&quot;AQAB\&quot;,&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;n\&quot;: \&quot;maGCOzVBAqcAD6JhOb5YYdhiKWlvVotTOzCsu6VxK2Uzb2tKhVYGd5hpgB_MFkbH64YPqIAn-IN7IUwvbkP4pDLF0kZ6uGAo1zFfmbACFlgBgB8HciMS1_zBCBnhtpPSm8K-6Ik66i20g6VfZ9HVyXxB8fcEO1fLgxz6Je_TF-TTXWtLMWaGE6zLFT0SJox5O3EsrstzwFDh1MNjba9Thn4PoOkn4rrT8nSdPRTRxphaLBR-ch3gVvykOSLJqVrmcQxJwAiCcNlIMXFgjpVpnY4n9Nz9wDHznr_a-qOI2w8nSGIHIdhT8wRj4Cf72DS1huIwIrMw1LQzM_hl7ZuGQw==\&quot;,&quot;</span>
+                <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;kid\&quot;: \&quot;dfad17ce-073b-4421-9944-fc9477c2bd63\&quot;,&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;kty\&quot;: \&quot;RSA\&quot;,&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;  \&quot;use\&quot;: \&quot;sig\&quot;&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;}&quot;</span><span class="o">;</span> <span class="c1">// LINE_SEPARATOR //</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// STEP 1: Create an instance of PoPTokenValidator</span>
+            <span class="n">PopTokenValidator</span> <span class="n">popTokenValidator</span> <span class="o">=</span> <span class="n">PopTokenValidator</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+
+            <span class="c1">// STEP 2: Get the list of ehts (external headers to sign) keys from the pop token string</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeys</span> <span class="o">=</span> <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">getEhtsKeys</span><span class="o">(</span><span class="n">popToken</span><span class="o">);</span>
+
+            <span class="c1">// STEP 3: Build map of ehts (external headers to sign) key-value pairs by reading the required values from HTTP request</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsValuesMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span> <span class="o">:</span> <span class="n">ehtsKeys</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">ehtsValuesMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">,</span> <span class="n">getEhtsValue</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">));</span>
+            <span class="o">}</span>
+
+            <span class="c1">// STEP 4: Validate the PoP token using PopTokenValidator.validatePopTokenWithPublicKeyJwkString method, this method will throw</span>
+            <span class="c1">// PopTokenValidatorException if the PoP token is invalid or the PoP token cannot be validated</span>
+            <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">validatePopTokenWithPublicKeyJwkString</span><span class="o">(</span><span class="n">popToken</span><span class="o">,</span> <span class="n">publicKeyJwkString</span><span class="o">,</span> <span class="n">ehtsValuesMap</span><span class="o">);</span>
+            <span class="n">fail</span><span class="o">(</span><span class="s">&quot;The PopTokenValidatorException should have been thrown as the this is an expired token&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">PopTokenValidatorException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;Error occurred while executing the test case, error: &quot;</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">ex</span><span class="o">);</span>
+            <span class="n">assertEquals</span><span class="o">(</span><span class="n">PopTokenExpiredException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">ex</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// ===== helper methods ===== //</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * This implementation is provided only for demonstrating the PoP token validation, in real use case these values should be read</span>
+<span class="cm">     * from the HTTP request.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param ehtsKey The ehts key</span>
+<span class="cm">     * @return The value for the ehts key</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getEhtsValue</span><span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;application/json&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;POST&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="javadoc-for-validatepoptokenwithpublickeyjwkstring-method">
+<h2>Javadoc for validatePopTokenWithPublicKeyJwkString Method<a class="headerlink" href="#javadoc-for-validatepoptokenwithpublickeyjwkstring-method" title="Permalink to this headline">¶</a></h2>
+<p><strong>public void validatePopTokenWithPublicKeyJwkString(String popToken, String publicKeyJwkString, Map&lt;String, String&gt; ehtsKeyValueMap) throws PopTokenValidatorException</strong></p>
+<p>Validates the PoP token with public key JWK string.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">popToken</span></code> — The PoP token string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">publicKeyJwktring</span></code> — The public key JWK string to verify the PoP token signature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ehtsKeyValueMap</span></code> — The map containing the values for all the ehts (external headers to sign) keys.
+<span class="raw-html-m2r"><p></span>
+Determining the ehts key name:
+<span class="raw-html-m2r"><ul>
+<li>For HTTP request URI, "uri" should be used as ehts key name, <code>PopEhtsKey.URI.keyName()</code>. <br>
+For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
+"https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
+"/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
+of "uri" ehts should not be in URL encoded format.</li>
+<li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
+<li>For HTTP request headers, the header name should be used as ehts key name.</li>
+<li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
+</ul></span></p>
+<p></li>
+</ul>
+</li>
+<li><p><strong>Exceptions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code> — If the popToken is null or empty, <span class="raw-html-m2r"><br></span>
+publicKeyJwkString is null or empty or ehtsKeyValueMap is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InvalidPopTokenException</span></code> — If the PoP token is invalid and so cannot be decoded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenExpiredException</span></code> — If the PoP token is expired</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenSignatureVerificationException</span></code> — If the PoP token signature resulted invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenInvalidEdtsHashException</span></code> — If the edts (external data to sign) hash is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenValidatorException</span></code> — If the PoP token cannot be validated</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="validating-the-pop-token-using-rsapublickey">
+<h2>Validating the PoP Token Using RSAPublicKey<a class="headerlink" href="#validating-the-pop-token-using-rsapublickey" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to validate the PoP token with the RSAPublicKey.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertEquals</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.fail</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.security.interfaces.RSAPublicKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopEhtsKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.PopTokenValidator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenExpiredException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.exception.PopTokenValidatorException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.validator.utils.PopTokenValidatorUtils</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenValidatorDemoWithRsaPublicKeyTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">PopTokenValidatorDemoWithRsaPublicKeyTest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">validatePopTokenWithRsaPublicKey</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="s">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJlZHRzIjoiRmtHalFWWWNuZ0VkZ3lPa3BiQjFUVWI2X19jenFib25wUVZDc2Y1Y3J3RSIsInYiOiJ2MSIsImV4cCI6MTU2MTA3MjIyNywiZWh0cyI6IkNvbnRlbnQtVHlwZTtBdXRob3JpemF0aW9uO3VyaTtodHRwLW1ldGhvZDtib2R5IiwiaWF0IjoxNTYxMDcyMTA3LCJqdGkiOiI2ZDlmOGQ3Zi01ZTM3LTRiNWItYTJiMC00M2E0YzllY2Q2ODkifQ.k7DYvg7kGYE8OosqkvGBAkktATbRcr1YdqefX5N0bc_yWTLd_1TXseZ6e2dr7E9UkDwN4FfZ8hbm8IF7oQy3BOgws5kt_u_x-HluGlESQLIsX1BoNGGrCyDX7gBgeDc-P0z70UJXi5r_VJz8WLoEyp3ZS14I3HlSJAuYwdTvf207j3Chj5iCA9B6TfRORbc-3ua35K_3OL8WckXfUGpkLDitDvA_BXxN4_pMCrTXBEYCxhWl4ZJcIuL3T8uGPFkug_Vcz_Wojdv4BauY-M_elfcXpM6-D_L8dE5hWrSAXZPnRN36rb0QhYeXO80zFtY3SuM0-CoC6_EoaVhZ28VCAA&quot;</span><span class="o">;</span>
+
+        <span class="n">String</span> <span class="n">publicKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN PUBLIC KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr6yrypbkrAT+4m0yU5sz&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;udm0Cm0NM5AOxU1x7Nx9hYRYrxbh+LFamxBGAKhO3Ej2ORfWyXtw1BuVXxheHGC9&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;CnNCozCh3OX15Rf23z+JeI2jGfa+JxiQ4qRBl53hMDOMEWp745aOr/bKOwnM6FCT&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;DlcKb/8N0ydJiiuX3gk2JX5pmZtiKgHsIaX/4O65fF42r4pRKw23RouCyqjTTWqt&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;OYrZSHFKwTp7VhCYXmjf87B6GO23YIF/TVJfkZ+b1LBKg+RTUqFeJgEvjEZka0Ug&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;r/t/tRzZsTLRMG38ENd0KDbsqtmILcLL7bCglyzdPS1HmOQIQwO7zKN8tZjNrGvO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;SwIDAQAB&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END PUBLIC KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// STEP 1: Create an instance of PoPTokenValidator</span>
+            <span class="n">PopTokenValidator</span> <span class="n">popTokenValidator</span> <span class="o">=</span> <span class="n">PopTokenValidator</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+
+            <span class="c1">// STEP 2: Get the list of ehts (external headers to sign) keys from the pop token string</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeys</span> <span class="o">=</span> <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">getEhtsKeys</span><span class="o">(</span><span class="n">popToken</span><span class="o">);</span>
+
+            <span class="c1">// STEP 3: Build map of ehts (external headers to sign) key-value pairs by reading the required values from HTTP request</span>
+            <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsValuesMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span> <span class="o">:</span> <span class="n">ehtsKeys</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">ehtsValuesMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">,</span> <span class="n">getEhtsValue</span><span class="o">(</span><span class="n">ehtsKey</span><span class="o">));</span>
+            <span class="o">}</span>
+
+            <span class="c1">// STEP 4: Create RSAPublicKey from publicKeyPemString</span>
+            <span class="n">RSAPublicKey</span> <span class="n">rsaPublicKey</span> <span class="o">=</span> <span class="n">PopTokenValidatorUtils</span><span class="o">.</span><span class="na">keyPemStringToRsaPublicKey</span><span class="o">(</span><span class="n">publicKeyPemString</span><span class="o">);</span>
+
+            <span class="c1">// STEP 5: Validate the PoP token using PopTokenValidator.validatePopTokenWithRsaPublicKey method, this method will throw</span>
+            <span class="c1">// PopTokenValidatorException if the PoP token is invalid or the PoP token cannot be validated</span>
+            <span class="n">popTokenValidator</span><span class="o">.</span><span class="na">validatePopTokenWithRsaPublicKey</span><span class="o">(</span><span class="n">popToken</span><span class="o">,</span> <span class="n">rsaPublicKey</span><span class="o">,</span> <span class="n">ehtsValuesMap</span><span class="o">);</span>
+            <span class="n">fail</span><span class="o">(</span><span class="s">&quot;The PopTokenValidatorException should have been thrown as the this is an expired token&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">PopTokenValidatorException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;Error occurred while executing the test case, error: &quot;</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">ex</span><span class="o">);</span>
+            <span class="n">assertEquals</span><span class="o">(</span><span class="n">PopTokenExpiredException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">ex</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// ===== helper methods ===== //</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * This implementation is provided only for demonstrating the PoP token validation, in real use case these values should be read</span>
+<span class="cm">     * from the HTTP request.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param ehtsKey The ehts key</span>
+<span class="cm">     * @return The value for the ehts key</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getEhtsValue</span><span class="o">(</span><span class="n">String</span> <span class="n">ehtsKey</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;application/json&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;POST&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ehtsKey</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="javadoc-for-validatepoptokenwithrsapublickey-method">
+<h2>Javadoc for validatePopTokenWithRsaPublicKey Method<a class="headerlink" href="#javadoc-for-validatepoptokenwithrsapublickey-method" title="Permalink to this headline">¶</a></h2>
+<p><strong>public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map&lt;String, String&gt; ehtsKeyValueMap) throws PopTokenValidatorException</strong></p>
+<p>Validates the PoP token with RSA public key.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">popToken</span></code> — The PoP token string</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rsaPublicKey</span></code> — The RSAPublicKey to verify the PoP token signature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ehtsKeyValueMap</span></code> — The map containing the values for all the ehts (external headers to sign) keys.
+<span class="raw-html-m2r"><p></span>
+Determining the ehts key name:
+<span class="raw-html-m2r"><ul>
+<li>For HTTP request URI, "uri" should be used as ehts key name, <code>PopEhtsKey.URI.keyName()</code>. <br>
+For "uri" ehts value, URI and query string of the request URL should be put in the map. Example: If the URL is
+"https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000" then only
+"/commerce/v1/orders?account-number=0000000000" should be used as ehts "uri" value. The query parameter values part
+of "uri" ehts should not be in URL encoded format.</li>
+<li>For HTTP method, "http-method" should be used as ehts key name, <code>PopEhtsKey.HTTP_METHOD.keyName()</code>.</li>
+<li>For HTTP request headers, the header name should be used as ehts key name.</li>
+<li>For HTTP request body, "body" should be used as ehts key name, <code>PopEhtsKey.BODY.keyName()</code>.</li>
+</ul></span></p>
+<p></li>
+</ul>
+</li>
+<li><p><strong>Exceptions:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IllegalArgumentException</span></code> — If the popToken is null or empty, rsaPublicKey is null or ehtsKeyValueMap is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InvalidPopTokenException</span></code> — If the PoP token is invalid and so cannot be decoded</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenExpiredException</span></code> — If the PoP token is expired</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenSignatureVerificationException</span></code> — If the PoP token signature resulted invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenInvalidEdtsHashException</span></code> — If the edts (external data to sign) hash is invalid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PopTokenValidatorException</span></code> — If the PoP token cannot be validated</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="poptoken-validator.index.html" class="btn btn-neutral float-left" title="PoP Token Validator Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

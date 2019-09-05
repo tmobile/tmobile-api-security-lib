@@ -5,7 +5,7 @@
 
 Execute following command to build the PoP token builder library.
 
-```
+```bash
 mvn clean install
 ```
 
@@ -41,7 +41,7 @@ PoP token builder and validator libraries are currently supporting PKCS8 key for
 
 Below commands shows how to create private and public keys in PKCS8 format:
 
-```
+```bash
 # Creates private key in PKCS1 format
 openssl genrsa -out private-key-pkcs1.pem 2048
 
@@ -57,7 +57,7 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
 
 Below commands shows how to create AES256 encrypted private key and public key in PCS8 format:
 
-```
+```bash
 # Creates encrypted private key in PKCS1 format
 openssl genrsa -aes256 -passout pass:foobar -out private_key_aes256_with_password.pem 2048
 
@@ -73,7 +73,7 @@ openssl rsa -in private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -
 
 Below commands shows how to create DES3 encrypted private key and public key in PKCS8 format:
 
-```
+```bash
 # Creates encrypted private key in PKCS1 format
 openssl genrsa -des3 -passout pass:foobar -out private_key_des3_with_password.pem 2048
 
@@ -108,7 +108,7 @@ The following table shows the processing time taken by PoP token builder for var
 ## Building the PoP Token Using Private Key PEM String
 The following Java JUnit test describes how to build the PoP using private key PEM string.  
   
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;
@@ -181,7 +181,7 @@ public class PopTokenBuilderDemoWithPrivateKeyPemStringTest {
 ## Building the PoP Token Using Encrypted Private Key PEM String
 The following Java JUnit test describes how to build the PoP using the encrypted private key PEM string.  
   
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;
@@ -326,7 +326,7 @@ public class PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordTest 
 ## Building the PoP Token Using RSAPrivateKey
 The following Java JUnit test describes how to build the PoP using RSAPrivateKey.
   
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.builder.demo;
 
 import static org.junit.Assert.assertTrue;

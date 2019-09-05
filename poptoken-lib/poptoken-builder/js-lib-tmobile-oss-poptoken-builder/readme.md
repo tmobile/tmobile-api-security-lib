@@ -24,7 +24,7 @@ PoP token builder and validator libraries are currently supporting PKCS8 key for
 
 Below commands shows how to create private and public keys in PKCS8 format:
 
-```
+```bash
 # Creates private key in PKCS1 format
 openssl genrsa -out private-key-pkcs1.pem 2048
 
@@ -38,12 +38,12 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
 
 ## Using the PoP Token Builder JavaScript Library in HTML/Client UI Page
 
-### Link to the below JavaScript libraries in an HTML/client UI page
+**Link to the below JavaScript libraries in an HTML/client UI page**
 
 1. `poptoken-builder.js` (available in js_lib directory)
 2. `jsrsasign-all-min.js` (available in root directory)
 
-### Sample Code
+**Sample Code**
 
 The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete HTML/JS code, please refer to poptoken-builder-test.html available in html_example directory.
 
@@ -107,19 +107,19 @@ popToken = buildPopToken(ehtsKeyValuMap, privateKeyPemString);
 
 ## Using the PoP Token Builder Library in Node.js Application
 
-### Install the node modules using the following command
+**Install the node modules using the following command**
 
-```
+```bash
 npm install
 ```
 
 The above command will create `node_modules` directory and will install the necessary node modules in it.
 
-### Sample Code
+**Sample Code**
 
 The following code snippet demonstrates how to use the PoP token builder Java Script library to build the PoP token. For the complete Node.js sample code, please refer to index-poptoken-builder.js available in node_example directory.
 
-```
+```js
 var popTokenBuilderUtil = require('../poptoken-builder-node');
 
 var popToken = '';

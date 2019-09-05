@@ -5,7 +5,7 @@
 
 Execute following command to build the PoP token validator library.
 
-```
+```bash
 mvn clean install
 ```
 
@@ -36,11 +36,11 @@ The T-Mobile PoP Validator library performs the following validations:
 
 PoP token builder and validator libraries are currently supporting PKCS8 key format.
 
-** Using Non Encrypted Keys: **
+**Using Non Encrypted Keys:**
 
 Below commands shows how to create private and public keys in PKCS8 format:
 
-```
+```bash
 # Creates private key in PKCS1 format
 openssl genrsa -out private-key-pkcs1.pem 2048
 
@@ -56,7 +56,7 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
 
 Below commands shows how to create AES256 encrypted private key and public key in PCS8 format:
 
-```
+```bash
 # Creates encrypted private key in PKCS1 format
 openssl genrsa -aes256 -passout pass:foobar -out private_key_aes256_with_password.pem 2048
 
@@ -72,7 +72,7 @@ openssl rsa -in private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -
 
 Below commands shows how to create DES3 encrypted private key and public key in PKCS8 format:
 
-```
+```bash
 # Creates encrypted private key in PKCS1 format
 openssl genrsa -des3 -passout pass:foobar -out private_key_des3_with_password.pem 2048
 
@@ -100,7 +100,7 @@ The following table shows the processing time taken by PoP token validation for 
 ## Validating the PoP Token Using Public Key PEM String
 The following Java JUnit test describes how to validate the PoP token with the public key PEM string.
 
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.validator.demo;
 
 import static org.junit.Assert.assertEquals;
@@ -191,7 +191,7 @@ public class PopTokenValidatorDemoWithPublicKeyPemStringTest {
   
 ## Javadoc for validatePopTokenWithPublicKeyPemString Method
 
-### `public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+**public void validatePopTokenWithPublicKeyPemString(String popToken, String publicKeyPemString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException**
 
 Validates the PoP token with public key PEM string.
 
@@ -225,7 +225,7 @@ Validates the PoP token with public key PEM string.
 ## Validating the PoP Token Using Public Key JWK String
 The following Java JUnit test describes how to validate the PoP token with public key JWK string.
 
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.validator.demo;
 
 import static org.junit.Assert.assertEquals;
@@ -316,7 +316,7 @@ public class PopTokenValidatorDemoWithPublicKeyJwkStringTest {
   
 ## Javadoc for validatePopTokenWithPublicKeyJwkString Method
 
-### `public void validatePopTokenWithPublicKeyJwkString(String popToken, String publicKeyJwkString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+**public void validatePopTokenWithPublicKeyJwkString(String popToken, String publicKeyJwkString, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException**
 
 Validates the PoP token with public key JWK string.
 
@@ -350,7 +350,7 @@ Validates the PoP token with public key JWK string.
 ## Validating the PoP Token Using RSAPublicKey
 The following Java JUnit test describes how to validate the PoP token with the RSAPublicKey.
   
-```
+```java
 package com.tmobile.oss.security.taap.poptoken.validator.demo;
 
 import static org.junit.Assert.assertEquals;
@@ -446,7 +446,7 @@ public class PopTokenValidatorDemoWithRsaPublicKeyTest {
   
 ## Javadoc for validatePopTokenWithRsaPublicKey Method
 
-### `public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException`
+**public void validatePopTokenWithRsaPublicKey(String popToken, RSAPublicKey rsaPublicKey, Map<String, String> ehtsKeyValueMap) throws PopTokenValidatorException**
 
 Validates the PoP token with RSA public key.
 

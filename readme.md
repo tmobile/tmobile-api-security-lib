@@ -6,19 +6,20 @@
 
 ## Directory Structure
 
-<font name="Consolas">
-<pre>
-└── <a href=".">tmobile-api-security-lib</a>                                # T-Mobile API Security Lib Parent Directory
-    └── <a href="./poptoken-lib">poptoken-lib</a>                                        # PoP Token Lib Parent Directory
-        ├── <a href="./poptoken-lib/poptoken-builder">poptoken-builder</a>                                # PoP Token Builder Lib Parent Directory
-        │   ├── <a href="./poptoken-lib/poptoken-builder/java-lib-tmobile-oss-poptoken-builder">java-lib-tmobile-oss-poptoken-builder</a>       # Java PoP Token Builder Lib
-        │   ├── <a href="./poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder">js-lib-tmobile-oss-poptoken-builder</a>         # JavaScript PoP Token Builder Lib
-        │   ├── <a href="./poptoken-lib/poptoken-builder/android-lib-tmobile-oss-poptoken-builder">android-lib-tmobile-oss-poptoken-builder</a>    # Android PoP Token Builder Lib
-        │   └── <a href="./poptoken-lib/poptoken-builder/ios-lib-tmobile-oss-poptoken-builder">ios-lib-tmobile-oss-poptoken-builder</a>        # iOS PoP Token Builder Lib
-        └── <a href="./poptoken-lib/poptoken-validator">poptoken-validator</a>                              # PoP Token Validator Lib Parent Directory
-            └── <a href="./poptoken-lib/poptoken-validator/java-lib-tmobile-oss-poptoken-validator">java-lib-tmobile-oss-poptoken-validator</a>     # Java PoP Token Validator Lib
-</pre>
-</font>
+<div style="font-family:Consolas; font-size:1em;background-color:WhiteSmoke">
+<br>
+└───<a href="https://github.com/tmobile/tmobile-api-security-lib" target="_blank">tmobile-api-security-lib</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# T-Mobile API Security Lib Parent Directory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib" target="_blank">poptoken-lib</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Lib Parent Directory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder" target="_blank">poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Builder Lib Parent Directory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/java-lib-tmobile-oss-poptoken-builder" target="_blank">java-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Java PoP Token Builder Lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/js-lib-tmobile-oss-poptoken-builder" target="_blank">js-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# JavaScript PoP Token Builder Lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   ├───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/android-lib-tmobile-oss-poptoken-builder" target="_blank">android-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;# Android PoP Token Builder Lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-builder/ios-lib-tmobile-oss-poptoken-builder" target="_blank">ios-lib-tmobile-oss-poptoken-builder</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# iOS PoP Token Builder Lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-validator" target="_blank">poptoken-validator</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# PoP Token Validator Lib Parent Directory<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───<a href="https://github.com/tmobile/tmobile-api-security-lib/tree/master/poptoken-lib/poptoken-validator/java-lib-tmobile-oss-poptoken-validator" target="_blank">java-lib-tmobile-oss-poptoken-validator</a>&nbsp;&nbsp;# Java PoP Token Validator Lib<br>
+<br>
+</div>
+
 
 ## Available Libraries 
 
@@ -32,8 +33,6 @@ Proof of possession (PoP) provides a mechanism to bind key material to access to
 
 Proof of possession (PoP) helps enabling the message integrity and also helps avoiding the transaction replay and token theft. For each API request the new PoP token is created by API consumer and signed by client's private key which can then be verified using client's public key at API gateway.
 
-For more information on PoP token libraries, please refer to the readme file - [PoP Token Library Readme.md](./poptoken-lib).
-
 #### PoP Token Flow
 
 ![PoP Token Sequence Diagram](./images/pop_token_sequence_diagram.png)
@@ -42,7 +41,7 @@ For more information on PoP token libraries, please refer to the readme file - [
 #### PoP Token Format
 
 The format of the PoP token used by T-Mobile is:
-```
+```bash
 Header: {alg, type} 
 Body { 
   iat: <epoch time> 
@@ -55,19 +54,6 @@ Body {
 Signature: <digitalSignature>
 ```
 
-#### PoP Token Builder Library
-
-The PoP token builder library can be used to create a PoP token.
-
-For more information on PoP token builder library, please refer to the - [PoP Token Builder Library](./poptoken-builder).
-
-
-#### PoP Token Validator Library
-
-The PoP token validator library can be used to validate a PoP token.
-
-For more information on PoP token validator library, please refer to the - [PoP Token Validator Library](./poptoken-validator).
-
 ## License
 
-The T-Mobile API security libraries are released under the [Apache 2.0 License](./LICENSE).
+The T-Mobile API security libraries are released under the <a href="https://github.com/tmobile/tmobile-api-security-lib/blob/master/LICENSE" target="_blank">Apache 2.0 License</a>.

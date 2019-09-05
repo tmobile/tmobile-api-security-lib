@@ -30,7 +30,9 @@ project = 'T-Mobile API Security Libraries'
 #extensions = [
 #]
 
-extensions = ['recommonmark']
+extensions = [
+#'recommonmark', 
+'m2r']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -60,3 +62,8 @@ def setup(app):
    app.add_css_file('custom.css')
 
 html_show_copyright = False
+html_show_sourcelink = False
+
+# source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
+

@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Java - PoP Token Builder Library &mdash; T-Mobile API Security Libraries  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="JavaScript - PoP Token Builder Library" href="js-lib-tmobile-oss-poptoken-builder-readme-link.html" />
+    <link rel="prev" title="PoP Token Builder Libraries" href="poptoken-builder.index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> T-Mobile API Security Libraries
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tmobile-api-security-lib-readme-link.html">T-Mobile API Security Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="poptoken-builder.index.html">PoP Token Builder Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Java - PoP Token Builder Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-install-pop-token-builder-library">Build/Install PoP Token Builder Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determining-the-ehts-key-name">Determining the ehts Key Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-key-format">Supported Key Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pop-token-builder-performance-test-results">PoP Token Builder Performance Test Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-pop-token-using-private-key-pem-string">Building the PoP Token Using Private Key PEM String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-pop-token-using-encrypted-private-key-pem-string">Building the PoP Token Using Encrypted Private Key PEM String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-pop-token-using-rsaprivatekey">Building the PoP Token Using RSAPrivateKey</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="js-lib-tmobile-oss-poptoken-builder-readme-link.html">JavaScript - PoP Token Builder Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="android-lib-tmobile-oss-poptoken-builder-readme-link.html">Android - PoP Token Builder Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ios-lib-tmobile-oss-poptoken-builder-readme-link.html">iOS - PoP Token Builder Library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="poptoken-validator.index.html">PoP Token Validator Libraries</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">T-Mobile API Security Libraries</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poptoken-builder.index.html">PoP Token Builder Libraries</a> &raquo;</li>
+        
+      <li>Java - PoP Token Builder Library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="java-pop-token-builder-library">
+<h1>Java - PoP Token Builder Library<a class="headerlink" href="#java-pop-token-builder-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-install-pop-token-builder-library">
+<h2>Build/Install PoP Token Builder Library<a class="headerlink" href="#build-install-pop-token-builder-library" title="Permalink to this headline">¶</a></h2>
+<p>Execute following command to build the PoP token builder library.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mvn clean install
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>The T-Mobile PoP Token Builder library follows the following logic for creating the PoP token.</p>
+<ul class="simple">
+<li><p>Sets up the edts (external data to sign) / ehts (external headers to sign) claims in PoP token using the specified ehts key-value map. The library uses SHA256 algorithm for calculating the edts and then the final edts value is encoded using Base64 URL encoding.</p></li>
+<li><p>Signs the PoP token using the specified RSA private key.</p></li>
+<li><p>Creates the PoP token with 2 minutes of validity period.</p></li>
+<li><p>Current PoP token builder and validator libraries support RSA PKCS8 format key for signing and validating the PoP tokens.</p></li>
+</ul>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>PopTokenBuilder is not thread-safe so the instance of this class should not be shared with between multiple threads.</p></li>
+<li><p>If the API request body is very large or data is being streamed then the “body” should not be added to ehts/edts while building/validating the PoP token.</p></li>
+</ul>
+</div>
+<div class="section" id="determining-the-ehts-key-name">
+<h2>Determining the ehts Key Name<a class="headerlink" href="#determining-the-ehts-key-name" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>For HTTP request URI, “uri” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.URI.keyName()</span></code>. For “uri” ehts value, the URI and query string of the request URL should be put in the ehts key-value map. Example: If the URL is <code class="docutils literal notranslate"><span class="pre">https://api.t-mobile.com/commerce/v1/orders?account-number=0000000000</span></code> then only <code class="docutils literal notranslate"><span class="pre">/commerce/v1/orders?account-number=0000000000</span></code> should be used as ehts value. The query parameter values part of “uri” ehts value should not be in URL encoded format.</p></li>
+<li><p>For HTTP method, “http-method” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.HTTP_METHOD.keyName()</span></code>.</p></li>
+<li><p>For HTTP request headers, the header name should be used as ehts key name.</p></li>
+<li><p>For HTTP request body, “body” should be used as ehts key name, <code class="docutils literal notranslate"><span class="pre">PopEhtsKey.BODY.keyName()</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="supported-key-format">
+<h2>Supported Key Format<a class="headerlink" href="#supported-key-format" title="Permalink to this headline">¶</a></h2>
+<p>PoP token builder and validator libraries are currently supporting PKCS8 key format.</p>
+<p><strong>Using Non Encrypted Keys:</strong></p>
+<p>Below commands shows how to create private and public keys in PKCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates private key in PKCS1 format</span>
+openssl genrsa -out private-key-pkcs1.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private-key-pkcs1.pem -outform PEM -nocrypt -out private-key-pkcs8.pem
+
+<span class="c1"># Creates public key in PKCS8 format</span>
+openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+<p><strong>Using AES256 Encrypted Keys:</strong></p>
+<p>Below commands shows how to create AES256 encrypted private key and public key in PCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates encrypted private key in PKCS1 format</span>
+openssl genrsa -aes256 -passout pass:foobar -out private_key_aes256_with_password.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private_key_aes256_with_password.pem -outform PEM -out private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar
+
+<span class="c1"># Creates public key</span>
+openssl rsa -in private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+<p><strong>Using DES3 Encrypted Keys:</strong></p>
+<p>Below commands shows how to create DES3 encrypted private key and public key in PKCS8 format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates encrypted private key in PKCS1 format</span>
+openssl genrsa -des3 -passout pass:foobar -out private_key_des3_with_password.pem <span class="m">2048</span>
+
+<span class="c1"># Converts private key to PKCS8 format</span>
+openssl pkcs8 -topk8 -inform PEM -in private_key_des3_with_password.pem -outform PEM -out private_key_des3_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar
+
+<span class="c1"># Creates public key</span>
+openssl rsa -in private_key_des3_with_password_pkcs8.pem -passin pass:foobar -outform PEM -pubout -out public-key.pem
+</pre></div>
+</div>
+<p><strong>Minimum Java Requirement for Encrypted Private Keys:</strong></p>
+<p>In order to use <strong>AES256</strong> or <strong>DES3</strong> encrypted private keys, it is required to either use Java version &gt;= 8u161 OR have the Java Cryptographic Extension (JCE) Unlimited Strength Jurisdiction Policy Files installed. Please checkout following links for more information.</p>
+<p><a class="reference external" href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8170157">https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8170157</a>
+<a class="reference external" href="https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html">https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html</a></p>
+</div>
+<div class="section" id="pop-token-builder-performance-test-results">
+<h2>PoP Token Builder Performance Test Results<a class="headerlink" href="#pop-token-builder-performance-test-results" title="Permalink to this headline">¶</a></h2>
+<p>The following table shows the processing time taken by PoP token builder for various test cases.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Test Name</p></th>
+<th class="head"><p>Total Processing Time For 1000 Calls</p></th>
+<th class="head"><p>Avg Processing Time For 1 Call</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PoP token with no request payload</p></td>
+<td><p>11383 ms</p></td>
+<td><p>~11 ms</p></td>
+</tr>
+<tr class="row-odd"><td><p>PoP token with 1K request payload</p></td>
+<td><p>10558 ms</p></td>
+<td><p>~11 ms</p></td>
+</tr>
+<tr class="row-even"><td><p>PoP token with 10K request payload</p></td>
+<td><p>11484 ms</p></td>
+<td><p>~11 ms</p></td>
+</tr>
+<tr class="row-odd"><td><p>PoP token with 100K request payload</p></td>
+<td><p>11239 ms</p></td>
+<td><p>~11 ms</p></td>
+</tr>
+<tr class="row-even"><td><p>PoP token with 1M request payload</p></td>
+<td><p>23576 ms</p></td>
+<td><p>~24 ms</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="building-the-pop-token-using-private-key-pem-string">
+<h2>Building the PoP Token Using Private Key PEM String<a class="headerlink" href="#building-the-pop-token-using-private-key-pem-string" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to build the PoP using private key PEM string.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertTrue</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.commons.lang3.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenBuilderDemoWithPrivateKeyPemStringTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildPopTokenWithPrivateKeyPemString</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">PopTokenBuilderException</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">privateKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;+vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;zHNmq7/VPITL5UgtZ5nk6g==&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+
+        <span class="c1">// STEP 1: Build the LinkedHashMap of ehts (external headers to sign) key and values</span>
+        <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeyValueMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">,</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">);</span> <span class="c1">// URL = https://api.t-mobile.com/commerce/v1/orders</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;POST&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">);</span>
+
+        <span class="c1">// STEP 2: Generate PoP token using PoPTokenBuilder</span>
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="n">PopTokenBuilder</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">setEhtsKeyValueMap</span><span class="o">(</span><span class="n">ehtsKeyValueMap</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">privateKeyPemString</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="c1">// verify the popToken has text</span>
+        <span class="n">assertTrue</span><span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">popToken</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-pop-token-using-encrypted-private-key-pem-string">
+<h2>Building the PoP Token Using Encrypted Private Key PEM String<a class="headerlink" href="#building-the-pop-token-using-encrypted-private-key-pem-string" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to build the PoP using the encrypted private key PEM string.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertTrue</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.commons.lang3.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenBuilderDemoWithEncryptedPrivateKeyPemStringAndPasswordTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildPopTokenWithAes256EncryptedPrivateKeyPemString</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">PopTokenBuilderException</span> <span class="o">{</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * This encrypted private key has been created using the following commands.</span>
+<span class="cm">         *</span>
+<span class="cm">         * // creates the private key in PKCS1 format &lt;br&gt;</span>
+<span class="cm">         * &lt;code&gt;openssl genrsa -aes256 -passout pass:foobar -out private_key_aes256_with_password.pem 2048&lt;/code&gt;</span>
+<span class="cm">         *</span>
+<span class="cm">         * // converts the private key to PKCS8 format &lt;br&gt;</span>
+<span class="cm">         * &lt;code&gt;openssl pkcs8 -topk8 -inform PEM -in private_key_aes256_with_password.pem -outform PEM -out private_key_aes256_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar&lt;/code&gt;</span>
+<span class="cm">         */</span>
+        <span class="n">String</span> <span class="n">aes256EncryptedPrivateKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN ENCRYPTED PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;MIIE6TAbBgkqhkiG9w0BBQMwDgQIgHkFaWfpw/sCAggABIIEyFlXMsc8DSfsnWGc&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;bNdyFzp6rIFAuya2BCid2F+Xr6S1hq8bcO3ZZpg4jpDUqFhdF/+Q2qjTyPtmD8Fp&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;gxXTZVUW942WX+NlNY2n60GWiSIUw/iQG1Z5w8ArE/1K4bFq3zYyzxfoul2gEBJh&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;WcYyAW0DYh1ooeGEh+Sf3qttXj2E2BfCbAE42lGYb7PKSgrSPCxODeaiyHd6nCIy&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;i9S7rwDPtgrE4uHu8t0m8sTHlXllM/CdyNZaVcNWNRNMqmdtJmi9v5grqB9M1jpe&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;HTtXFjlpRgDOeY2T4JptGs9nt3N6lDdd+ufs4WBkJLh6b4i2fHCrf8K2ZMB6qwTk&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;IMf4OUUDmGPh9CI3t5xDZlLEhaZiQFsoJypYF8O2PBDTbrk2ZyMcKObNIZHVNfS0&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;asvMjg4jbA0qhvsujf+t3rrw89fdQLQrGBR0zQwAnXPXI1biFupA4iAKjoD3BtHL&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;46tv20L59T6uV1NAmoqCvNOgf+Rkxe/TXLwE7ungE2uxIW5F+3kNlMNr1Olom59I&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;GVT2T8SOoRjavvz676vYWcJY8Vd4usECEUCJN/divDoHn3LS4eLa8Q9dYf4O15oU&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;DGuJQgGiNeFeGqgOJkCsOyWw1uZJDcjxrFuzPO0SBPZKIH/Jsraw9D+5u0g/VDqI&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;8o/nLt6YPAhGY2PBO0XOm2VO+dbVPMNQq/QZcJ3pw+MLhLufBwCya89ivUo2ybsb&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;u/XtJDKse0kDpbYqL/c+xCVXMQl6PJh2CmSpqLGCsFbf0Dhiw7gYKpChsTXycwnP&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;GyhmHltWzPC5bS1NSMMS1dirFMKnM2cPUzlzjeTWOOh19j1nyHADmdCaKXxHuToX&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;3j+5glQl4VA+rZyCvZKUToxedEZ/IADetZSbRS5GhTWHE2QPGEjjuSypVU1DUmmk&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;hNQIExEdQ7mQRPSwwcVbxFY7sfvLZrNTk8okuKUNVAU1ICwZlWuvKChYNmiuXmkg&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;sG+eqiPaUJC0y+FL3LU3e/bd/Zbf3jK16wtcylBbVUa16TPe7f6NrcxQ5io+53SS&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;7f5puvRaBD9WUT2YO2RFysOgZHwaX5k2Qyl0EDR7R5kqWzkVAh0s59AaIs/lmdaA&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;S5mJD9nE/osZCp37bhHzB17NR8By91HPlED2ZngpYxEzYCLs9AVk2SlWId9tlITW&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;6CzFe7ell9sZMrNn/x6iyDTh8MJlk+6J5WQvtfniU0tGhzhWxGgZj1tvneaZZxRc&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;rNCbxaIQnA0cX9fp4LRdcCRZ2XKVWUoweJYxBYjRCm4ziJnj+tbtGHyRNNj1sA9Z&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;cJnWMd2+M/SuI52BdIgIU+wXmRURYuEl1u+ZoeAjETHNaPPGvvDgnayFgeRPpA6P&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;tdnHavYrzw6/HevkgxhLFZM3jjS4hWo6TyLjhGl+BWZcnX9wM5hHQOCN2sbUaPmi&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;wVY7QimfAD7H7G2blE+RUV7crgFT/mhDG/VZJWjU6x92NC7lMZPQbL8UPIync88T&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;44fNv9GtMfUOuQgcawDwlIJrIuP32kvgVlKxA4VMUM9Icw6uy0eCbFPVWPjDPJ31&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;B4hwcjie25G6oD/kMx/2zxs3zt0ST2hfUQ6jli98QMOZbdAKMWJd1nq8LDDdUpUa&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;chcblDYmEVmup0H/Nw==&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END ENCRYPTED PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+        <span class="n">String</span> <span class="n">privateKeyPassword</span> <span class="o">=</span> <span class="s">&quot;foobar&quot;</span><span class="o">;</span>
+
+        <span class="c1">// STEP 1: Build the LinkedHashMap of ehts (external headers to sign) key and values</span>
+        <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeyValueMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">,</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">);</span> <span class="c1">// URL = https://api.t-mobile.com/commerce/v1/orders</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;POST&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">);</span>
+
+        <span class="c1">// STEP 2: Generate PoP token using PoPTokenBuilder</span>
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="n">PopTokenBuilder</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">setEhtsKeyValueMap</span><span class="o">(</span><span class="n">ehtsKeyValueMap</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">aes256EncryptedPrivateKeyPemString</span><span class="o">,</span> <span class="n">privateKeyPassword</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="c1">// verify the popToken has text</span>
+        <span class="n">assertTrue</span><span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">popToken</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildPopTokenWithDes3EncryptedPrivateKeyPemString</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">PopTokenBuilderException</span> <span class="o">{</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * This encrypted private key has been created using the following commands.</span>
+<span class="cm">         *</span>
+<span class="cm">         * // creates the private key in PKCS1 format &lt;br&gt;</span>
+<span class="cm">         * &lt;code&gt;openssl genrsa -des3 -passout pass:foobar -out private_key_des3_with_password.pem 2048&lt;/code&gt;</span>
+<span class="cm">         *</span>
+<span class="cm">         * // converts the private key to PKCS8 format &lt;br&gt;</span>
+<span class="cm">         * &lt;code&gt;openssl pkcs8 -topk8 -inform PEM -in private_key_des3_with_password.pem -outform PEM -out private_key_des3_with_password_pkcs8.pem -passin pass:foobar -passout pass:foobar&lt;/code&gt;</span>
+<span class="cm">         */</span>
+        <span class="n">String</span> <span class="n">des3EncryptedPrivateKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN ENCRYPTED PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;MIIE6TAbBgkqhkiG9w0BBQMwDgQI05SLGK2TADYCAggABIIEyEqVOM/eZZurtlhO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;Kszf/jq7LaGlMVavArkhv9DrsLj3rZm5WsDQc9eB3qLDRZuUZZ6ak23mckbl1hId&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;iE6gjxbeLXYOf2zr6R8ESgktO7SOp2dEvxChENIKPd0boNyJgx00yKA2PaHyVeEA&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;tHate0Q3SJNAPa8qLiHT2eJ3nA08yHvoaiROya9t8a5xz1qb7yJKmeD/qEw5RoPD&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;Gbj9Q4dVaqNFSxWRHb0bLRrklHn/9klY9vmsPGaluuIKpzo4Cg5uBYtyks0S4Xab&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;u7s6QvXBiJXQLu4R7c55rnY17CWg1gfs/NnXquLlStDqslPmjNymRFcyEPFwqtM9&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;ZNjeRHYcaSnI+zEz6JqZMU/IxCWDgmZmr3f95a3q7JYwT386gvBouSSCOVbckprB&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;tCsBS3iwsNaxt/dGdTNfArn97zQjTM9QWkZ+6aC7uMtU+zXlB9nxSg1LB5cPRmvc&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;wvwBjV0cB3uQt16ASq7J0rB8Mr3o6v/RlKHdkGX6h33kMewzT1FMQvN5m9ZB4Pne&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;IjA9VuLlPUAKnMsRD+EogntCGoQUl9jOkNURJpql/rg3NtS2EUAOFzG4xrQYK+re&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;mesOPSg0hE/Inj8MaHFPTL7BI3o9ZYe9jxhAdZVQEz5qOxq0NlV1WGaGwJKiViM7&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;7q4JtZcJZJ4Z5huQ13VcgxGqsAjuOAuKT3jg7ccQf5ku28fhklQ5/NtBtHm0LW3J&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;9b+Wfhty/CsBVplu3Z9BFPxqBymRdULUhmN2O5rVBLVE0EBGa67IBElTS69upY24&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;RTrm/uPsQCT7hgxt/mONL6lmB+sCPIfEoyPIXvZNgc3vR9K1FzAoGkHIVq7RzIpE&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;09TxPUXiaCK6rad7qhNs2cpHn5GJzzUCNVV7ooOpvoFhjFf0ZLuLxh+zo/e5Nvrl&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;OS9IgOCMHdzBWXS261UocDEZ+WvBSQOf1uNqI+NJN6O4XQxK2EgXjozSUjS3DvPt&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;fFiwv32SgO9juN5KFzwDQzwhyAIVrMZ+R/qiRDPJSPiteYGfGuxngGwCQDSGvH2a&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;9BGEvP52Spil0VG3sXT57Io8VuJBWKlZqt0bqGZJ9Rtpz6QQKPBrYp8CClAWU0vT&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;+HSi7OkKSt6FFHNdEa4bxfomCdT3RtCbBXhOeZMTzvj5Kt6QQHPtPjJAFYk4G2DL&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;MldIsi8wZ3vFnTTSOvhvUhZSSJpE8FmUhblPwSwUrvW75Yn2+PIKABd5g7Tw574J&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;ytc6MU4+pHxNIr594noVUZffiXfdg3g7x0T8ZuLKjRlJnlTheZdrot1qe8Yb6bX+&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;lgf++lfxxBTONjrADS5R/hznc4ojGSOY5wv5MB8BVkANQx2sRWv5EkTUszoxLkrN&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;SSwIdWCHmVSzMThi6ir3ouxCeBcMTDrWYNku4yQavPh/+ObMSQN/MJBdCDzFgd1H&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;6VAsqPZp7tyaBYKVkJwLNOQ/5THMWylm27y12Q8c44kjPGxVAtSJOuIR/xxywW0c&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;Eog0+FH727JvoXM+N3v9nfDEBoR6RbJjmkjv08vAh1nJjcmPQ2JLaSMdegsorep+&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span>
+                <span class="o">+</span> <span class="s">&quot;lByzS/bl3Kwgu0MAaQwGlH6LhyvhBOKUMm2mbdBVNu9uBfGeqvIsGiIw8E87yT6O&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;Ybza3fEAAjBUC5gPdQ==&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END ENCRYPTED PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+        <span class="n">String</span> <span class="n">privateKeyPassword</span> <span class="o">=</span> <span class="s">&quot;foobar&quot;</span><span class="o">;</span>
+
+        <span class="c1">// STEP 1: Build the LinkedHashMap of ehts (external headers to sign) key and values</span>
+        <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeyValueMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">,</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">);</span> <span class="c1">// URL = https://api.t-mobile.com/commerce/v1/orders</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;POST&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">);</span>
+
+        <span class="c1">// STEP 2: Generate PoP token using PoPTokenBuilder</span>
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="n">PopTokenBuilder</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">setEhtsKeyValueMap</span><span class="o">(</span><span class="n">ehtsKeyValueMap</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">des3EncryptedPrivateKeyPemString</span><span class="o">,</span> <span class="n">privateKeyPassword</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="c1">// verify the popToken has text</span>
+        <span class="n">assertTrue</span><span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">popToken</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-pop-token-using-rsaprivatekey">
+<h2>Building the PoP Token Using RSAPrivateKey<a class="headerlink" href="#building-the-pop-token-using-rsaprivatekey" title="Permalink to this headline">¶</a></h2>
+<p>The following Java JUnit test describes how to build the PoP using RSAPrivateKey.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.demo</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">org.junit.Assert.assertTrue</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.security.interfaces.RSAPrivateKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.commons.lang3.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.PopTokenBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.exception.PopTokenBuilderException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.tmobile.oss.security.taap.poptoken.builder.utils.PopTokenBuilderUtils</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PopTokenBuilderDemoWithRsaPrivateKeyTest</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">LINE_SEPARATOR</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&quot;line.separator&quot;</span><span class="o">);</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildPopTokenWithRsaPrivateKey</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">PopTokenBuilderException</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">privateKeyPemString</span> <span class="o">=</span> <span class="s">&quot;-----BEGIN PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2ccmjG1gBJwTN&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;slQJAEYmQYZl0j2LI+URPXCOjWj3hcmjYQPdfd+ZeCKuA8aUgXFox1xBdIxqAnY4&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;8pW0MyMlwtyOiMpcnelzuKl9CqktbLSxdOUDo/wOd2d4lKnuvIHSKeoETfENroVM&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;3Cm3CFJ8tmpQRjMYh4MBxZh2V3XClhES8t12DI+Lznr5BWvk8oIjRRs99Xu2n9Dy&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;RoYal3trb+0ncdmr5EDhDE/sBC6MAk37UjyS8sty37+tbcgLkn42WISemSLnA4IO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;yiW6EZHcSTXj/vUCHLJjwDyihMCUWfA6NxLPlPFcLaD4o8DEg2VOa89rL9t1SoBo&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;wsEhLn/5AgMBAAECggEBAI0tReOSMCpMIDpvyPliHeZShAZchsUZlJMfoO6eXGBV&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;Ra/ITa5iTdk7DlLrlwmplLGIu0nnPxR1LThp9xAHFiaNQBCHp1e91j124qhgzILb&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;AIPlOaX0igJDwWycVVboxeh0CKMmEOcOahYMs7bvmKzqlx/hAn7ztZt0ZMMGcJiO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;KLIUBVOjFoCeDoLgjvNrBduvHCnQ2CcJLnBxml7oRYc63ipBeJmC+aGjCIdKGtFK&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;WRGiYrM4n5h4CKEnMTaZ+KAkJTmS43CBobDbp+rJbfpsGo7+xCt1VyjZfpMjF3zB&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;oK8LywuFDddwopcMMkCHbFo7sM9HBqW7vyzgxlBZ5QECgYEA8f6XN2o9QV57H6GO&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;5X0tCe5zdHt4NIHGYJfC3gVkduurMg8q/DBHBodFokp53OC48zOh6NzJOyhWacLq&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;H6oSLQy2oSIBIXKC3Wt9yreOa3g69tQTN+CT7OT87KMvV0nYf7lXWTxjgMLEgClh&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;0tDDls3+03oIQ4FpP7LBc6WhhRkCgYEAwQDmOtAYP51xuuVXl3Z0x9r6xfeIq/NG&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;IqlVcq6tB+yWJ+YtVoysboyTcfJbGCPRMeQlrntfHSkdjMWb8R+xwt5c0eAmcL8m&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;9tEtjHFa2QkqbKkQ3wRmS6KXJ8WJGY2opnVPwpWHpJn2qg01NkgQFfkjgUkWPSZx&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;oauKcjiwTeECfx1NtwH+22wPBNnPtn4TqmCJf3GbgfLZxCvuNKqt/HxqDVEChTIE&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;ppUjzErauecFT2Aj4HdSRQvk1pH4CGHNNmY+I99fPsPOGgq1+YWStKxO4tUA2VLq&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;3v7Qu8/r8s+fIZhV2T31EheFfkYGvNHKdeTNDQ6OuHF0Okp8WvCmHekCgYEAtfW+&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;GXa1Vcx/O+AbG54/bWjDgr7j6JE771PMTonmchEYY9d7qRyJONRp8kS2o2SpRqs8&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;52pC+wAXbu+jHMpv0jPIOMpmE2f0OUBu+/im2PXuPHGMiWXhd697aLCwmBnZBc6V&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;+vL05jeNuTcoktuP5tdzJOGeCNrkyLIsnZFajqECgYAGEbakt+8OpDxFVIFzPWGT&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;f2KIeBYHX74JiJ3C0iGYvTiIO2cPuM3sSzUfx6+kmCqKioLueMW6BcAIy0WdELOh&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;P1MaK10FQ12qFFrsnOZjVPoxZ4xVtzN3e4uCyc69xT2bAUpzoVKCMaCSRNv/unGk&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;zHNmq7/VPITL5UgtZ5nk6g==&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span> <span class="c1">//</span>
+                <span class="o">+</span> <span class="s">&quot;-----END PRIVATE KEY-----&quot;</span> <span class="o">+</span> <span class="n">LINE_SEPARATOR</span><span class="o">;</span> <span class="c1">//</span>
+
+        <span class="c1">// STEP 1: Convert private key PEM string to RSAPrivateKey</span>
+        <span class="n">RSAPrivateKey</span> <span class="n">rsaPrivateKey</span> <span class="o">=</span> <span class="n">PopTokenBuilderUtils</span><span class="o">.</span><span class="na">keyPemStringToRsaPrivateKey</span><span class="o">(</span><span class="n">privateKeyPemString</span><span class="o">);</span>
+
+        <span class="c1">// STEP 2: Build the LinkedHashMap of ehts (external headers to sign) key and values</span>
+        <span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">ehtsKeyValueMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;Authorization&quot;</span><span class="o">,</span> <span class="s">&quot;Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">URI</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;/commerce/v1/orders&quot;</span><span class="o">);</span> <span class="c1">// URL = https://api.t-mobile.com/commerce/v1/orders</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">HTTP_METHOD</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;POST&quot;</span><span class="o">);</span>
+        <span class="n">ehtsKeyValueMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">PopEhtsKey</span><span class="o">.</span><span class="na">BODY</span><span class="o">.</span><span class="na">keyName</span><span class="o">(),</span> <span class="s">&quot;{\&quot;orderId\&quot;: 100, \&quot;product\&quot;: \&quot;Mobile Phone\&quot;}&quot;</span><span class="o">);</span>
+
+        <span class="c1">// STEP 3: Generate PoP token using PoPTokenBuilder</span>
+        <span class="n">String</span> <span class="n">popToken</span> <span class="o">=</span> <span class="n">PopTokenBuilder</span><span class="o">.</span><span class="na">newInstance</span><span class="o">()</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">setEhtsKeyValueMap</span><span class="o">(</span><span class="n">ehtsKeyValueMap</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">rsaPrivateKey</span><span class="o">)</span> <span class="c1">//</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="c1">// verify the popToken has text</span>
+        <span class="n">assertTrue</span><span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">popToken</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="js-lib-tmobile-oss-poptoken-builder-readme-link.html" class="btn btn-neutral float-right" title="JavaScript - PoP Token Builder Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poptoken-builder.index.html" class="btn btn-neutral float-left" title="PoP Token Builder Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
