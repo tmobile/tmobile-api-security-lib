@@ -6,7 +6,7 @@
 
 ## Directory Structure
 
-```
+```bash
 └── tmobile-api-security-lib                                # T-Mobile API Security Lib Parent Directory
     └── poptoken-lib                                        # PoP Token Lib Parent Directory
         ├── poptoken-builder                                # PoP Token Builder Lib Parent Directory
