@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'T-Mobile API Security Libraries'
-#copyright = ''
+copyright = 'Copyright 2019 T-Mobile US, Inc. Licensed under the Apache License, Version 2.0.'
 #author = ''
 
 
@@ -61,7 +61,7 @@ master_doc = 'index'
 def setup(app):
    app.add_css_file('custom.css')
 
-html_show_copyright = False
+html_show_copyright = True
 html_show_sourcelink = False
 
 # source_suffix = '.rst'
