@@ -28,3 +28,6 @@
 /bin/
 **/bin/
 **/package-lock.json
+
+**/private-key.txt
+**/public-key.txt

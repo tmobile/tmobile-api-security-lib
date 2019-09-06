@@ -164,3 +164,40 @@ var privateKeyPemStr = "" +
 popToken = popTokenBuilderUtil.buildPopToken(ehtsKeyValueMap, privateKeyPemStr);
 console.log("The JWT for the given RSA PEM is - " + popToken);
 ```
+
+##  Creating Public/Private Key Pair
+
+The public/private key pair can be created using the following sample code. This sample code can be found at node_example/create-key-pair/index-create-key-pair.js.
+
+```js
+const { generateKeyPair } = require('crypto');
+var fs = require("fs");
+
+generateKeyPair('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: {
+    type: 'spki',
+    format: 'pem'
+  },
+  privateKeyEncoding: {
+    type: 'pkcs8',
+    format: 'pem'
+  }
+}, (err, publicKey, privateKey) => {
+  fs.writeFile('public-key.txt', publicKey, (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log('The public-key.txt file has been saved.');
+    }
+  });
+
+  fs.writeFile('private-key.txt', privateKey, (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log('The private-key.txt file has been saved.');
+    }
+  });
+});
+```

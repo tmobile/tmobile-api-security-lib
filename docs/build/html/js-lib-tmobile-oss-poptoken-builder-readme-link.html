@@ -94,6 +94,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-pop-token-builder-javascript-library-in-html-client-ui-page">Using the PoP Token Builder JavaScript Library in HTML/Client UI Page</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-the-pop-token-builder-library-in-node-js-application">Using the PoP Token Builder Library in Node.js Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-public-private-key-pair">Creating Public/Private Key Pair</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="android-lib-tmobile-oss-poptoken-builder-readme-link.html">Android - PoP Token Builder Library</a></li>
@@ -322,6 +323,42 @@ openssl rsa -in private-key-pkcs8.pem -outform PEM -pubout -out public-key.pem
 
 <span class="nx">popToken</span> <span class="o">=</span> <span class="nx">popTokenBuilderUtil</span><span class="p">.</span><span class="nx">buildPopToken</span><span class="p">(</span><span class="nx">ehtsKeyValueMap</span><span class="p">,</span> <span class="nx">privateKeyPemStr</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;The JWT for the given RSA PEM is - &quot;</span> <span class="o">+</span> <span class="nx">popToken</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-public-private-key-pair">
+<h2>Creating Public/Private Key Pair<a class="headerlink" href="#creating-public-private-key-pair" title="Permalink to this headline">¶</a></h2>
+<p>The public/private key pair can be created using the following sample code. This sample code can be found at node_example/create-key-pair/index-create-key-pair.js.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">generateKeyPair</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;crypto&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;fs&quot;</span><span class="p">);</span>
+
+<span class="nx">generateKeyPair</span><span class="p">(</span><span class="s1">&#39;rsa&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">modulusLength</span><span class="o">:</span> <span class="mi">2048</span><span class="p">,</span>
+  <span class="nx">publicKeyEncoding</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;spki&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;pem&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">privateKeyEncoding</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;pkcs8&#39;</span><span class="p">,</span>
+    <span class="nx">format</span><span class="o">:</span> <span class="s1">&#39;pem&#39;</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="s1">&#39;public-key.txt&#39;</span><span class="p">,</span> <span class="nx">publicKey</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The public-key.txt file has been saved.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="s1">&#39;private-key.txt&#39;</span><span class="p">,</span> <span class="nx">privateKey</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;The private-key.txt file has been saved.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 </div>
