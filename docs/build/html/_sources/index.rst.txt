@@ -8,4 +8,4 @@ T-Mobile API Security Libraries
    poptoken-builder.index.rst
    poptoken-validator.index.rst
    link-to-github-repository.md
-   readme.md
+   building-docs-using-sphinx-readme-link.rst
