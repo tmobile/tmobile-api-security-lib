@@ -6,6 +6,8 @@ The following is a set of guidelines for contributing to Project T-Mobile API Se
 
 [Code of Conduct](#code-of-conduct)
 
+[Slack](#join-the-tmobile-slack-team)
+
 [How Can I Contribute?](#how-can-i-contribute)
   * [Reporting Bugs](#reporting-bugs)
   * [Suggesting Enhancements](#suggesting-enhancements)
@@ -24,6 +26,13 @@ The following is a set of guidelines for contributing to Project T-Mobile API Se
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the [Project T-Mobile API Security Library's Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [TMobileOSS@T-Mobile.com](mailto:TMobileOSS@T-Mobile.com).
+
+### Join the TMobile Slack team:
+
+* [Join the T-Mobile Slack team](https://tmo-oss-getinvite.herokuapp.com/)
+    * Even though Slack is a chat service, sometimes it takes several hours for community members to respond &mdash; please be patient!
+    * Use the `#taap-api-security` channel for questions about Project T-Mobile API Security Lib.
+    * Use the `#general` channel for general questions or discussion about anything else.
 
 ## How Can I Contribute?
 Anyone can contribute to Project T-Mobile API Security Library and we welcome your contributions.

@@ -1,5 +1,7 @@
 Have you read [Project T-Mobile API Security Library's Code of Conduct](https://github.com/tmobile/tmobile-api-security-lib/blob/master/.github/CODE_OF_CONDUCT.md)? By filing an Issue, you are expected to comply with it, including treating everyone with respect.
 
+Do you want to ask a question? Are you looking for support? Connect with us on [Slack](https://github.com/tmobile/tmobile-api-security-lib/blob/master/.github/CONTRIBUTING.md#join-the-tmobile-slack-team) to get help.
+
 ### Description
 <!-- Detailed description of the issue -->
 
