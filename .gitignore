@@ -25,9 +25,14 @@
 /nbdist/
 /.nb-gradle/
 
+## Build Files ##
 /bin/
 **/bin/
 **/package-lock.json
 
+## Keys ##
 **/private-key.txt
 **/public-key.txt
+
+## MacOS ##
+.DS_Store

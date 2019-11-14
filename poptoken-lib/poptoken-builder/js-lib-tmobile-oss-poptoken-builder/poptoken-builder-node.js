@@ -22,128 +22,48 @@
 var rs = require('jsrsasign');
 
 module.exports = {
-	buildPopToken: function (ehtsKeyValuMap, privateKeyPemString) {
+	buildPopToken: function (ehtsKeyValMap, privateKeyPemString, passphrase) {
 		/*
-		 param ehtsKeyValuMap - Map to be signed
+		 param ehtsKeyValMap - Map to be signed
 		 param privateKeyPemString - Private Key PEM string
+		 param passphrase - Private Key passphrase (optional)
 		*/
-		var objClaim = {};
 		var strEhts = '';
 		var strToHash = '';
 		var strToken = '';
-		var curTime = "now";
-		var currentTimeInSeconds = Math.floor(new Date().getTime() / 1000);
-		var expTime = currentTimeInSeconds + (2 * 60); // token is valid for 2 minutes
-
-		for (var [key, value] of ehtsKeyValuMap) {
+		for (var [key, value] of ehtsKeyValMap) {
 			if (strEhts.length > 0) {
 				strEhts = strEhts + ";";
 			}
 			strEhts = strEhts + key;
 			strToHash = strToHash + value;
 		}
-
+	
 		var strHash = rs.KJUR.crypto.Util.sha256(strToHash);
 		var strEdtsHashB64U = rs.hextob64u(strHash);
-
-		var strUniq = module.exports.createGUID();
-
-		if (strEdtsHashB64U.length > 0) {
-			objClaim.edts = strEdtsHashB64U;
-		}
-
-		objClaim.v = '1';
-
-		if (expTime != '') {
-			objClaim.exp = expTime;
-		}
-
-		if (strEhts.length > 0) {
-			objClaim.ehts = strEhts;
-		}
-
-		if (curTime != '') {
-			objClaim.iat = rs.KJUR.jws.IntDate.get(curTime);
-		}
-
-		if (strUniq.length > 0) {
-			objClaim.jti = strUniq;
-		}
-
-		var sClaim = JSON.stringify(objClaim);
-		var alg = 'RS256';
-		var pHeader = { 'alg': alg, 'typ': 'JWT' };
-		var sHeader = JSON.stringify(pHeader);
-
-		strToken = rs.KJUR.jws.JWS.sign(null, sHeader, sClaim, privateKeyPemString);
-
-		return strToken;
-	},
-
-	buildPopTokenWithPassword: function (ehtsKeyValuMap, encryptedPrivateKeyPemString, password) {
-		/*
-		 param ehtsKeyValuMap - Map to be signed
-		 param privateKeyPemString - Private Key PEM string
-		 param password - Private Key password
-		*/
-		var objClaim = {};
-		var strEhts = '';
-		var strToHash = '';
-		var strToken = '';
-		var curTime = "now";
-		var currentTimeInSeconds = Math.floor(new Date().getTime() / 1000);
+	
+		var currentTimeInSeconds = rs.KJUR.jws.IntDate.get('now');
 		var expTime = currentTimeInSeconds + (2 * 60); // token is valid for 2 minutes
-
-
-		for (var [key, value] of ehtsKeyValuMap) {
-			if (strEhts.length > 0) {
-				strEhts = strEhts + ";";
-			}
-			strEhts = strEhts + key;
-			strToHash = strToHash + value;
+	
+		var objClaim = {
+			v: 1,
+			edts: strEdtsHashB64U,
+			exp: expTime,
+			ehts: strEhts,
+			iat: currentTimeInSeconds,
+			jti: module.exports.createGUID()
+		};
+	
+		var objHeader = { 'alg': 'RS256', 'typ': 'JWT' };
+		if (passphrase) {
+			var objKey = rs.KEYUTIL.getKey(privateKeyPemString, passphrase)
+			strToken = rs.KJUR.jws.JWS.sign(null, objHeader, objClaim, objKey);
+		} else {
+			strToken = rs.KJUR.jws.JWS.sign(null, objHeader, objClaim, privateKeyPemString);
 		}
-
-		var strHash = rs.KJUR.crypto.Util.sha256(strToHash);
-		var strEdtsHashB64U = rs.hextob64u(strHash);
-
-		var strUniq = module.exports.createGUID();
-
-		if (strEdtsHashB64U.length > 0) {
-			objClaim.edts = strEdtsHashB64U;
-		}
-
-		objClaim.v = '1';
-
-		if (expTime != '') {
-			objClaim.exp = expTime;
-		}
-
-		if (strEhts.length > 0) {
-			objClaim.ehts = strEhts;
-		}
-
-		if (curTime != '') {
-			objClaim.iat = rs.KJUR.jws.IntDate.get(curTime);
-		}
-
-		if (strUniq.length > 0) {
-			objClaim.jti = strUniq;
-		}
-
-		var sClaim = JSON.stringify(objClaim);
-		var alg = 'RS256';
-		var pHeader = { 'alg': alg, 'typ': 'JWT' };
-		var sHeader = JSON.stringify(pHeader);
-
-		var keyObj = rs.KEYUTIL.getKey(encryptedPrivateKeyPemString, password)
-
-		var privateKeyPemString = encryptedPrivateKeyPemString;
-
-		strToken = rs.KJUR.jws.JWS.sign(null, sHeader, sClaim, keyObj);
-
+		
 		return strToken;
 	},
-
 	createGUID: function () {
 		function randomStr() {
 			return Math.floor((1 + Math.random()) * 0x10000)
