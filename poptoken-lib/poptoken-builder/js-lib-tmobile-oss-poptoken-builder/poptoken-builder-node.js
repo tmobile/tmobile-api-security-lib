@@ -22,7 +22,17 @@
 var rs = require('jsrsasign');
 
 module.exports = {
-	buildPopToken: function (ehtsKeyValMap, privateKeyPemString, passphrase) {
+	/*
+ 	 * Defines the function for the PoP Token Builder without passphrase
+ 	 */
+	buildPopToken: function (ehtsKeyValMap, privateKeyPemString) {
+		return module.exports.buildPopTokenWithPassword(ehtsKeyValMap, privateKeyPemString, null);
+	},
+
+	/*
+ 	 * Defines the function for the PoP Token Builder with passphrase.
+ 	 */
+	buildPopTokenWithPassword: function (ehtsKeyValMap, privateKeyPemString, passphrase) {
 		/*
 		 param ehtsKeyValMap - Map to be signed
 		 param privateKeyPemString - Private Key PEM string
@@ -64,6 +74,10 @@ module.exports = {
 		
 		return strToken;
 	},
+	
+	/*
+ 	 * Defines the function to generate a unique ID
+ 	 */
 	createGUID: function () {
 		function randomStr() {
 			return Math.floor((1 + Math.random()) * 0x10000)

@@ -15,9 +15,16 @@
  */
 
 /*
- * Defines the functions for the PoP Token Builder.
+ * Defines the function for the PoP Token Builder without passphrase
  */
-function buildPopToken(ehtsKeyValMap, privateKeyPemString, passphrase) {
+function buildPopToken(ehtsKeyValMap, privateKeyPemString) {
+	buildPopTokenWithPassword(ehtsKeyValMap, privateKeyPemString, null);
+}
+
+/*
+ * Defines the function for the PoP Token Builder with passphrase.
+ */
+function buildPopTokenWithPassword(ehtsKeyValMap, privateKeyPemString, passphrase) {
 	/*
 	 param ehtsKeyValMap - Map to be signed
 	 param privateKeyPemString - Private Key PEM string
@@ -60,6 +67,9 @@ function buildPopToken(ehtsKeyValMap, privateKeyPemString, passphrase) {
 	return strToken;
 }
 
+/*
+ * Defines the function to generate a unique ID
+ */
 function createGUID() {
 	function randomStr() {
 		return Math.floor((1 + Math.random()) * 0x10000)
