@@ -31,3 +31,8 @@
 
 **/private-key.txt
 **/public-key.txt
+/.vs
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/.vs/PopTokenBuilderSolution/DesignTimeBuild
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/.vs/PopTokenBuilderSolution/v16
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/com.tmobile.oss.security.taap.poptoken.builder/obj
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/com.tmobile.oss.security.taap.poptoken.builder.test/obj

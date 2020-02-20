@@ -14,6 +14,7 @@
         │   ├── js-lib-tmobile-oss-poptoken-builder         # JavaScript PoP Token Builder Lib
         │   ├── android-lib-tmobile-oss-poptoken-builder    # Android PoP Token Builder Lib
         │   └── ios-lib-tmobile-oss-poptoken-builder        # iOS PoP Token Builder Lib
+        │   └── C#-lib-tmobile-oss-poptoken-builder         # C# .NetCore PoP Token Builder Lib
         └── poptoken-validator                              # PoP Token Validator Lib Parent Directory
             └── java-lib-tmobile-oss-poptoken-validator     # Java PoP Token Validator Lib
 ```

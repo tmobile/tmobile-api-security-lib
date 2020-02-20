@@ -11,4 +11,6 @@ For more information please refer to the following language specific libraries.
 [iOS - PoP Token Builder Library](./ios-lib-tmobile-oss-poptoken-builder)
   
 [Android - PoP Token Builder Library](./android-lib-tmobile-oss-poptoken-builder)
+ 
+[C# .NetCore - PoP Token Builder Library](./cs-lib-tmobile-oss-poptoken-builder)
   
