@@ -30,11 +30,11 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 	/// A builder class to build the PoP token. PopTokenBuilder is not thread-safe. 
 	/// So the instance of this class should not be shared between multiple threads.
 	/// </summary>
-	public class PopTokenBuilder
+	public class PopTokenBuilder : IPopTokenBuilder
 	{
 		private const int POP_TOKEN_VALIDITY_DURATION_IN_MILLIS = 2 * 60 * 1000;
 		private const int MAX_NUMBER_OF_EHTS = 100;
-        private const string POP_TOKEN_VERSION = "1";
+		private const string POP_TOKEN_VERSION = "1";
 		private string audience;
 		private string issuer;
 		private HashSet<KeyValuePair<string, string>> ehtsKeyValueMap;
@@ -102,6 +102,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 		public PopTokenBuilder SignWith(string privateKeyXmlRsa)
 		{
 			this.privateKeyXmlRsa = privateKeyXmlRsa;
+			this.rsaSecurityKey = null;
 			return this;
 		}
 
@@ -145,7 +146,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 					throw new PopTokenBuilderException("The ehtsKeyValueMap should not contain more than " + MAX_NUMBER_OF_EHTS + " entries");
 				}
 
-				if (this.rsaSecurityKey == null && 
+				if (this.rsaSecurityKey == null &&
 					string.IsNullOrEmpty(this.privateKeyXmlRsa))
 				{
 					throw new PopTokenBuilderException("Either rsaSecurityKey or privateKeyXmlRsa should be provided to sign the PoP token");
@@ -160,8 +161,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 				if (rsaSecurityKey == null)
 				{
 					var rsa = RSA.Create();
-                    rsa.KeySize = 2048;
-                    rsa.FromXmlRsaPemKey(this.privateKeyXmlRsa);
+					rsa.KeySize = 2048;
+					rsa.FromXmlRsaPemKey(this.privateKeyXmlRsa);
 					this.rsaSecurityKey = new RsaSecurityKey(rsa);
 				}
 
@@ -189,7 +190,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 					SigningCredentials = signingCredentials
 				};
 				var jsonWebTokenHandler = new JsonWebTokenHandler();
-				return jsonWebTokenHandler.CreateToken(securityTokenDescriptor);
+				return jsonWebTokenHandler.CreateToken(securityTokenDescriptor); // Any instance members are not guaranteed to be thread safe.
 			}
 			catch (PopTokenBuilderException)
 			{
@@ -210,7 +211,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 		{
 			foreach (var ehtsKeyValueEntry in ehtsKeyValueMap)
 			{
-				if (string.IsNullOrEmpty(ehtsKeyValueEntry.Key) || 
+				if (string.IsNullOrEmpty(ehtsKeyValueEntry.Key) ||
 					string.IsNullOrEmpty(ehtsKeyValueEntry.Value))
 				{
 					return true;
@@ -237,7 +238,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 				}
 
 				ehtsStringBuilder.Append(ehtsKey.Key.Replace("\n", "")
-                                                    .Replace("\r", ""));
+													.Replace("\r", ""));
 			}
 
 			return ehtsStringBuilder.ToString();
@@ -256,8 +257,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 			foreach (var ehtsKeyValueEntry in ehtsKeyValueMap)
 			{
 				stringToHashBuilder.Append(ehtsKeyValueEntry.Value
-                                                            .Replace("\n","")
-                                                            .Replace("\r", ""));
+															.Replace("\n", "")
+															.Replace("\r", ""));
 			}
 
 			var stringToHash = stringToHashBuilder.ToString();
@@ -276,7 +277,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 			var sha256 = new SHA256Managed();
 			var hash = sha256.ComputeHash(inputBytes);
 
-			return Convert.ToBase64String(hash).Replace("=","")
+			return Convert.ToBase64String(hash).Replace("=", "")
 											   .Replace("+", "-")
 											   .Replace("/", "_");
 		}
