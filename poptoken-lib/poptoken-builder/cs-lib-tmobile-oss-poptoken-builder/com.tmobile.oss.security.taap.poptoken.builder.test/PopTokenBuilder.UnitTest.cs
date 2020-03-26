@@ -117,28 +117,6 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(PopTokenBuilderException), "Either only rsaSecurityKey or only privateKeyXmlRsa should be provided to sign the PoP token")]
-        public void PopTokenBuilder_Build_Both_RsaSecurityKey_privateKeyXmlRsa_NotNull_Test()
-        {
-            // Arrange
-            var popTokenBuilder = new PopTokenBuilder(audience, issuer);
-            popTokenBuilder.rsaSecurityKey = new RsaSecurityKey(RSA.Create(2048));  // Set rsaSecurityKey 
-            var keyValuePairDictionary = new Dictionary<string, string>();
-            for (var i = 0; i < 100; i++)
-            {
-                keyValuePairDictionary.Add(popTokenBuilder.GetUniqueIdentifier(), popTokenBuilder.GetUniqueIdentifier());
-            }
-            var ehtsKeyValueMap = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
-
-            // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
-                                          .SignWith(privateKeyXmlRsa)               // Set privateKeyXmlRsa
-                                          .Build();
-            // Assert
-            // Expected: PopTokenBuilderException
-        }
-
-        [TestMethod]
         [ExpectedException(typeof(PopTokenBuilderException), "The ehtsKeyValueMap should not be null or empty and should not contain any null or empty ehts keys or values")]
         public void PopTokenBuilder_DoesContainAnyEmptyKeysOrValues_ValueIsNull_Test()
         {
