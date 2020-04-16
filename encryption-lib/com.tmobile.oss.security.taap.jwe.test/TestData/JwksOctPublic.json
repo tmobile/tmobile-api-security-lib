@@ -1,0 +1,10 @@
+{
+  "keys": [
+    {
+      "kty": "OCT",
+      "alg": "A128KW",
+      "k": "GawgguFyGrWKav7AX4VKUg",
+      "kid": "40F36B31-44A5-44B4-AC2F-676D5C8CB4C2"
+    }
+  ]
+}

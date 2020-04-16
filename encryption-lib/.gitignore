@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/JweSolution/v16
+/com.tmobile.oss.security.taap.jwe/bin/Debug
+/com.tmobile.oss.security.taap.jwe/obj/Debug
+/com.tmobile.oss.security.taap.jwe/com.tmobile.oss.security.taap.jwe.csproj.user
+/com.tmobile.oss.security.taap.jwe.test/bin/Debug
+/com.tmobile.oss.security.taap.jwe.test/obj/Debug
+/com.tmobile.oss.security.taap.jwe.test/com.tmobile.oss.security.taap.jwe.test.csproj.user
+/packages
+/.vs/JweSolution_CLR_4.8/v16/.suo
+/.vs
+/com.tmobile.oss.security.taap.jwe.core/bin/Debug/netstandard2.0
+/com.tmobile.oss.security.taap.jwe.core/obj
+/com.tmobile.oss.security.taap.jwe.core.test/bin/Debug/netcoreapp3.1
+/com.tmobile.oss.security.taap.jwe.core.test/obj
