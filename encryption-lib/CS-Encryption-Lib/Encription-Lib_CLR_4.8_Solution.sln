@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.tmobile.oss.security.taap.jwe", "com.tmobile.oss.security.taap.jwe\com.tmobile.oss.security.taap.jwe.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.tmobile.oss.security.taap.jwe.test", "com.tmobile.oss.security.taap.jwe.test\com.tmobile.oss.security.taap.jwe.test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F7787A8B-3DD7-4C88-A0E9-DCC9341A3E44}"
 	ProjectSection(SolutionItems) = preProject
 		com.tmobile.oss.security.taap.jwe\ClassDesign.png = com.tmobile.oss.security.taap.jwe\ClassDesign.png
 		FieldLevelEncrryption_DataFlow.png = FieldLevelEncrryption_DataFlow.png
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encription-Library", "encyption-lib\Encription-Library.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encription-Library.Test", "encyption-lib.test\Encription-Library.Test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

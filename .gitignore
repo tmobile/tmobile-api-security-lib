@@ -40,3 +40,7 @@
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj/Debug/netcoreapp3.1
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj/Release/netcoreapp3.1
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj
+/encryption-lib/CS-Encryption-Lib/encyption-lib/obj/Debug
+/encryption-lib/CS-Encryption-Lib/encyption-lib-core/obj
+/encryption-lib/CS-Encryption-Lib/encyption-lib-core.test/obj
+/encryption-lib/CS-Encryption-Lib/encyption-lib.test/obj/Debug

@@ -146,9 +146,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\com.tmobile.oss.security.taap.jwe\com.tmobile.oss.security.taap.jwe.csproj">
+    <ProjectReference Include="..\encyption-lib\Encription-Library.csproj">
       <Project>{3dd5cf74-e943-450e-a63e-095021e1b343}</Project>
-      <Name>com.tmobile.oss.security.taap.jwe</Name>
+      <Name>Encription-Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
