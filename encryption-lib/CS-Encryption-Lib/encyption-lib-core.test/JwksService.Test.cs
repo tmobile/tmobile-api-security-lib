@@ -37,7 +37,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		[TestInitialize]
 		public void TestInitialize()
 		{
-			this.jwkUrl = "https://keyvault-qat.test.px-npe01b.cf.t-mobile.com/jwks/v1/qlab02/chubccpadonotsellsetting";
+			this.jwkUrl = "https://somedomain.com/jwks/v1/lab/endpoint";
 
 			// Public RSA Jwks
 			var publicRsaJwksJson = File.ReadAllText(@"TestData\JwksRSAPublic.json")
@@ -65,30 +65,6 @@ namespace com.tmobile.oss.security.taap.jwe.test
 								  .Returns((HttpRequestMessage request, CancellationToken cancellationToken) => { return Task.FromResult(publicEcResponse); });
 			this.publicEcHttpClient = new HttpClient(mockHttpMessageHandler.Object, true);
 		}
-
-		//[TestMethod]
-		//[TestCategory("IntergrationTest")]
-		//public async Task GetJsonWebKeyListAsync_PublicRSA_IntergrationSuccess()
-		//{
-		//	// Arrange
-		//	var httpClient = new HttpClient(); // Don't use MOC HttpClient
-		//	var jwksService = new JwksService(httpClient, this.jwkUrl);
-
-		//	// Act
-		//	var jwksList = await jwksService.GetJsonWebKeyListAsync();
-
-		//	// Assert
-		//	Assert.IsNotNull(jwksList);
-		//	Assert.IsTrue(jwksList.Count == 1);
-
-		//	Assert.AreEqual("RSA", jwksList[0].Kty);
-		//	Assert.AreEqual("chubccpadonotsellsetting", jwksList[0].Kid);
-		//	Assert.AreEqual("enc", jwksList[0].Use);
-		//	Assert.IsFalse(string.IsNullOrEmpty(jwksList[0].N));  // This will change over time, so just check if exists
-		//	Assert.AreEqual("AQAB", jwksList[0].E);
-		//	Assert.AreEqual(false, jwksList[0].HasPrivateKey);
-		//	Assert.AreEqual(2048, jwksList[0].KeySize);
-		//}
 
 		[TestMethod]
 		[TestCategory("UnitTest")]
