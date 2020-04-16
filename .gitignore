@@ -36,3 +36,7 @@
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/.vs/PopTokenBuilderSolution/v16
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/com.tmobile.oss.security.taap.poptoken.builder/obj
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/com.tmobile.oss.security.taap.poptoken.builder.test/obj
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder/obj
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj/Debug/netcoreapp3.1
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj/Release/netcoreapp3.1
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/obj

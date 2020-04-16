@@ -37,12 +37,14 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void PopTokenBuilder_Build_ValidPopToken_Success_Test()
         {
             // Arrange
-            var keyValuePairDictionary = new Dictionary<string, string>();
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}");
+            var keyValuePairDictionary = new Dictionary<string, string>
+            {
+                { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
 
@@ -64,7 +66,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
             HashSet<KeyValuePair<string, string>> ehtsKeyValueMap = null;   // ehtsKeyValueMap is null
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
+            popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
@@ -86,7 +88,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
             var ehtsKeyValueMap = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
+            popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
@@ -109,7 +111,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
             privateKeyXmlRsa = null;                                            // privateKeyXmlRsa is null
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
+            popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
@@ -121,17 +123,19 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void PopTokenBuilder_DoesContainAnyEmptyKeysOrValues_ValueIsNull_Test()
         {
             // Arrange
-            var keyValuePairDictionary = new Dictionary<string, string>();
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.ContentType.GetDescription(), null);    // Value is null
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}");
+            var keyValuePairDictionary = new Dictionary<string, string>
+            {
+                { PopEhtsKeyEnum.ContentType.GetDescription(), null },    // Value is null
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
+            popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
@@ -143,17 +147,19 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void PopTokenBuilder_DoesContainAnyEmptyKeysOrValues_KeyIsEmpty_Test()
         {
             // Arrange
-            var keyValuePairDictionary = new Dictionary<string, string>();
-            keyValuePairDictionary.Add(string.Empty, PopEhtsKeyEnum.ApplicationJson.GetDescription());   // Key is empty
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}");
+            var keyValuePairDictionary = new Dictionary<string, string>
+            {
+                { string.Empty, PopEhtsKeyEnum.ApplicationJson.GetDescription() },   // Key is empty
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
+            popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
@@ -166,19 +172,21 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void PopTokenBuilder_Build_ValidPopToken_GeneralException_Test()
         {
             // Arrange
-            var keyValuePairDictionary = new Dictionary<string, string>();
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders");
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription());
-            keyValuePairDictionary.Add(PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}");
+            var keyValuePairDictionary = new Dictionary<string, string>
+            {
+                { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
 
             privateKeyXmlRsa = privateKeyPemRsa;                            // Use Pem format rather then XML format
 
             // Act
-            var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
+            popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
                                           .SignWith(privateKeyXmlRsa)
                                           .Build();
             // Assert
