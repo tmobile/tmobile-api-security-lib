@@ -5,7 +5,10 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F7787A8B-3DD7-4C88-A0E9-DCC9341A3E44}"
 	ProjectSection(SolutionItems) = preProject
+		encyption-lib\ClassDesign.png = encyption-lib\ClassDesign.png
 		FieldLevelEncrryption_DataFlow.png = FieldLevelEncrryption_DataFlow.png
+		ReadMe.docx = ReadMe.docx
+		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "encryption_lib.test", "encyption-lib-core.test\encryption_lib.test.csproj", "{59E08A75-E054-402E-B6E2-86F224DF6BA9}"
