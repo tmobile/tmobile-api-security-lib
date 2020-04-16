@@ -5,8 +5,10 @@ VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F7787A8B-3DD7-4C88-A0E9-DCC9341A3E44}"
 	ProjectSection(SolutionItems) = preProject
-		com.tmobile.oss.security.taap.jwe\ClassDesign.png = com.tmobile.oss.security.taap.jwe\ClassDesign.png
+		encyption-lib\ClassDesign.png = encyption-lib\ClassDesign.png
 		FieldLevelEncrryption_DataFlow.png = FieldLevelEncrryption_DataFlow.png
+		ReadMe.docx = ReadMe.docx
+		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encription-Library", "encyption-lib\Encription-Library.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"

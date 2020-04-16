@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\encyption-lib-core\Encription_Lib.csproj" />
+    <ProjectReference Include="..\encyption-lib-core\encryption_lib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

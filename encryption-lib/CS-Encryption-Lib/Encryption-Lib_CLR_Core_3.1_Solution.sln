@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		FieldLevelEncrryption_DataFlow.png = FieldLevelEncrryption_DataFlow.png
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encription_Lib.Test", "encyption-lib-core.test\Encription_Lib.Test.csproj", "{59E08A75-E054-402E-B6E2-86F224DF6BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "encryption_lib.test", "encyption-lib-core.test\encryption_lib.test.csproj", "{59E08A75-E054-402E-B6E2-86F224DF6BA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encription_Lib", "encyption-lib-core\Encription_Lib.csproj", "{5A62165E-EF76-4ED2-B470-4465D79E9A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "encryption_lib", "encyption-lib-core\encryption_lib.csproj", "{5A62165E-EF76-4ED2-B470-4465D79E9A5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
