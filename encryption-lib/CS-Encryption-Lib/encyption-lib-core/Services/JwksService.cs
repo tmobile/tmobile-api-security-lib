@@ -20,17 +20,14 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("com.tmobile.oss.security.taap.jwe.test")]
 namespace com.tmobile.oss.security.taap.jwe
 {
     /// <summary>
-    /// Jwks Service for DoNotSellSettings 
-    ///     /jwks/v1/qlab02/chubccpadonotsellsetting
+    /// Jwks Service
     /// </summary>
-    internal class JwksService : IJwksService
+    public class JwksService : IJwksService
     {
         private readonly HttpClient httpClient;
         private readonly Uri jwkUrl;

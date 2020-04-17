@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace com.tmobile.oss.security.taap.jwe
 {
     public interface IEncryption
     {
-        Task<string> EncryptAsync(string value);
-        Task<string> DecryptAsync(string cipher);
+        Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger);
+
+        Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger);
     }
 }

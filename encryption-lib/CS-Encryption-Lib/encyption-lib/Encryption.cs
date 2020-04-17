@@ -30,36 +30,31 @@ namespace com.tmobile.oss.security.taap.jwe
 	/// </summary>
 	public class Encryption : IEncryption
 	{
-		private readonly IKeyResolver keyResolver;
-		private readonly ILogger logger;
+		private IKeyResolver keyResolver;
+		private ILogger logger;
 		private JsonWebKey jsonWebKey;
 
 		/// <summary>
 		/// Default constructor
 		/// </summary>
-		private Encryption()
+		public Encryption()
 		{
-		}
-
-		/// <summary>
-		/// Custom constructor
-		/// </summary>
-		/// <param name="keyResolver"></param>
-		public Encryption(IKeyResolver keyResolver, ILogger logger) : this()
-		{
-			this.keyResolver = keyResolver;
-			this.logger = logger;
 		}
 
 		/// <summary>
 		/// Encrypt Async
 		/// </summary>
 		/// <param name="value">The value to encrypt as JWE string</param>
+		/// <param name="keyResolver">Key Resolver</param>
+		/// <param name="logger">Logger</param>
 		/// <returns>JWE string</returns>
-		public async Task<string> EncryptAsync(string value)
+		public async Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger)
 		{
 			try
 			{
+				this.keyResolver = keyResolver;
+				this.logger = logger;
+
 				if (this.jsonWebKey == null)
 				{
 					this.jsonWebKey = await this.keyResolver.GetEncryptionKeyAsync();
@@ -133,20 +128,23 @@ namespace com.tmobile.oss.security.taap.jwe
 		/// Decrypt Async
 		/// </summary>
 		/// <param name="cipher">Cipher string</param>
-		/// <param name="hasPrivateKey">Get key which has private key</param>
+		/// <param name="keyResolver">Key Resolver</param>
+		/// <param name="logger">Logger</param>
 		/// <returns>Descrypted string</returns>
-		public async Task<string> DecryptAsync(string cipher)
+		public async Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger)
 		{
-			JsonWebKey privateJsonWebKey = null;
+			var privateJsonWebKey = default(JsonWebKey);
+			var value = default(string);
 
 			try
 			{
-				var value = string.Empty;
-
 				if (!cipher.StartsWith(Constants.CIPHER_HEADER, StringComparison.Ordinal))
 				{
 					throw new InvalidHeaderException("Invalid encryption header.");
 				}
+
+				this.keyResolver = keyResolver;
+				this.logger = logger;
 
 				cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
 				var cipherArray = cipher.Split(new char[] { '.' });

@@ -18,17 +18,15 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 
-[assembly: InternalsVisibleTo("com.tmobile.oss.security.taap.jwe.test")]
 namespace com.tmobile.oss.security.taap.jwe
 {
 	/// <summary>
 	/// Key Resolver
 	/// </summary>
-	internal class KeyResolver : IKeyResolver
+	public class KeyResolver : IKeyResolver, IDisposable
 	{
 		private readonly IJwksService jwksService;
 		private IList<JsonWebKey> publicJsonWebKeyList;
@@ -36,6 +34,7 @@ namespace com.tmobile.oss.security.taap.jwe
 		private readonly Timer timer;
 		private bool IsCacheExpired;
 		private IList<JsonWebKey> privateJsonWebKeyList;
+		private bool disposed = false;
 
 		public KeyResolver(IList<JsonWebKey> privateJsonWebKeyList, IJwksService jwksService, long cacheDurationSeconds)
 		{
@@ -90,7 +89,26 @@ namespace com.tmobile.oss.security.taap.jwe
 		private void OnTimedEvent(Object source, ElapsedEventArgs e)
 		{
 			this.IsCacheExpired = true;
-			timer.Enabled = false;
+			this.timer.Enabled = false;
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			//GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					this.timer.Dispose();
+				}
+
+				disposed = true;
+			}
 		}
 	}
 }
