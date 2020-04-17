@@ -25,204 +25,193 @@ using System.Threading.Tasks;
 
 namespace com.tmobile.oss.security.taap.jwe
 {
-	/// <summary>
-	/// Encryption
-	/// </summary>
-	public class Encryption : IEncryption
-	{
-		private IKeyResolver keyResolver;
-		private ILogger logger;
-		private JsonWebKey jsonWebKey;
+    /// <summary>
+    /// Encryption
+    /// </summary>
+    public class Encryption : IEncryption
+    {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Encryption()
+        {
+        }
 
-		/// <summary>
-		/// Default constructor
-		/// </summary>
-		public Encryption()
-		{
-		}
+        /// <summary>
+        /// Encrypt Async
+        /// </summary>
+        /// <param name="value">The value to encrypt as JWE string</param>
+        /// <param name="keyResolver">Key Resolver</param>
+        /// <param name="logger">Logger</param>
+        /// <returns>JWE string</returns>
+        public async Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger)
+        {
+            JsonWebKey jsonWebKey = null;
 
-		/// <summary>
-		/// Encrypt Async
-		/// </summary>
-		/// <param name="value">The value to encrypt as JWE string</param>
-		/// <param name="keyResolver">Key Resolver</param>
+            try
+            {
+                jsonWebKey = await keyResolver.GetEncryptionKeyAsync();
+                if (jsonWebKey == null)
+                {
+                    throw new EncryptionException(string.Format("Encryption key not found by KeyResolver."));
+                }
+
+                var encodedJwe = string.Empty;
+                var extraHeaders = new Dictionary<string, object>
+                {
+                    { "kid", jsonWebKey.Kid },
+                    { "kty", jsonWebKey.Kty }
+                };
+                if (jsonWebKey.Kty == "EC")
+                {
+                    var xByteArray = Jose.Base64Url.Decode(jsonWebKey.X);
+                    var yByteArray = Jose.Base64Url.Decode(jsonWebKey.Y);
+                    var eccKey = EccKey.New(xByteArray, yByteArray, null, CngKeyUsages.KeyAgreement);
+                    encodedJwe = Jose.JWT.Encode(value, eccKey, Jose.JweAlgorithm.ECDH_ES_A256KW, Jose.JweEncryption.A256GCM, null, extraHeaders, null);
+                }
+                else if (jsonWebKey.Kty == "RSA")
+                {
+                    var keyParams = new RSAParameters
+                    {
+                        Exponent = Jose.Base64Url.Decode(jsonWebKey.E),
+                        Modulus = Jose.Base64Url.Decode(jsonWebKey.N)
+                    };
+                    var rsa = RSA.Create();
+                    rsa.ImportParameters(keyParams);
+                    encodedJwe = Jose.JWT.Encode(value, rsa, Jose.JweAlgorithm.RSA_OAEP_256, Jose.JweEncryption.A256GCM, null, extraHeaders, null);
+                }
+                else
+                {
+                    throw new EncryptionException("Unsupport Json Web Key type.");
+                }
+
+                logger.LogDebug("Encrypting data with keyid: {0}, type: {1}, value: {2}", jsonWebKey.Kid, jsonWebKey.Kty, encodedJwe);
+
+                return Constants.CIPHER_HEADER + encodedJwe;
+            }
+            catch (EncryptionException eeEx)
+            {
+                if (jsonWebKey == null)
+                {
+                    logger.LogError(eeEx, "An Encryption Exception Occurred: Value: {0}", value);
+                }
+                else
+                {
+                    logger.LogError(eeEx, "An Encryption Exception Occurred: Keyid: {0}, type: {1}", jsonWebKey.Kid, jsonWebKey.Kty);
+                }
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(NotImplementedException))
+                {
+                    throw;
+                }
+                else
+                {
+                    logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", jsonWebKey.Kid, jsonWebKey.Kty);
+                    throw new EncryptionException("Unable to encrypt data.", ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decrypt Async
+        /// </summary>
+        /// <param name="cipher">Cipher string</param>
+        /// <param name="keyResolver">Key Resolver</param>
 		/// <param name="logger">Logger</param>
-		/// <returns>JWE string</returns>
-		public async Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger)
-		{
-			try
-			{
-				this.keyResolver = keyResolver;
-				this.logger = logger;
+        /// <returns>Descrypted string</returns>
+        public async Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger)
+        {
+            var privateJsonWebKey = default(JsonWebKey);
+            var value = default(string);
 
-				if (this.jsonWebKey == null)
-				{
-					this.jsonWebKey = await this.keyResolver.GetEncryptionKeyAsync();
-					if (this.jsonWebKey == null)
-					{
-						throw new EncryptionException(string.Format("Encryption key not found by KeyResolver."));
-					}
-				}
+            try
+            {
+                if (!cipher.StartsWith(Constants.CIPHER_HEADER, StringComparison.Ordinal))
+                {
+                    throw new InvalidHeaderException("Invalid encryption header.");
+                }
 
-				var encodedJwe = string.Empty;
-				var extraHeaders = new Dictionary<string, object>
-				{
-					{ "kid", this.jsonWebKey.Kid },
-					{ "kty", this.jsonWebKey.Kty }
-				};
-				if (this.jsonWebKey.Kty == "EC")
-				{
-					var xByteArray = Jose.Base64Url.Decode(this.jsonWebKey.X);
-					var yByteArray = Jose.Base64Url.Decode(this.jsonWebKey.Y);
-					var eccKey = EccKey.New(xByteArray, yByteArray, null, CngKeyUsages.KeyAgreement);
-					encodedJwe = Jose.JWT.Encode(value, eccKey, Jose.JweAlgorithm.ECDH_ES_A256KW, Jose.JweEncryption.A256GCM, null, extraHeaders, null);
-				}
-				else if (this.jsonWebKey.Kty == "RSA")
-				{
-					var keyParams = new RSAParameters
-					{
-						Exponent = Jose.Base64Url.Decode(this.jsonWebKey.E),
-						Modulus = Jose.Base64Url.Decode(this.jsonWebKey.N)
-					};
-					var rsa = RSA.Create();
-					rsa.ImportParameters(keyParams);
-					encodedJwe = Jose.JWT.Encode(value, rsa, Jose.JweAlgorithm.RSA_OAEP_256, Jose.JweEncryption.A256GCM, null, extraHeaders, null);
-				}
-				else
-				{
-					throw new EncryptionException("Unsupport Json Web Key type.");
-				}
+                cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
+                var cipherArray = cipher.Split(new char[] { '.' });
+                var json = Encoding.UTF8.GetString(Jose.Base64Url.Decode(cipherArray[0]));
+                var requestedprivateJsonWebKey = new JsonWebKey(json);
 
-				logger.LogDebug("Encrypting data with keyid: {0}, type: {1}, value: {2}", this.jsonWebKey.Kid, this.jsonWebKey.Kty, encodedJwe);
+                privateJsonWebKey = await keyResolver.GetDecryptionKeyAsync(requestedprivateJsonWebKey.Kid);
+                if (privateJsonWebKey == null)
+                {
+                    throw new EncryptionException(string.Format("Decryption key not found. ID: '{0}'.", requestedprivateJsonWebKey.Kid));
+                }
 
-				return Constants.CIPHER_HEADER + encodedJwe;
-			}
-			catch (EncryptionException eeEx)
-			{
-				if (this.jsonWebKey == null)
-				{
-					logger.LogError(eeEx, "An Encryption Exception Occurred: Value: {0}", value);
-				}
-				else
-				{
-					logger.LogError(eeEx, "An Encryption Exception Occurred: Keyid: {0}, type: {1}", this.jsonWebKey.Kid, this.jsonWebKey.Kty);
-				}
+                if (privateJsonWebKey.Kty == "EC")
+                {
+                    var xByteArray = Jose.Base64Url.Decode(privateJsonWebKey.X);
+                    var yByteArray = Jose.Base64Url.Decode(privateJsonWebKey.Y);
+                    var dByteArray = Jose.Base64Url.Decode(privateJsonWebKey.D);
+                    var privateKey = EccKey.New(xByteArray, yByteArray, dByteArray, CngKeyUsages.KeyAgreement);
+                    value = Jose.JWT.Decode(cipher, privateKey);
+                }
+                else if (privateJsonWebKey.Kty == "RSA")
+                {
+                    var keyParams = new RSAParameters
+                    {
+                        Exponent = Jose.Base64Url.Decode(privateJsonWebKey.E),
+                        Modulus = Jose.Base64Url.Decode(privateJsonWebKey.N),
+                        P = Jose.Base64Url.Decode(privateJsonWebKey.P),
+                        Q = Jose.Base64Url.Decode(privateJsonWebKey.Q),
+                        D = Jose.Base64Url.Decode(privateJsonWebKey.D),
+                        InverseQ = Jose.Base64Url.Decode(privateJsonWebKey.QI),
+                        DP = Jose.Base64Url.Decode(privateJsonWebKey.DQ),
+                        DQ = Jose.Base64Url.Decode(privateJsonWebKey.DP)
+                    };
 
-				throw;
-			}
-			catch (Exception ex)
-			{
-				if (ex.GetType() == typeof(NotImplementedException))
-				{
-					throw;
-				}
-				else
-				{
-					logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", this.jsonWebKey.Kid, this.jsonWebKey.Kty);
-					throw new EncryptionException("Unable to encrypt data.", ex);
-				}
-			}
-		}
+                    var rsa = RSA.Create();
+                    rsa.ImportParameters(keyParams);
+                    value = Jose.JWT.Decode(cipher, rsa, Jose.JweAlgorithm.RSA_OAEP_256, Jose.JweEncryption.A256GCM);
+                }
+                else
+                {
+                    throw new EncryptionException("Unsupport Json Web Key type.");
+                }
 
-		/// <summary>
-		/// Decrypt Async
-		/// </summary>
-		/// <param name="cipher">Cipher string</param>
-		/// <param name="keyResolver">Key Resolver</param>
-		/// <param name="logger">Logger</param>
-		/// <returns>Descrypted string</returns>
-		public async Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger)
-		{
-			var privateJsonWebKey = default(JsonWebKey);
-			var value = default(string);
+                logger.LogDebug("Decrypted data with keyid: {0}, type: {1}, value: {2}", privateJsonWebKey.Kid, privateJsonWebKey.Kty, value);
 
-			try
-			{
-				if (!cipher.StartsWith(Constants.CIPHER_HEADER, StringComparison.Ordinal))
-				{
-					throw new InvalidHeaderException("Invalid encryption header.");
-				}
+                return value;
+            }
+            catch (InvalidHeaderException ihEx)
+            {
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(ihEx, "An Invalid Header Exception Occurred: cipher: {0}", cipher);
+                }
+                else
+                {
+                    logger.LogError(ihEx, "An Invalid Header Exception Occurred: keyid: {0}, type: {1}, cipher: {2}", privateJsonWebKey.Kid, privateJsonWebKey.Kty, cipher);
+                }
 
-				this.keyResolver = keyResolver;
-				this.logger = logger;
+                throw;
+            }
+            catch (EncryptionException eeEx)
+            {
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(eeEx, "An Decryption Exception Occurred: cipher: {0}", cipher);
+                }
+                else
+                {
+                    logger.LogError(eeEx, "An Decryption Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                }
 
-				cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
-				var cipherArray = cipher.Split(new char[] { '.' });
-				var json = Encoding.UTF8.GetString(Jose.Base64Url.Decode(cipherArray[0]));
-				var requestedprivateJsonWebKey = new JsonWebKey(json);
-
-				privateJsonWebKey = await this.keyResolver.GetDecryptionKeyAsync(requestedprivateJsonWebKey.Kid);
-				if (privateJsonWebKey == null)
-				{
-					throw new EncryptionException(string.Format("Decryption key not found. ID: '{0}'.", requestedprivateJsonWebKey.Kid));
-				}
-
-				if (privateJsonWebKey.Kty == "EC")
-				{
-					var xByteArray = Jose.Base64Url.Decode(privateJsonWebKey.X);
-					var yByteArray = Jose.Base64Url.Decode(privateJsonWebKey.Y);
-					var dByteArray = Jose.Base64Url.Decode(privateJsonWebKey.D);
-					var privateKey = EccKey.New(xByteArray, yByteArray, dByteArray, CngKeyUsages.KeyAgreement);
-					value = Jose.JWT.Decode(cipher, privateKey);
-				}
-				else if (privateJsonWebKey.Kty == "RSA")
-				{
-					var keyParams = new RSAParameters
-					{
-						Exponent = Jose.Base64Url.Decode(privateJsonWebKey.E),
-						Modulus = Jose.Base64Url.Decode(privateJsonWebKey.N),
-						P = Jose.Base64Url.Decode(privateJsonWebKey.P),
-						Q = Jose.Base64Url.Decode(privateJsonWebKey.Q),
-						D = Jose.Base64Url.Decode(privateJsonWebKey.D),
-						InverseQ = Jose.Base64Url.Decode(privateJsonWebKey.QI),
-						DP = Jose.Base64Url.Decode(privateJsonWebKey.DQ),
-						DQ = Jose.Base64Url.Decode(privateJsonWebKey.DP)
-					};
-
-					var rsa = RSA.Create();
-					rsa.ImportParameters(keyParams);
-					value = Jose.JWT.Decode(cipher, rsa, Jose.JweAlgorithm.RSA_OAEP_256, Jose.JweEncryption.A256GCM);
-				}
-				else
-				{
-					throw new EncryptionException("Unsupport Json Web Key type.");
-				}
-
-				logger.LogDebug("Decrypted data with keyid: {0}, type: {1}, value: {2}", privateJsonWebKey.Kid, privateJsonWebKey.Kty, value);
-
-				return value;
-			}
-			catch (InvalidHeaderException ihEx)
-			{
-				if (privateJsonWebKey == null)
-				{
-					logger.LogError(ihEx, "An Invalid Header Exception Occurred: cipher: {0}", cipher);
-				}
-				else
-				{
-					logger.LogError(ihEx, "An Invalid Header Exception Occurred: keyid: {0}, type: {1}, cipher: {2}", privateJsonWebKey.Kid, privateJsonWebKey.Kty, cipher);
-				}
-
-				throw;
-			}
-			catch (EncryptionException eeEx)
-			{
-				if (privateJsonWebKey == null)
-				{
-					logger.LogError(eeEx, "An Decryption Exception Occurred: cipher: {0}", cipher);
-				}
-				else
-				{
-					logger.LogError(eeEx, "An Decryption Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
-				}
-
-				throw;
-			}
-			catch (Exception ex)
-			{
-				logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
-				throw new EncryptionException("Unable to decrypt data.", ex);
-			}
-		}
-	}
+                throw;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                throw new EncryptionException("Unable to decrypt data.", ex);
+            }
+        }
+    }
 }
