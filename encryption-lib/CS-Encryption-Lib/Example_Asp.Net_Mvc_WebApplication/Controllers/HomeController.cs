@@ -1,49 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using com.tmobile.oss.security.taap.jwe;
 using Example_Asp.Net_Mvc_WebApplication.Models;
 using Microsoft.AspNetCore.Http;
-using com.tmobile.oss.security.taap.jwe;
-using System.Net.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Sample_Asp.Net_Mvc_WebApplication.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Net;
+using System;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Example_Asp.Net_Mvc_WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEncryption _encryption;
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        private readonly ILogger<HomeController> _logger;
-        private readonly IOptions<EncryptionOptions> _encryptionOptions;
+        private readonly IHttpClientFactory httpClientFactory;
+        private readonly ILogger<HomeController> logger;
+        private readonly IOptions<EncryptionOptions> encryptionOptions;
+        private readonly IEncryption encryption;
+        private IKeyResolver keyResolver;
 
         public HomeController(
-            IEncryption encryption, 
             IHttpClientFactory httpClientFactory, 
-            IOptions<EncryptionOptions> encryptionOptions, 
-            ILogger<HomeController> logger)
+            ILogger<HomeController> logger, 
+            IOptions<EncryptionOptions> encryptionOptions,
+            IEncryption encryption, 
+            IKeyResolver keyResolver)
         {
-            _encryption = encryption;
-            _httpClientFactory = httpClientFactory;
-            _encryptionOptions = encryptionOptions;
-            _logger = logger;
+            this.httpClientFactory = httpClientFactory;
+            this.logger = logger;
+            this.encryptionOptions = encryptionOptions;
+            this.encryption = encryption;
+            this.keyResolver = keyResolver;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            if(this.keyResolver.GetJwksService() == null)
+            {
+                var httpClient = this.httpClientFactory.CreateClient();
+                var jwkUrl = this.encryptionOptions.Value.JwksUrl;
+                var jwksService = new JwksService(httpClient, jwkUrl);
+
+                this.keyResolver.SetJwksService(jwksService);
+            }
+
             var encryptedJweViewModel = new EncryptedJweViewModel();
             encryptedJweViewModel.PhoneNumber = "(555) 555-5555";
             encryptedJweViewModel.ErrorMessage = " ";
             encryptedJweViewModel.EncryptedJwe = string.Empty;
-
             return View(encryptedJweViewModel);
         }
 
@@ -52,12 +57,8 @@ namespace Example_Asp.Net_Mvc_WebApplication.Controllers
         {
             try
             {
-                var httpClient = _httpClientFactory.CreateClient();
-                var jwksService = new JwksService(httpClient, _encryptionOptions.Value.JwksUrl);
-                var keyResolver = new KeyResolver(new List<JsonWebKey>(), jwksService, _encryptionOptions.Value.CacheDurationSeconds);
-                encryptedJweViewModel.EncryptedJwe = await _encryption.EncryptAsync(encryptedJweViewModel.PhoneNumber, keyResolver, _logger);
-
-                //encryptedJweViewModel.EncryptedJwe = WebUtility.HtmlEncode(encryptedJweViewModel.EncryptedJwe);
+                var phoneNumber = encryptedJweViewModel.PhoneNumber;
+                encryptedJweViewModel.EncryptedJwe = await this.encryption.EncryptAsync(phoneNumber, this.keyResolver, this.logger);
             }
             catch(Exception ex)
             {

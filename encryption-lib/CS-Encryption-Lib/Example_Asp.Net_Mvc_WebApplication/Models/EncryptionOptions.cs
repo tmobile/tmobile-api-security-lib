@@ -1,4 +1,4 @@
-﻿namespace Sample_Asp.Net_Mvc_WebApplication.Models
+﻿namespace Example_Asp.Net_Mvc_WebApplication.Models
 {
     public class EncryptionOptions
     {

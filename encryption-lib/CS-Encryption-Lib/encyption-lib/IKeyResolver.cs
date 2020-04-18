@@ -15,12 +15,19 @@
  */
 
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace com.tmobile.oss.security.taap.jwe
 {
     public interface IKeyResolver
     {
+        List<JsonWebKey> PrivateJsonWebKeyList { get; set; }
+
+        JwksService GetJwksService();
+
+        void SetJwksService(JwksService jwksService);
+
         Task<JsonWebKey> GetEncryptionKeyAsync();
 
         Task<JsonWebKey> GetDecryptionKeyAsync(string kid);

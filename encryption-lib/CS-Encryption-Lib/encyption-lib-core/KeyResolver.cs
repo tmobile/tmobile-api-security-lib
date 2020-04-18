@@ -28,19 +28,39 @@ namespace com.tmobile.oss.security.taap.jwe
 	/// </summary>
 	public class KeyResolver : IKeyResolver, IDisposable
 	{
-		private readonly IJwksService jwksService;
-		private IList<JsonWebKey> publicJsonWebKeyList;
-		private readonly long cacheDurationSeconds;
-		private readonly Timer timer;
+		private JwksService jwksService;
+		private List<JsonWebKey> publicJsonWebKeyList;
+		private Timer timer;
+		private long cacheDurationSeconds;
 		private bool IsCacheExpired;
-		private IList<JsonWebKey> privateJsonWebKeyList;
-		private bool disposed = false;
+		private bool disposed;
 
-		public KeyResolver(IList<JsonWebKey> privateJsonWebKeyList, IJwksService jwksService, long cacheDurationSeconds)
+		private KeyResolver()
 		{
-			this.privateJsonWebKeyList = privateJsonWebKeyList;
-			this.jwksService = jwksService;
+			this.cacheDurationSeconds = 3600; // 1 Hour
+		}
+
+		/// <summary>
+		/// Custom Constructor
+		/// </summary>
+		public KeyResolver(long cacheDurationSeconds) : base()
+		{
+			this.PrivateJsonWebKeyList = new List<JsonWebKey>();
 			this.cacheDurationSeconds = cacheDurationSeconds;
+			this.IsCacheExpired = true;
+			this.disposed = false;
+		}
+
+		public List<JsonWebKey> PrivateJsonWebKeyList { get; set; }
+
+		public JwksService GetJwksService()
+		{
+			return this.jwksService;
+		}
+
+		public void SetJwksService(JwksService jwksService)
+		{
+			this.jwksService = jwksService;
 
 			this.IsCacheExpired = true;
 			this.timer = new Timer(this.cacheDurationSeconds * 1000); // Milliseconds
@@ -81,15 +101,9 @@ namespace com.tmobile.oss.security.taap.jwe
 
 		public async Task<JsonWebKey> GetDecryptionKeyAsync(string kid)
 		{
-			var privateJsonWebKey = this.privateJsonWebKeyList.Where(p => p.Kid == kid)
+			var privateJsonWebKey = this.PrivateJsonWebKeyList.Where(p => p.Kid == kid)
 									                          .FirstOrDefault();
 			return await Task.FromResult(privateJsonWebKey);
-		}
-
-		private void OnTimedEvent(Object source, ElapsedEventArgs e)
-		{
-			this.IsCacheExpired = true;
-			this.timer.Enabled = false;
 		}
 
 		public void Dispose()
@@ -109,6 +123,12 @@ namespace com.tmobile.oss.security.taap.jwe
 
 				disposed = true;
 			}
+		}
+
+		private void OnTimedEvent(Object source, ElapsedEventArgs e)
+		{
+			this.IsCacheExpired = true;
+			this.timer.Enabled = false;
 		}
 	}
 }

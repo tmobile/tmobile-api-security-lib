@@ -52,7 +52,7 @@ namespace com.tmobile.oss.security.taap.jwe
         /// Get JsonWebKey List Async
         /// </summary>
         /// <returns>List JsonWebKey</returns>
-        public async Task<List<JsonWebKey>> GetJsonWebKeyListAsync()
+        public virtual async Task<List<JsonWebKey>> GetJsonWebKeyListAsync()
         {
             var jsonWebKeyList = new List<JsonWebKey>();
 
