@@ -157,7 +157,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			// Arrange
 			var kid = "3072F4C6-193D-481B-BDD2-0F09F5A7DDFB";
 			var keyResolver = new KeyResolver(this.cacheDurationSeconds);
-			keyResolver.PrivateJsonWebKeyList = this.privateJsonWebKeyList;
+			keyResolver.SetPrivateJsonWebKeyList(this.privateJsonWebKeyList);
 			keyResolver.SetJwksService(this.publicEcJwksService.Object);
 
 			// Act
@@ -176,23 +176,22 @@ namespace com.tmobile.oss.security.taap.jwe.test
 
 		[TestMethod]
 		[TestCategory("UnitTest")]
-		public async Task GetEncryptionKeyAsync_PublicRSA_NewJWKSKey_Success()
+		public async Task GetEncryptionKeyAsync_PublicRSA_TimerExpires_Success()
 		{
 			// Arrange
 			int cacheDurationSeconds = 2;
 			var keyResolver = new KeyResolver(cacheDurationSeconds);
-			keyResolver.PrivateJsonWebKeyList = this.privateJsonWebKeyList;
-			keyResolver.SetJwksService(this.publicEcJwksService.Object);
+			keyResolver.SetJwksService(this.publicRsaJwksService.Object);
 
 			// Act
 			var jsonWebKey = await keyResolver.GetEncryptionKeyAsync(); // Initial call to JWKS
-			Thread.Sleep(2020);
-			jsonWebKey = await keyResolver.GetEncryptionKeyAsync();     // Timer expired. Call JWKS
-			Thread.Sleep(1000);
-			jsonWebKey = await keyResolver.GetEncryptionKeyAsync();     // Timer not expired. Use JWKS cache
+			Thread.Sleep(2050);
+			jsonWebKey = await keyResolver.GetEncryptionKeyAsync();     // Timer expired. Call JWKS  
+			Thread.Sleep(1);
+			jsonWebKey = await keyResolver.GetEncryptionKeyAsync();     // Timer not expired. Use cache
 
 			// Assert
-			this.publicEcJwksService.Verify(m => m.GetJsonWebKeyListAsync(), Times.Exactly(2));
+			this.publicRsaJwksService.Verify(m => m.GetJsonWebKeyListAsync(), Times.Exactly(2));
 		}
 	}
 }

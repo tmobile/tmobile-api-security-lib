@@ -126,7 +126,6 @@ namespace com.tmobile.oss.security.taap.jwe
         public async Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger)
         {
             var privateJsonWebKey = default(JsonWebKey);
-            var value = default(string);
 
             try
             {
@@ -134,6 +133,8 @@ namespace com.tmobile.oss.security.taap.jwe
                 {
                     throw new InvalidHeaderException("Invalid encryption header.");
                 }
+
+                var value = default(string);
 
                 cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
                 var cipherArray = cipher.Split(new char[] { '.' });
@@ -194,15 +195,15 @@ namespace com.tmobile.oss.security.taap.jwe
 
                 throw;
             }
-            catch (EncryptionException eeEx)
+            catch (EncryptionException eEx)
             {
                 if (privateJsonWebKey == null)
                 {
-                    logger.LogError(eeEx, "An Decryption Exception Occurred: cipher: {0}", cipher);
+                    logger.LogError(eEx, "An Decryption Exception Occurred: cipher: {0}", cipher);
                 }
                 else
                 {
-                    logger.LogError(eeEx, "An Decryption Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                    logger.LogError(eEx, "An Decryption Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
                 }
 
                 throw;

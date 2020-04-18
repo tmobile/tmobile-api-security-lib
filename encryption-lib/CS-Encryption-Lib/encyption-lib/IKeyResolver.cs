@@ -22,10 +22,13 @@ namespace com.tmobile.oss.security.taap.jwe
 {
     public interface IKeyResolver
     {
-        List<JsonWebKey> PrivateJsonWebKeyList { get; set; }
+        List<JsonWebKey> GetPublicJsonWebKeyList();
+        void SetPublicJsonWebKeyList(List<JsonWebKey> publicJsonWebKeyList);
+
+        List<JsonWebKey> GetPrivateJsonWebKeyList();
+        void SetPrivateJsonWebKeyList(List<JsonWebKey> privateJsonWebKeyList);
 
         JwksService GetJwksService();
-
         void SetJwksService(JwksService jwksService);
 
         Task<JsonWebKey> GetEncryptionKeyAsync();

@@ -126,8 +126,6 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		[TestCategory("UnitTest")]
 		public async Task EncryptAsync_DecryptAsync_EC_Success()
 		{
-			Assert.Inconclusive("EC not implemented in .NET Core 3.1");
-
 			// Arrange
 			string expectedValue = "Test data!";
 			var publicEncryption = new Encryption();

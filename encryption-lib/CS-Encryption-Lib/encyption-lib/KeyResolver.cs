@@ -18,8 +18,10 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace com.tmobile.oss.security.taap.jwe
 {
@@ -28,16 +30,26 @@ namespace com.tmobile.oss.security.taap.jwe
 	/// </summary>
 	public class KeyResolver : IKeyResolver, IDisposable
 	{
-		private JwksService jwksService;
-		private List<JsonWebKey> publicJsonWebKeyList;
-		private Timer timer;
 		private long cacheDurationSeconds;
+		private List<JsonWebKey> publicJsonWebKeyList;
+		private List<JsonWebKey> privateJsonWebKeyList;
+		private JwksService jwksService;
 		private bool IsCacheExpired;
+
+		private Timer timer;
 		private bool disposed;
 
+		private int jwksServiceCallCount;
+
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
 		private KeyResolver()
 		{
-			this.cacheDurationSeconds = 3600; // 1 Hour
+			this.cacheDurationSeconds = 3600; // Default to 1 Hour
+			this.privateJsonWebKeyList = new List<JsonWebKey>();
+			this.IsCacheExpired = true;
+			this.disposed = false;
 		}
 
 		/// <summary>
@@ -45,22 +57,67 @@ namespace com.tmobile.oss.security.taap.jwe
 		/// </summary>
 		public KeyResolver(long cacheDurationSeconds) : base()
 		{
-			this.PrivateJsonWebKeyList = new List<JsonWebKey>();
 			this.cacheDurationSeconds = cacheDurationSeconds;
-			this.IsCacheExpired = true;
-			this.disposed = false;
 		}
 
-		public List<JsonWebKey> PrivateJsonWebKeyList { get; set; }
+		/// <summary>
+		/// Get Public JsonWebKey List
+		/// </summary>
+		/// <returns></returns>
+		public List<JsonWebKey> GetPublicJsonWebKeyList()
+		{
+			List<JsonWebKey> publicJsonWebKeyList = null;
+			Interlocked.Exchange(ref publicJsonWebKeyList, this.publicJsonWebKeyList);
+			return publicJsonWebKeyList;
+		}
 
+		/// <summary>
+		/// Set Public JsonWebKey List
+		/// </summary>
+		/// <param name="publicJsonWebKeyList"></param>
+		public void SetPublicJsonWebKeyList(List<JsonWebKey> publicJsonWebKeyList)
+		{
+			Interlocked.Exchange(ref this.publicJsonWebKeyList, publicJsonWebKeyList);
+		}
+
+		/// <summary>
+		/// Get Private JsonWebKey List
+		/// </summary>
+		/// <returns></returns>
+		public List<JsonWebKey> GetPrivateJsonWebKeyList()
+		{
+			List<JsonWebKey> privateJsonWebKeyList = null;
+			Interlocked.Exchange(ref privateJsonWebKeyList, this.privateJsonWebKeyList);
+			return privateJsonWebKeyList;
+		}
+
+		/// <summary>
+		/// Set Private JsonWebKey List
+		/// </summary>
+		/// <param name="privateJsonWebKeyList"></param>
+		public void SetPrivateJsonWebKeyList(List<JsonWebKey> privateJsonWebKeyList)
+		{
+			Interlocked.Exchange(ref this.privateJsonWebKeyList, privateJsonWebKeyList);
+		}
+
+		/// <summary>
+		/// Get JwksService
+		/// </summary>
+		/// <returns>JwksService</returns>
 		public JwksService GetJwksService()
 		{
-			return this.jwksService;
+			JwksService jwksService = null;
+			Interlocked.Exchange(ref jwksService, this.jwksService);
+			return jwksService;
 		}
 
+		/// <summary>
+		/// Set JwksService
+		/// </summary>
+		/// <param name="jwksService">JwksService</param>
 		public void SetJwksService(JwksService jwksService)
 		{
-			this.jwksService = jwksService;
+			Interlocked.Exchange(ref this.jwksService, jwksService);
 
 			this.IsCacheExpired = true;
 			this.timer = new Timer(this.cacheDurationSeconds * 1000); // Milliseconds
@@ -75,21 +132,33 @@ namespace com.tmobile.oss.security.taap.jwe
 		/// <returns>Json Web Key</returns>
 		public async Task<JsonWebKey> GetEncryptionKeyAsync()
 		{
-			JsonWebKey jsonWebKey = null;
+			var jsonWebKey = default(JsonWebKey);
+			var publicJsonWebKeyList = new List<JsonWebKey>();
 
 			if (this.IsCacheExpired)
 			{
-				this.publicJsonWebKeyList = await jwksService.GetJsonWebKeyListAsync();
-				this.IsCacheExpired = false;
-				this.timer.Enabled = true;
+				// Only allow one thread at a time to call JWKS service
+				if (Interlocked.Increment(ref this.jwksServiceCallCount) == 1)
+				{
+					try
+					{
+						publicJsonWebKeyList = await jwksService.GetJsonWebKeyListAsync();
+						this.SetPublicJsonWebKeyList(publicJsonWebKeyList);
+						this.IsCacheExpired = false;
+						this.timer.Enabled = true;
+					}
+					finally
+					{
+						Interlocked.Exchange(ref this.jwksServiceCallCount, 0);
+					}
+				}
 			}
 
-			// Get first EC key
-			jsonWebKey = this.publicJsonWebKeyList.FirstOrDefault(k => k.Kty == "EC");
+			publicJsonWebKeyList = this.GetPublicJsonWebKeyList();
+			jsonWebKey = publicJsonWebKeyList.FirstOrDefault(k => k.Kty == "EC");
 			if (jsonWebKey == null)
 			{
-				// If no EC key, then get RSA key
-				jsonWebKey = this.publicJsonWebKeyList.FirstOrDefault(k => k.Kty == "RSA");
+				jsonWebKey = publicJsonWebKeyList.FirstOrDefault(k => k.Kty == "RSA");
 				if (jsonWebKey == null)
 				{
 					throw new EncryptionException("Unable to retrieve public EC or RSA key from JWK store.");
@@ -101,15 +170,14 @@ namespace com.tmobile.oss.security.taap.jwe
 
 		public async Task<JsonWebKey> GetDecryptionKeyAsync(string kid)
 		{
-			var privateJsonWebKey = this.PrivateJsonWebKeyList.Where(p => p.Kid == kid)
-															  .FirstOrDefault();
+			var privateJsonWebKey = this.GetPrivateJsonWebKeyList().Where(p => p.Kid == kid)
+																   .FirstOrDefault();
 			return await Task.FromResult(privateJsonWebKey);
 		}
 
 		public void Dispose()
 		{
 			Dispose(true);
-			//GC.SuppressFinalize(this);
 		}
 
 		protected virtual void Dispose(bool disposing)
@@ -121,7 +189,7 @@ namespace com.tmobile.oss.security.taap.jwe
 					this.timer.Dispose();
 				}
 
-				disposed = true;
+				this.disposed = true;
 			}
 		}
 
