@@ -45,7 +45,7 @@ namespace com.tmobile.oss.security.taap.jwe
             httpClient.Timeout = TimeSpan.FromSeconds(30);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
-            httpClient.BaseAddress = new Uri($"{this.jwkUrl.Scheme}://{this.jwkUrl.Host}");
+            httpClient.BaseAddress = new Uri($"{this.jwkUrl.Scheme}://{this.jwkUrl.Host}:{this.jwkUrl.Port}");
         }
 
         /// <summary>

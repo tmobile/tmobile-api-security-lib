@@ -1,0 +1,29 @@
+﻿@model EncryptedJweViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-6">Encryption example<br />using Asp.Net MVC <br />and .Net Core 3.1</h1>
+    <p>&nbsp;</p>
+</div>
+
+<div class="text-left">
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <p>
+            <label>Enter in a phone number:</label><br />
+            @Html.TextBoxFor(m => m.PhoneNumber)
+            <input type="submit" value="Encrypt">
+        </p>
+    }
+
+    <p>
+        <label>Encrypted JWE:</label><br />
+        <textarea>@Model.EncryptedJwe</textarea>
+    </p>
+    <p>
+        <label>@Model.ErrorMessage</label>
+    </p>
+</div>
