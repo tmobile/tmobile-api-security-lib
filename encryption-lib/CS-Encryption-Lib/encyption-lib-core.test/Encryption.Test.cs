@@ -101,7 +101,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 
 		[TestMethod]
 		[TestCategory("UnitTest")]
-		public async Task EncryptAsync_DecryptAsync_RSA_Success()
+		public async Task EncryptAsync_RSA_Success()
 		{
 			// Arrange
 			string expectedValue = "Test data!";
@@ -114,20 +114,30 @@ namespace com.tmobile.oss.security.taap.jwe.test
 
 			// Assert
 			Assert.AreEqual(expectedValue, actualValue);
-			//this.logger.Verify(x => 
-			//	x.Log(It.Is<LogLevel>(l => l == LogLevel.Debug),
-			//		  It.IsAny<EventId>(),
-			//		  It.Is<It.IsAnyType>((v, t) => true), // v.ToString() == ""),
-			//		  It.IsAny<Exception>(),
-			//		  It.Is<Func<It.IsAnyType, Exception, string>>((v, t) => true)));
+		}
+
+
+		[TestMethod]
+		[TestCategory("UnitTest")]
+		public async Task DecryptAsync_RSA_Success()
+		{
+			// Arrange
+			string expectedValue = "Test data!";
+			var publicEncryption = new Encryption();
+			var privateEncryption = new Encryption();
+
+			// Act
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicRSAKeyResolver.Object, this.logger.Object);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateRSAKeyResolver.Object, this.logger.Object);
+
+			// Assert
+			Assert.AreEqual(expectedValue, actualValue);
 		}
 
 		[TestMethod]
 		[TestCategory("UnitTest")]
-		public async Task EncryptAsync_DecryptAsync_EC_Success()
+		public async Task EncryptAsync_EC_Success()
 		{
-			Assert.Inconclusive("EC not implemented in .NET Core 3.1");
-
 			// Arrange
 			string expectedValue = "Test data!";
 			var publicEncryption = new Encryption();
@@ -137,8 +147,24 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicECKeyResolver.Object, this.logger.Object);
 			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateECKeyResolver.Object, this.logger.Object);
 
-			//// Assert
-			//Assert.AreEqual(expectedValue, actualValue);
+			// Assert
+			Assert.AreEqual(expectedValue, actualValue);
+		}
+
+		[TestMethod]
+		[TestCategory("UnitTest")]
+		public async Task DecryptAsync_EC_Success()
+		{
+			// Arrange
+			string expectedValue = "Test data!";
+			var cipherData = "{cipher}eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiJCN0I0RjVDNy0yQjQ2LTRGNTQtQTgxQS01MUU4QTg4NkIwOTQiLCJrdHkiOiJFQyIsImVwayI6eyJrdHkiOiJFQyIsIngiOiJfLXkyLXd2MEVlOVJpaV84T0tqMXFfZ1E1ZEpTOFJSaDc5dGdCUkJMVFlJIiwieSI6ImVHZmNyNm1EV0VDbDNsMDhYS19WUDRnZ0I4TXJJbmpISVhLY1g3bkkwNTAiLCJjcnYiOiJQLTI1NiJ9fQ.EinqEBKfkX5hryFScL5k4UaP9YW5egKbImOb5aejNNY53t05-FTGUw.kBGxczCrUvkV5y0F.JA67aTm4Cyf4Ig.ZL96UugjU-4W_OZHocX22w";
+			var privateEncryption = new Encryption();
+
+			// Act
+			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateECKeyResolver.Object, this.logger.Object);
+
+			// Assert
+			Assert.AreEqual(expectedValue, actualValue);
 		}
 
 		[TestMethod]
@@ -217,6 +243,38 @@ namespace com.tmobile.oss.security.taap.jwe.test
 
 			// Assert
 			// EncryptionException: "Unsupport Json Web Key type."
+		}
+
+		[TestMethod]
+		[TestCategory("UnitTest")]
+		[ExpectedExceptionMessage(typeof(SerializerException), "Unable to deserializer value.")]
+		public async Task DecryptAsync_SerializerException_ArgumentNullException_Throws()
+		{
+			// Arrange
+			string cipherData = "{cipher}";		 // Missing cipher text
+			var publicEncryption = new Encryption();
+
+			// Act
+			await publicEncryption.DecryptAsync(cipherData, this.publicRSAKeyResolver.Object, this.logger.Object);
+
+			// Assert
+			// SerializerException: "Unable to deserializer value."
+		}
+
+		[TestMethod]
+		[TestCategory("UnitTest")]
+		[ExpectedExceptionMessage(typeof(SerializerException), "Unable to deserializer value.")]
+		public async Task DecryptAsync_SerializerException_ArgumentException_Throws()
+		{
+			// Arrange
+			string cipherData = "{cipher}123456789123456789";      // Incorrect cipher text
+			var publicEncryption = new Encryption();
+
+			// Act
+			await publicEncryption.DecryptAsync(cipherData, this.publicRSAKeyResolver.Object, this.logger.Object);
+
+			// Assert
+			// SerializerException: "Unable to deserializer value."
 		}
 
 		[TestMethod]

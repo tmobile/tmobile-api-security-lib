@@ -6,6 +6,10 @@ textarea {
     width: 95%;
 }
 
+label.errorMessage {
+    color: red;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

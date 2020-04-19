@@ -10,6 +10,9 @@ namespace Example_Asp.Net_Mvc_WebApplication.Models
         [DisplayName("Encrypted JWE:")]
         public string EncryptedJwe { get; set; }
 
+        [DisplayName("Decrypted JWE:")]
+        public string DecryptedPhoneNumber { get; set; }
+
         [DisplayName("Error message:")]
         public string ErrorMessage { get; set; }
     }

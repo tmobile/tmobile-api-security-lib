@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encription-Library", "encyption-lib\Encription-Library.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib", "encyption-lib\encription-lib.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encription-Library.Test", "encyption-lib.test\Encription-Library.Test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib.test", "encyption-lib.test\encription-lib.test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

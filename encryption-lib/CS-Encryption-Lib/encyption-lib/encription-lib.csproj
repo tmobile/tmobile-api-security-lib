@@ -103,6 +103,7 @@
     <Compile Include="Encryption.cs" />
     <Compile Include="Exception\EncryptionException.cs" />
     <Compile Include="Exception\InvalidHeaderException.cs" />
+    <Compile Include="Exception\SerializerException.cs" />
     <Compile Include="IEncryption.cs" />
     <Compile Include="IKeyResolver.cs" />
     <Compile Include="KeyResolver.cs" />

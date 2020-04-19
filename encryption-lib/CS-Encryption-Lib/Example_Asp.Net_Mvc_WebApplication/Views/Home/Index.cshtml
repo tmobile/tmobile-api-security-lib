@@ -4,26 +4,29 @@
 }
 
 <div class="text-center">
-    <h1 class="display-6">Encryption example<br />using Asp.Net MVC <br />and .Net Core 3.1</h1>
-    <p>&nbsp;</p>
+    <h2 class="display-6">JWE Encryption example using Asp.Net MVC and .Net Core 3.1</h2>
 </div>
 
 <div class="text-left">
 
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "encryptionForm" }))
     {
         <p>
+            <label class="errorMessage">@Model.ErrorMessage</label>
+        </p>
+        <p>
             <label>Enter in a phone number:</label><br />
-            @Html.TextBoxFor(m => m.PhoneNumber)
-            <input type="submit" value="Encrypt">
+            @Html.TextBoxFor(m => m.PhoneNumber)<br />
+            <input type="submit" name="submitButton" value="Encrypt">
+        </p>
+        <p>
+            <label>Encrypted JWE:</label><br />
+            <textarea name="encryptedJwe" form="encryptionForm">@Model.EncryptedJwe</textarea>
+            <input type="submit" name="submitButton" value="Decrypt">
+        </p>
+        <p>
+            <label>Decrypted phone number:</label><br />
+            <input type="text" name="decryptedPhoneNumber" value="@Model.DecryptedPhoneNumber" />
         </p>
     }
-
-    <p>
-        <label>Encrypted JWE:</label><br />
-        <textarea>@Model.EncryptedJwe</textarea>
-    </p>
-    <p>
-        <label>@Model.ErrorMessage</label>
-    </p>
 </div>

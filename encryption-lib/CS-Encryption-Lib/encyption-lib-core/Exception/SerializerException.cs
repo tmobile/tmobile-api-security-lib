@@ -18,14 +18,15 @@ using System;
 
 namespace com.tmobile.oss.security.taap.jwe
 {
-	public class InvalidHeaderException : EncryptionException
-	{
-		public InvalidHeaderException(string message) : base(message)
-		{
-		}
-
-        public InvalidHeaderException(string message, Exception ex) : base(message, ex)
+    public class SerializerException : EncryptionException
+    {
+        public SerializerException(string message) : base(message)
         {
         }
+
+        public SerializerException(string message, Exception ex) : base(message, ex)
+        {
+        }
+
     }
 }

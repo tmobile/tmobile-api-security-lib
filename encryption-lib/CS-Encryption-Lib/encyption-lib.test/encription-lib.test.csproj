@@ -146,9 +146,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\encyption-lib\Encription-Library.csproj">
+    <ProjectReference Include="..\encyption-lib\encription-lib.csproj">
       <Project>{3dd5cf74-e943-450e-a63e-095021e1b343}</Project>
-      <Name>Encription-Library</Name>
+      <Name>encription-lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

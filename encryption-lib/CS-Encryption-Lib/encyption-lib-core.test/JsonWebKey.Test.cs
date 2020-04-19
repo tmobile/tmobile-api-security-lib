@@ -29,6 +29,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var jwksJson = File.ReadAllText(@"TestData\JwksRSAPublic.json");
+
 			// Act
 			var jwks = JsonConvert.DeserializeObject<Jwks>(jwksJson);
 			var jsonWebKey = jwks.Keys[0];
@@ -45,6 +46,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var jsonWebKeyJson = File.ReadAllText(@"TestData\RSAPrivate.json");
+
 			// Act
 			var jsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(jsonWebKeyJson);
 
@@ -66,6 +68,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var jwksJson = File.ReadAllText(@"TestData\JwksECPublic.json");
+
 			// Act
 			var jwks = JsonConvert.DeserializeObject<Jwks>(jwksJson);
 			var jsonWebKey = jwks.Keys[0];
@@ -103,6 +106,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var jwksJson = File.ReadAllText(@"TestData\JwksOctPublic.json");
+
 			// Act
 			var jwks = JsonConvert.DeserializeObject<Jwks>(jwksJson);
 			var jsonWebKey = jwks.Keys[0];
@@ -119,6 +123,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var jsonWebKeyJson = File.ReadAllText(@"TestData\OctPrivate.json");
+
 			// Act
 			var jsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(jsonWebKeyJson);
 

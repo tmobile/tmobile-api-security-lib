@@ -46,12 +46,12 @@ namespace com.tmobile.oss.security.taap.jwe
         /// <returns>JWE string</returns>
         public async Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger)
         {
-            JsonWebKey jsonWebKey = null;
+            JsonWebKey publicJsonWebKey = null;
 
             try
             {
-                jsonWebKey = await keyResolver.GetEncryptionKeyAsync();
-                if (jsonWebKey == null)
+                publicJsonWebKey = await keyResolver.GetEncryptionKeyAsync();
+                if (publicJsonWebKey == null)
                 {
                     throw new EncryptionException(string.Format("Encryption key not found by KeyResolver."));
                 }
@@ -59,22 +59,22 @@ namespace com.tmobile.oss.security.taap.jwe
                 var encodedJwe = string.Empty;
                 var extraHeaders = new Dictionary<string, object>
                 {
-                    { "kid", jsonWebKey.Kid },
-                    { "kty", jsonWebKey.Kty }
+                    { "kid", publicJsonWebKey.Kid },
+                    { "kty", publicJsonWebKey.Kty }
                 };
-                if (jsonWebKey.Kty == "EC")
+                if (publicJsonWebKey.Kty == "EC")
                 {
-                    var xByteArray = Jose.Base64Url.Decode(jsonWebKey.X);
-                    var yByteArray = Jose.Base64Url.Decode(jsonWebKey.Y);
+                    var xByteArray = Jose.Base64Url.Decode(publicJsonWebKey.X);
+                    var yByteArray = Jose.Base64Url.Decode(publicJsonWebKey.Y);
                     var eccKey = EccKey.New(xByteArray, yByteArray, null, CngKeyUsages.KeyAgreement);
                     encodedJwe = Jose.JWT.Encode(value, eccKey, Jose.JweAlgorithm.ECDH_ES_A256KW, Jose.JweEncryption.A256GCM, null, extraHeaders, null);
                 }
-                else if (jsonWebKey.Kty == "RSA")
+                else if (publicJsonWebKey.Kty == "RSA")
                 {
                     var keyParams = new RSAParameters
                     {
-                        Exponent = Jose.Base64Url.Decode(jsonWebKey.E),
-                        Modulus = Jose.Base64Url.Decode(jsonWebKey.N)
+                        Exponent = Jose.Base64Url.Decode(publicJsonWebKey.E),
+                        Modulus = Jose.Base64Url.Decode(publicJsonWebKey.N)
                     };
                     var rsa = RSA.Create();
                     rsa.ImportParameters(keyParams);
@@ -85,19 +85,45 @@ namespace com.tmobile.oss.security.taap.jwe
                     throw new EncryptionException("Unsupport Json Web Key type.");
                 }
 
-                logger.LogDebug("Encrypting data with keyid: {0}, type: {1}, value: {2}", jsonWebKey.Kid, jsonWebKey.Kty, encodedJwe);
+                logger.LogDebug("Encrypting data with keyid: {0}, type: {1}", publicJsonWebKey.Kid, publicJsonWebKey.Kty);
 
                 return Constants.CIPHER_HEADER + encodedJwe;
             }
+            catch (Jose.EncryptionException iaEx)
+            {
+                if (publicJsonWebKey == null)
+                {
+                    logger.LogError(iaEx, "An Encryption Exceptionn occurred.");
+                }
+                else
+                {
+                    logger.LogError(iaEx, "An Encryption Exceptionn occurred. keyid: {0}, type: {1}", publicJsonWebKey.Kid, publicJsonWebKey.Kty);
+                }
+
+                throw new EncryptionException("Unable to decrypt data.", iaEx);
+            }
+            catch (Jose.InvalidAlgorithmException iaEx)
+            {
+                if (publicJsonWebKey == null)
+                {
+                    logger.LogError(iaEx, "An Invalid Algorithm Exception occurred.");
+                }
+                else
+                {
+                    logger.LogError(iaEx, "An Invalid Algorithm Exception occurred. keyid: {0}, type: {1}", publicJsonWebKey.Kid, publicJsonWebKey.Kty);
+                }
+
+                throw new EncryptionException("Unable to decrypt data.", iaEx);
+            }
             catch (EncryptionException eeEx)
             {
-                if (jsonWebKey == null)
+                if (publicJsonWebKey == null)
                 {
                     logger.LogError(eeEx, "An Encryption Exception Occurred: Value: {0}", value);
                 }
                 else
                 {
-                    logger.LogError(eeEx, "An Encryption Exception Occurred: Keyid: {0}, type: {1}", jsonWebKey.Kid, jsonWebKey.Kty);
+                    logger.LogError(eeEx, "An Encryption Exception Occurred: Keyid: {0}, type: {1}", publicJsonWebKey.Kid, publicJsonWebKey.Kty);
                 }
 
                 throw;
@@ -110,7 +136,7 @@ namespace com.tmobile.oss.security.taap.jwe
                 }
                 else
                 {
-                    logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", jsonWebKey.Kid, jsonWebKey.Kty);
+                    logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", publicJsonWebKey.Kid, publicJsonWebKey.Kty);
                     throw new EncryptionException("Unable to encrypt data.", ex);
                 }
             }
@@ -129,17 +155,29 @@ namespace com.tmobile.oss.security.taap.jwe
 
             try
             {
-                if (!cipher.StartsWith(Constants.CIPHER_HEADER, StringComparison.Ordinal))
+                if (string.IsNullOrEmpty(cipher) ||
+                   !cipher.StartsWith(Constants.CIPHER_HEADER, StringComparison.Ordinal))
                 {
                     throw new InvalidHeaderException("Invalid encryption header.");
                 }
 
                 var value = default(string);
-
-                cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
-                var cipherArray = cipher.Split(new char[] { '.' });
-                var json = Encoding.UTF8.GetString(Jose.Base64Url.Decode(cipherArray[0]));
-                var requestedprivateJsonWebKey = new JsonWebKey(json);
+                var requestedprivateJsonWebKey = default(JsonWebKey);
+                try
+                {
+                    cipher = cipher.Substring(Constants.CIPHER_HEADER.Length);
+                    var cipherArray = cipher.Split(new char[] { '.' });
+                    var json = Encoding.UTF8.GetString(Jose.Base64Url.Decode(cipherArray[0]));
+                    requestedprivateJsonWebKey = new JsonWebKey(json);
+                }
+                catch(ArgumentNullException anEx)
+                {
+                    throw new SerializerException("Unable to deserializer value.", anEx);
+                }
+                catch (ArgumentException aEx)
+                {
+                    throw new SerializerException("Unable to deserializer value.", aEx);
+                }
 
                 privateJsonWebKey = await keyResolver.GetDecryptionKeyAsync(requestedprivateJsonWebKey.Kid);
                 if (privateJsonWebKey == null)
@@ -182,15 +220,54 @@ namespace com.tmobile.oss.security.taap.jwe
 
                 return value;
             }
+            catch(Jose.EncryptionException iaEx)
+            {
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(iaEx, "An Encryption Exceptionn occurred.");
+                }
+                else
+                {
+                    logger.LogError(iaEx, "An Encryption Exceptionn occurred. keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                }
+
+                throw new EncryptionException("Unable to decrypt data.", iaEx);
+            }
+            catch (Jose.InvalidAlgorithmException iaEx)
+            {
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(iaEx, "An Invalid Algorithm Exception occurred.");
+                }
+                else
+                {
+                    logger.LogError(iaEx, "An Invalid Algorithm Exception occurred. keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                }
+
+                throw new EncryptionException("Unable to decrypt data.", iaEx);
+            }
             catch (InvalidHeaderException ihEx)
             {
                 if (privateJsonWebKey == null)
                 {
-                    logger.LogError(ihEx, "An Invalid Header Exception Occurred: cipher: {0}", cipher);
+                    logger.LogError(ihEx, "An Invalid Header Exception occurred.");
                 }
                 else
                 {
-                    logger.LogError(ihEx, "An Invalid Header Exception Occurred: keyid: {0}, type: {1}, cipher: {2}", privateJsonWebKey.Kid, privateJsonWebKey.Kty, cipher);
+                    logger.LogError(ihEx, "An Invalid Header Exception occurred. keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                }
+
+                throw;
+            }
+            catch (SerializerException sEx)
+            {
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(sEx.InnerException, "Unable to deserializer value.");
+                }
+                else
+                {
+                    logger.LogError(sEx, "Unable to deserializer value.: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
                 }
 
                 throw;
@@ -199,7 +276,7 @@ namespace com.tmobile.oss.security.taap.jwe
             {
                 if (privateJsonWebKey == null)
                 {
-                    logger.LogError(eEx, "An Decryption Exception Occurred: cipher: {0}", cipher);
+                    logger.LogError(eEx, "An Decryption Exception Occurred");
                 }
                 else
                 {
@@ -210,7 +287,15 @@ namespace com.tmobile.oss.security.taap.jwe
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                if (privateJsonWebKey == null)
+                {
+                    logger.LogError(ex, "An Decryption Exception Occurred");
+                }
+                else
+                {
+                    logger.LogError(ex, "An Exception Occurred: Keyid: {0}, type: {1}", privateJsonWebKey.Kid, privateJsonWebKey.Kty);
+                }
+
                 throw new EncryptionException("Unable to decrypt data.", ex);
             }
         }

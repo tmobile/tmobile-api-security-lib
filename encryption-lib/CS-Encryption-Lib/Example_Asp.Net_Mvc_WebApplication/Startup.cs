@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net.Http;
 
 namespace Example_Asp.Net_Mvc_WebApplication
 {
@@ -29,9 +30,16 @@ namespace Example_Asp.Net_Mvc_WebApplication
             services.AddOptions();                             
             var encryptionOptionsSection = Configuration.GetSection(nameof(EncryptionOptions));
             services.Configure<EncryptionOptions>(encryptionOptionsSection);
-            
-            // IKeyResolver
             var encryptionOptions = encryptionOptionsSection.Get<EncryptionOptions>();
+
+            // IJwksService
+            services.AddSingleton(serviceProvider =>
+            {
+                var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
+                return new JwksService(httpClientFactory.CreateClient(), encryptionOptions.JwksUrl);
+            });
+
+            // IKeyResolver
             services.AddSingleton<IKeyResolver>(r => new KeyResolver(encryptionOptions.CacheDurationSeconds));
 
             // IEncryption

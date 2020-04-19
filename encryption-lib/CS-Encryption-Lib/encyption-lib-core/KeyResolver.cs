@@ -15,8 +15,10 @@
  */
 
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -143,8 +145,15 @@ namespace com.tmobile.oss.security.taap.jwe
 				{
 					try
 					{
+						// Public RSA key
 						publicJsonWebKeyList = await JwksService.GetJsonWebKeyListAsync();
 						this.SetPublicJsonWebKeyList(publicJsonWebKeyList);
+
+						// Private RSA key
+						var privateJsonWebKeyJson = File.ReadAllText(@"TestData\RSAPrivate.json");
+						var privateJsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(privateJsonWebKeyJson);
+						this.SetPrivateJsonWebKeyList(new List<JsonWebKey> { privateJsonWebKey });
+
 						IsCacheExpired = false;
 						Timer.Enabled = true;
 					}
