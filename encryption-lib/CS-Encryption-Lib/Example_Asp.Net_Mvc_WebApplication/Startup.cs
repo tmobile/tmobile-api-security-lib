@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 
 namespace Example_Asp.Net_Mvc_WebApplication
@@ -23,10 +27,10 @@ namespace Example_Asp.Net_Mvc_WebApplication
             // IHttpClientFactory
             services.AddHttpClient();                           
 
-            // ILogger<HomeService> 
+            // ILogger
             services.AddLogging();                              
 
-            // IOptions<EncryptionOptions>
+            // IOptions
             services.AddOptions();                             
             var encryptionOptionsSection = Configuration.GetSection(nameof(EncryptionOptions));
             services.Configure<EncryptionOptions>(encryptionOptionsSection);
@@ -40,7 +44,18 @@ namespace Example_Asp.Net_Mvc_WebApplication
             });
 
             // IKeyResolver
-            services.AddSingleton<IKeyResolver>(r => new KeyResolver(encryptionOptions.CacheDurationSeconds));
+            services.AddSingleton(serviceProvider =>
+            {
+                var jwksService = serviceProvider.GetService<JwksService>();
+                var privateJsonWebKeyList = new List<JsonWebKey>();
+
+                // TODO: Get private key from KeyVault
+                var privateRsaJson = File.ReadAllText(@"TestData\RsaPrivate.json");
+                var privateRsaJsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(privateRsaJson);
+                privateJsonWebKeyList.Add(privateRsaJsonWebKey);
+
+                return new KeyResolver(privateJsonWebKeyList, jwksService, encryptionOptions.CacheDurationSeconds);
+            });
 
             // IEncryption
             services.AddTransient<IEncryption, Encryption>();

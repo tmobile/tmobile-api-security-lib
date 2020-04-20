@@ -17,33 +17,25 @@ namespace Example_Asp.Net_Mvc_WebApplication.Controllers
         private readonly ILogger<HomeController> logger;
         private readonly IOptions<EncryptionOptions> encryptionOptions;
         private readonly IEncryption encryption;
-        private IKeyResolver keyResolver;
-        private JwksService jwksService;
+        private KeyResolver keyResolver;
 
         public HomeController(
             IHttpClientFactory httpClientFactory, 
             ILogger<HomeController> logger, 
             IOptions<EncryptionOptions> encryptionOptions,
             IEncryption encryption, 
-            IKeyResolver keyResolver,
-            JwksService jwksService)
+            KeyResolver keyResolver)
         {
             this.httpClientFactory = httpClientFactory;
             this.logger = logger;
             this.encryptionOptions = encryptionOptions;
             this.encryption = encryption;
             this.keyResolver = keyResolver;
-            this.jwksService = jwksService;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            if(this.keyResolver.GetJwksService() == null)
-            {
-                this.keyResolver.SetJwksService(jwksService);
-            }
-
             var encryptedJweViewModel = new EncryptedJweViewModel();
             encryptedJweViewModel.PhoneNumber = "(555) 555-5555";
             encryptedJweViewModel.ErrorMessage = " ";

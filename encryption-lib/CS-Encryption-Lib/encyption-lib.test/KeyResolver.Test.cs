@@ -34,6 +34,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		private Mock<JwksService> publicRsaJwksService;
 		private Mock<JwksService> publicEcJwksService;
 		private Mock<JwksService> publicOctJwksService;
+
 		private long cacheDurationSeconds;
 
 		[TestInitialize]
@@ -44,8 +45,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			this.cacheDurationSeconds = 3600;
 
 			// Public RSA Jwks
-			var publicRsaJwksJson = File.ReadAllText(@"TestData\JwksRSAPublic.json")
-										.Replace(Environment.NewLine, string.Empty);
+			var publicRsaJwksJson = File.ReadAllText(@"TestData\JwksRSAPublic.json");
 			var publicRsaJwks = JsonConvert.DeserializeObject<Jwks>(publicRsaJwksJson);
 			var publicRsaJsoneWebKeyList = new List<JsonWebKey>();
 			publicRsaJsoneWebKeyList.AddRange(publicRsaJwks.Keys);
@@ -54,8 +54,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 									 .Returns(Task.FromResult(publicRsaJsoneWebKeyList));
 
 			// Public EC Jwks
-			var publicEcJwksJson = File.ReadAllText(@"TestData\JwksECPublic.json")
-									   .Replace(Environment.NewLine, string.Empty);
+			var publicEcJwksJson = File.ReadAllText(@"TestData\JwksECPublic.json");
 			var publicEcJwks = JsonConvert.DeserializeObject<Jwks>(publicEcJwksJson);
 			var publicEcJsoneWebKeyList = new List<JsonWebKey>(publicEcJwks.Keys);
 			this.publicEcJwksService = new Mock<JwksService>(httpClient, jwkUrl);
@@ -63,8 +62,7 @@ namespace com.tmobile.oss.security.taap.jwe.test
 									.Returns(Task.FromResult(publicEcJsoneWebKeyList));
 
 			// Public Oct Jwks
-			var publicOctJwksJson = File.ReadAllText(@"TestData\JwksOctPublic.json")
-										.Replace(Environment.NewLine, string.Empty);
+			var publicOctJwksJson = File.ReadAllText(@"TestData\JwksOctPublic.json");
 			var publicOctJwks = JsonConvert.DeserializeObject<Jwks>(publicOctJwksJson);
 			var publicOctJsoneWebKeyList = new List<JsonWebKey>(publicOctJwks.Keys);
 			this.publicOctJwksService = new Mock<JwksService>(httpClient, jwkUrl);
@@ -73,14 +71,12 @@ namespace com.tmobile.oss.security.taap.jwe.test
 
 			// Private RSA Key
 			this.privateJsonWebKeyList = new List<JsonWebKey>();
-			var privateRsaJson = File.ReadAllText(@"TestData\RsaPrivate.json")
-									 .Replace(Environment.NewLine, string.Empty);
+			var privateRsaJson = File.ReadAllText(@"TestData\RsaPrivate.json");
 			var privateRsaJsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(privateRsaJson);
 			this.privateJsonWebKeyList.Add(privateRsaJsonWebKey);
 
 			// Private EC key
-			var privateEcJson = File.ReadAllText(@"TestData\EcPrivate.json")
-									 .Replace(Environment.NewLine, string.Empty);
+			var privateEcJson = File.ReadAllText(@"TestData\EcPrivate.json");
 			var privateEcJsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(privateEcJson);
 			this.privateJsonWebKeyList.Add(privateEcJsonWebKey);
 
@@ -92,8 +88,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		public async Task GetEncryptionKeyAsync_PublicEC_Success()
 		{
 			// Arrange
-			var keyResolver = new KeyResolver(this.cacheDurationSeconds);
-			keyResolver.SetJwksService(this.publicEcJwksService.Object);
+			var keyResolver = new KeyResolver(
+				new List<JsonWebKey>(),
+				this.publicEcJwksService.Object,
+				this.cacheDurationSeconds);
 
 			// Act
 			var jsonWebKey = await keyResolver.GetEncryptionKeyAsync();
@@ -116,8 +114,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		public async Task GetEncryptionKeyAsync_PublicRSA_Success()
 		{
 			// Arrange
-			var keyResolver = new KeyResolver(this.cacheDurationSeconds);
-			keyResolver.SetJwksService(this.publicRsaJwksService.Object);
+			var keyResolver = new KeyResolver(
+				new List<JsonWebKey>(),
+				this.publicRsaJwksService.Object,
+				this.cacheDurationSeconds);
 
 			// Act
 			var jsonWebKey = await keyResolver.GetEncryptionKeyAsync();
@@ -140,14 +140,16 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		public async Task GetEncryptionKeyAsync_PublicRSA_NoKeysFound_Throws()
 		{
 			// Arrange
-			var keyResolver = new KeyResolver(this.cacheDurationSeconds);
-			keyResolver.SetJwksService(this.publicOctJwksService.Object);  // Get Oct key 
+			var keyResolver = new KeyResolver(
+				new List<JsonWebKey>(),
+				this.publicOctJwksService.Object,  // Get Oct key 
+				this.cacheDurationSeconds);
 
 			// Act
-			await keyResolver.GetEncryptionKeyAsync();
+			var jsonWebKey = await keyResolver.GetEncryptionKeyAsync();
 
 			// Assert
-			// EncryptionException: EncryptionException
+			// EncryptionException: "Unable to retrieve public EC or RSA key from JWK store.")]
 		}
 
 		[TestMethod]
@@ -156,9 +158,11 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			var kid = "3072F4C6-193D-481B-BDD2-0F09F5A7DDFB";
-			var keyResolver = new KeyResolver(this.cacheDurationSeconds);
-			keyResolver.SetPrivateJsonWebKeyList(this.privateJsonWebKeyList);
-			keyResolver.SetJwksService(this.publicEcJwksService.Object);
+
+			var keyResolver = new KeyResolver(
+				this.privateJsonWebKeyList,
+				this.publicRsaJwksService.Object,
+				this.cacheDurationSeconds);
 
 			// Act
 			var jsonWebKey = await keyResolver.GetDecryptionKeyAsync(kid);
@@ -180,8 +184,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			int cacheDurationSeconds = 2;
-			var keyResolver = new KeyResolver(cacheDurationSeconds);
-			keyResolver.SetJwksService(this.publicRsaJwksService.Object);
+			var keyResolver = new KeyResolver(
+				new List<JsonWebKey>(),
+				this.publicRsaJwksService.Object,
+				cacheDurationSeconds);
 
 			// Act
 			var jsonWebKey = await keyResolver.GetEncryptionKeyAsync(); // Initial call to JWKS

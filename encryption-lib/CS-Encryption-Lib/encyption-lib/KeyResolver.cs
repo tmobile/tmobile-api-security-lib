@@ -15,10 +15,8 @@
  */
 
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -29,15 +27,20 @@ namespace com.tmobile.oss.security.taap.jwe
 	/// <summary>
 	/// KeyResolver. Inject as Singleton
 	/// </summary>
-	public class KeyResolver : IKeyResolver
+	public class KeyResolver : IKeyResolver, IDisposable
 	{
 		private static List<JsonWebKey> PublicJsonWebKeyList;
 		private static List<JsonWebKey> PrivateJsonWebKeyList;
 		private static bool IsCacheExpired;
 		private static int JwksServiceCallCount;
 		private static JwksService JwksService;
-		private static Timer Timer;
 
+		private Timer timer;
+		private bool isDisposed;
+
+		/// <summary>
+		/// Static Constructor
+		/// </summary>
 		static KeyResolver()
 		{
 			PublicJsonWebKeyList = new List<JsonWebKey>();
@@ -46,10 +49,6 @@ namespace com.tmobile.oss.security.taap.jwe
 
 			JwksService = default(JwksService);
 			JwksServiceCallCount = 0;
-			Timer = new Timer();
-			Timer.Elapsed += OnTimedEvent;
-			Timer.AutoReset = false;
-			Timer.Enabled = false;
 		}
 
 		/// <summary>
@@ -57,15 +56,19 @@ namespace com.tmobile.oss.security.taap.jwe
 		/// </summary>
 		private KeyResolver()
 		{
+			this.timer = new Timer();
+			this.timer.Elapsed += OnTimedEvent;
+			this.timer.AutoReset = false;
+			this.timer.Enabled = false;
 		}
 
-		/// <summary>
-		/// Custom Constructor
-		/// </summary>
-		/// <param name="cacheDurationSeconds">Cache Duration in Seconds</param>
-		public KeyResolver(long cacheDurationSeconds) : this()
+		public KeyResolver(List<JsonWebKey> privateJsonWebKeyList, JwksService jwksService, long cacheDurationSeconds) : this()
 		{
-			Timer.Interval = cacheDurationSeconds * 1000;
+			PrivateJsonWebKeyList = privateJsonWebKeyList;
+			JwksService = jwksService;
+
+			this.timer.Interval = cacheDurationSeconds * 1000;
+			IsCacheExpired = true;
 		}
 
 		/// <summary>
@@ -109,27 +112,6 @@ namespace com.tmobile.oss.security.taap.jwe
 		}
 
 		/// <summary>
-		/// Get JwksService
-		/// </summary>
-		/// <returns>JwksService</returns>
-		public JwksService GetJwksService()
-		{
-			JwksService jwksService = null;
-			Interlocked.Exchange(ref jwksService, JwksService);
-			return jwksService;
-		}
-
-		/// <summary>
-		/// Set JwksService
-		/// </summary>
-		/// <param name="jwksService">JwksService</param>
-		public void SetJwksService(JwksService jwksService)
-		{
-			Interlocked.Exchange(ref JwksService, jwksService);
-			IsCacheExpired = true;
-		}
-
-		/// <summary>
 		/// Get Encryption Key Async
 		/// </summary>
 		/// <returns>Json Web Key</returns>
@@ -149,13 +131,8 @@ namespace com.tmobile.oss.security.taap.jwe
 						publicJsonWebKeyList = await JwksService.GetJsonWebKeyListAsync();
 						this.SetPublicJsonWebKeyList(publicJsonWebKeyList);
 
-						// Private RSA key
-						var privateJsonWebKeyJson = File.ReadAllText(@"TestData\RSAPrivate.json");
-						var privateJsonWebKey = JsonConvert.DeserializeObject<JsonWebKey>(privateJsonWebKeyJson);
-						this.SetPrivateJsonWebKeyList(new List<JsonWebKey> { privateJsonWebKey });
-
 						IsCacheExpired = false;
-						Timer.Enabled = true;
+						this.timer.Enabled = true;
 					}
 					finally
 					{
@@ -197,10 +174,35 @@ namespace com.tmobile.oss.security.taap.jwe
 		/// </summary>
 		/// <param name="source">Timer</param>
 		/// <param name="e">Elapsed Event Args</param>
-		private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+		private void OnTimedEvent(Object source, ElapsedEventArgs e)
 		{
 			IsCacheExpired = true;
-			Timer.Enabled = false;
+			this.timer.Enabled = false;
+		}
+
+		/// <summary>
+		/// Dispose
+		/// </summary>
+		public void Dispose()
+		{
+			Dispose(true);
+		}
+
+		/// <summary>
+		/// Dispose the Timer
+		/// </summary>
+		/// <param name="disposing">Disposing</param>
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.isDisposed)
+			{
+				if (disposing)
+				{
+					this.timer.Dispose();
+				}
+
+				this.isDisposed = true;
+			}
 		}
 	}
 }
