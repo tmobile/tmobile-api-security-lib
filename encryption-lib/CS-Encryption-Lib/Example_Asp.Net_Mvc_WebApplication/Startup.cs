@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -36,14 +37,14 @@ namespace Example_Asp.Net_Mvc_WebApplication
             services.Configure<EncryptionOptions>(encryptionOptionsSection);
             var encryptionOptions = encryptionOptionsSection.Get<EncryptionOptions>();
 
-            // IJwksService
+            // JwksService
             services.AddSingleton(serviceProvider =>
             {
                 var httpClientFactory = serviceProvider.GetService<IHttpClientFactory>();
                 return new JwksService(httpClientFactory.CreateClient(), encryptionOptions.JwksUrl);
             });
 
-            // IKeyResolver
+            // KeyResolver
             services.AddSingleton(serviceProvider =>
             {
                 var jwksService = serviceProvider.GetService<JwksService>();
@@ -57,8 +58,13 @@ namespace Example_Asp.Net_Mvc_WebApplication
                 return new KeyResolver(privateJsonWebKeyList, jwksService, encryptionOptions.CacheDurationSeconds);
             });
 
-            // IEncryption
-            services.AddTransient<IEncryption, Encryption>();
+            // Encryption
+            services.AddTransient(serviceProvider =>
+            {
+                var keyResolver = serviceProvider.GetService<KeyResolver>();
+                var encryptionLogger = serviceProvider.GetService<ILogger<Encryption>>();
+                return new Encryption(keyResolver, encryptionLogger);
+            });
 
             services.AddControllersWithViews();
         }

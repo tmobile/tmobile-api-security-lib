@@ -30,27 +30,39 @@ namespace com.tmobile.oss.security.taap.jwe
     /// </summary>
     public class Encryption : IEncryption
     {
+        IKeyResolver keyResolver;
+        ILogger logger;
+
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Encryption()
+        private Encryption()
         {
+        }
+
+        /// <summary>
+        /// Encryption
+        /// </summary>
+        /// <param name="keyResolver">Key Resolver</param>
+        /// <param name="logger">Logger</param>
+        public Encryption(IKeyResolver keyResolver, ILogger logger) : this()
+        {
+            this.keyResolver = keyResolver;
+            this.logger = logger;
         }
 
         /// <summary>
         /// Encrypt Async
         /// </summary>
         /// <param name="value">The value to encrypt as JWE string</param>
-        /// <param name="keyResolver">Key Resolver</param>
-        /// <param name="logger">Logger</param>
         /// <returns>JWE string</returns>
-        public async Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger)
+        public async Task<string> EncryptAsync(string value)
         {
             JsonWebKey publicJsonWebKey = null;
 
             try
             {
-                publicJsonWebKey = await keyResolver.GetEncryptionKeyAsync();
+                publicJsonWebKey = await this.keyResolver.GetEncryptionKeyAsync();
                 if (publicJsonWebKey == null)
                 {
                     throw new EncryptionException(string.Format("Encryption key not found by KeyResolver."));
@@ -146,10 +158,8 @@ namespace com.tmobile.oss.security.taap.jwe
         /// Decrypt Async
         /// </summary>
         /// <param name="cipher">Cipher string</param>
-        /// <param name="keyResolver">Key Resolver</param>
-		/// <param name="logger">Logger</param>
         /// <returns>Descrypted string</returns>
-        public async Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger)
+        public async Task<string> DecryptAsync(string cipher)
         {
             var privateJsonWebKey = default(JsonWebKey);
 
@@ -179,7 +189,7 @@ namespace com.tmobile.oss.security.taap.jwe
                     throw new SerializerException("Unable to deserializer value.", aEx);
                 }
 
-                privateJsonWebKey = await keyResolver.GetDecryptionKeyAsync(requestedprivateJsonWebKey.Kid);
+                privateJsonWebKey = await this.keyResolver.GetDecryptionKeyAsync(requestedprivateJsonWebKey.Kid);
                 if (privateJsonWebKey == null)
                 {
                     throw new EncryptionException(string.Format("Decryption key not found. ID: '{0}'.", requestedprivateJsonWebKey.Kid));

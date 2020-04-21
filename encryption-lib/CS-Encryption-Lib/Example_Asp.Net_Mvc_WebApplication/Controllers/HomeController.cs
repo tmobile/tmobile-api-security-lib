@@ -13,24 +13,11 @@ namespace Example_Asp.Net_Mvc_WebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IHttpClientFactory httpClientFactory;
-        private readonly ILogger<HomeController> logger;
-        private readonly IOptions<EncryptionOptions> encryptionOptions;
-        private readonly IEncryption encryption;
-        private KeyResolver keyResolver;
+        private readonly Encryption encryption;
 
-        public HomeController(
-            IHttpClientFactory httpClientFactory, 
-            ILogger<HomeController> logger, 
-            IOptions<EncryptionOptions> encryptionOptions,
-            IEncryption encryption, 
-            KeyResolver keyResolver)
+        public HomeController(Encryption encryption)
         {
-            this.httpClientFactory = httpClientFactory;
-            this.logger = logger;
-            this.encryptionOptions = encryptionOptions;
             this.encryption = encryption;
-            this.keyResolver = keyResolver;
         }
 
         [HttpGet]
@@ -51,11 +38,11 @@ namespace Example_Asp.Net_Mvc_WebApplication.Controllers
             {
                 if (submitButton == "Encrypt")
                 {
-                    encryptedJweViewModel.EncryptedJwe = await this.encryption.EncryptAsync(encryptedJweViewModel.PhoneNumber, this.keyResolver, this.logger);
+                    encryptedJweViewModel.EncryptedJwe = await this.encryption.EncryptAsync(encryptedJweViewModel.PhoneNumber);
                 }
                 else if (submitButton == "Decrypt")
                 {
-                    encryptedJweViewModel.DecryptedPhoneNumber = await this.encryption.DecryptAsync(encryptedJwe, this.keyResolver, this.logger);
+                    encryptedJweViewModel.DecryptedPhoneNumber = await this.encryption.DecryptAsync(encryptedJwe);
                 }
             }
             catch(Exception ex)

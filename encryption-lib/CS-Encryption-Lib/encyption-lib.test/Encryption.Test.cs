@@ -105,12 +105,12 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
-			var privateEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
+			var privateEncryption = new Encryption(this.privateRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicRSAKeyResolver.Object, this.logger.Object);
-			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateRSAKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			Assert.AreEqual(expectedValue, actualValue);
@@ -123,12 +123,12 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
-			var privateEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
+			var privateEncryption = new Encryption(this.privateRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicRSAKeyResolver.Object, this.logger.Object);
-			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateRSAKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			Assert.AreEqual(expectedValue, actualValue);
@@ -140,12 +140,13 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
-			var privateEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicECKeyResolver.Object, this.logger.Object);
+			var privateEncryption = new Encryption(this.privateECKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicECKeyResolver.Object, this.logger.Object);
-			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateECKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData);
+
 
 			// Assert
 			Assert.AreEqual(expectedValue, actualValue);
@@ -158,10 +159,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			// Arrange
 			string expectedValue = "Test data!";
 			var cipherData = "{cipher}eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiJCN0I0RjVDNy0yQjQ2LTRGNTQtQTgxQS01MUU4QTg4NkIwOTQiLCJrdHkiOiJFQyIsImVwayI6eyJrdHkiOiJFQyIsIngiOiJfLXkyLXd2MEVlOVJpaV84T0tqMXFfZ1E1ZEpTOFJSaDc5dGdCUkJMVFlJIiwieSI6ImVHZmNyNm1EV0VDbDNsMDhYS19WUDRnZ0I4TXJJbmpISVhLY1g3bkkwNTAiLCJjcnYiOiJQLTI1NiJ9fQ.EinqEBKfkX5hryFScL5k4UaP9YW5egKbImOb5aejNNY53t05-FTGUw.kBGxczCrUvkV5y0F.JA67aTm4Cyf4Ig.ZL96UugjU-4W_OZHocX22w";
-			var privateEncryption = new Encryption();
+			var privateEncryption = new Encryption(this.privateECKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string actualValue = await privateEncryption.DecryptAsync(cipherData, this.privateECKeyResolver.Object, this.logger.Object);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			Assert.AreEqual(expectedValue, actualValue);
@@ -174,10 +175,11 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange								// Expected Kid == "11" 
 			var cipherData = "{cipher}eyJhbGciOiJSU0EtT0FFUC0yNTYiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMTEiLCJjdHkiOiJ0ZXh0L3BsYWluIn0.AQk7JJN-LkHL21PaBf-y5yjlx3saquD_iZBhp-rz3zuageAvkKF0xEduWV3b5xUbYy9BqxZ4kzz95nYfmeoU4ySc6w1T3VrR9FGAO19vo0zM_O9ggYZKmoOQUTKV0dwLIQE1DF6Q0Wz5hqK3ygAtR_XFdcHy4xafo13GHInPBLWBWop78rdIwzjIeDiUeaToUFqAYvw7xWLmfWfcaft5T3urn0-6xI_1OECfQyzO0VtNB4ZB-u8KgZkLW5DiopdQGu_kNbHVx3hdysVWx2Nkz5OZqQGrfmbr_U6jhDZLAdKqhxJIS3BFuVWUAABs-RDKCoyNFfl4e75dL0kKBbPQJg.wY85Mqk5FQ95c7zb.nqP08KYxxGfpQg.6MVw7O6GJy6X0ZXozQFl3A";
-			var privateEncryption = new Encryption();
+			var privateEncryption = new Encryption(this.privateECKeyResolver.Object, this.logger.Object);
 			// Actual Kid == 1
+
 			// Act
-			await privateEncryption.DecryptAsync(cipherData, this.privateECKeyResolver.Object, this.logger.Object);
+			string actualValue = await privateEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			// EncryptionException: "Decryption key not found. ID: '11'."
@@ -191,16 +193,16 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
-			var privateEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
+			var privateEncryption = new Encryption(this.privateRSAKeyResolver.Object, this.logger.Object);
 
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicRSAKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
 			int idx = cipherData.LastIndexOf('.');
 			cipherData = cipherData.Substring(0, idx + 1);
 			cipherData += "badsig";  // Add invalid cipher
 
 			// Act
-			await privateEncryption.DecryptAsync(cipherData, this.privateRSAKeyResolver.Object, this.logger.Object);
+			await privateEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			// EncryptionException: "Unable to decrypt content or authentication tag do not match."
@@ -220,10 +222,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			var publicRSAKeyResolver = new Mock<IKeyResolver>();
 			publicRSAKeyResolver.Setup(k => k.GetEncryptionKeyAsync())
 											 .ReturnsAsync(() => rsaPublicJsonWebKey);
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(publicRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, publicRSAKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
 
 			// Assert
 			// EncryptionException: "Unable to encrypt data."
@@ -236,10 +238,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";           // Use OCT Key, not supported
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicOctKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.EncryptAsync(expectedValue, this.publicOctKeyResolver.Object, this.logger.Object);
+			await publicEncryption.EncryptAsync(expectedValue);
 
 			// Assert
 			// EncryptionException: "Unsupport Json Web Key type."
@@ -252,10 +254,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string cipherData = "{cipher}";      // Missing cipher text
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.DecryptAsync(cipherData, this.publicRSAKeyResolver.Object, this.logger.Object);
+			await publicEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			// SerializerException: "Unable to deserializer value."
@@ -268,10 +270,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string cipherData = "{cipher}123456789123456789";      // Incorrect cipher text
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.DecryptAsync(cipherData, this.publicRSAKeyResolver.Object, this.logger.Object);
+			await publicEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			// SerializerException: "Unable to deserializer value."
@@ -286,10 +288,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			// Arrange
 			var cipherJson = "{\"kty\": \"OCT\",\"k\": \"1234567890\",\"kid\": \"1\"}";
 			var cipher = Constants.CIPHER_HEADER + Jose.Base64Url.Encode(Encoding.UTF8.GetBytes(cipherJson));
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicOctKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.DecryptAsync(cipher, this.publicOctKeyResolver.Object, this.logger.Object);
+			await publicEncryption.DecryptAsync(cipher);
 
 			// Assert
 			// EncryptionException: "Decryption key not found. ID: '1'."
@@ -302,10 +304,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicNullKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.EncryptAsync(expectedValue, this.publicNullKeyResolver.Object, this.logger.Object);
+			await publicEncryption.EncryptAsync(expectedValue);
 
 			// Assert
 			// EncryptionException: "Encryption key not found by KeyResolver"
@@ -317,10 +319,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			string cipherData = await publicEncryption.EncryptAsync(expectedValue, this.publicRSAKeyResolver.Object, this.logger.Object);
+			string cipherData = await publicEncryption.EncryptAsync(expectedValue);
 
 			// Assert
 			Assert.IsTrue(cipherData.StartsWith("{cipher}", StringComparison.Ordinal));
@@ -333,10 +335,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string cipherData = "SomeBadData";
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicRSAKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.DecryptAsync(cipherData, this.publicRSAKeyResolver.Object, this.logger.Object);
+			await publicEncryption.DecryptAsync(cipherData);
 
 			// Assert
 			// EncryptionException: "Invalid encryption header."
@@ -349,10 +351,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 		{
 			// Arrange
 			string expectedValue = "Test data!";
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.publicNullKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.EncryptAsync(expectedValue, this.publicNullKeyResolver.Object, this.logger.Object);
+			await publicEncryption.EncryptAsync(expectedValue);
 
 			// Assert
 			// EncryptionException: "Encryption key not found by KeyResolver."
@@ -366,10 +368,10 @@ namespace com.tmobile.oss.security.taap.jwe.test
 			// Arrange					// OCT JsonWebKey type not supported
 			var cipherJson = "{\"kty\": \"OCT\",\"k\": \"1234567890\",\"kid\": \"40F36B31-44A5-44B4-AC2F-676D5C8CB4C2\"}";
 			var cipher = Constants.CIPHER_HEADER + Jose.Base64Url.Encode(Encoding.UTF8.GetBytes(cipherJson));
-			var publicEncryption = new Encryption();
+			var publicEncryption = new Encryption(this.privateOctKeyResolver.Object, this.logger.Object);
 
 			// Act
-			await publicEncryption.DecryptAsync(cipher, this.privateOctKeyResolver.Object, this.logger.Object);
+			await publicEncryption.DecryptAsync(cipher);
 
 			// Assert
 			// EncryptionException: "Unsupport Json Web Key type."

@@ -21,8 +21,8 @@ namespace com.tmobile.oss.security.taap.jwe
 {
     public interface IEncryption
     {
-        Task<string> EncryptAsync(string value, IKeyResolver keyResolver, ILogger logger);
+        Task<string> EncryptAsync(string value);
 
-        Task<string> DecryptAsync(string cipher, IKeyResolver keyResolver, ILogger logger);
+        Task<string> DecryptAsync(string cipher);
     }
 }
