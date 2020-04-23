@@ -4,6 +4,21 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>com.tmobile.oss.security.taap.jwe</AssemblyName>
     <RootNamespace>com.tmobile.oss.security.taap.jwe</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Carl Prothman</Authors>
+    <Company>T-Mobile</Company>
+    <Product>JSON Web Encryption (JWE) Builder - .NET Core</Product>
+    <Description>This component will encrypt your PII data as a JWE token using a public RSA key.</Description>
+    <Copyright>© 2020 T-Mobile</Copyright>
+    <PackageReleaseNotes>JWE Builder</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
+    <PackageIcon>T-Mobile.png</PackageIcon>
+    <RepositoryUrl>https://github.com/cprothm1/tmobile-api-security-lib</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <NeutralLanguage />
+    <PackageTags>JWE, RSA, RSA_OAEP_256, A256GCM</PackageTags>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +29,17 @@
     <PackageReference Include="jose-jwt" Version="2.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
