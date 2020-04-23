@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		encyption-lib\ClassDesign.png = encyption-lib\ClassDesign.png
 		FieldLevelEncrryption_DataFlow.png = FieldLevelEncrryption_DataFlow.png
+		encyption-lib-core\license.txt = encyption-lib-core\license.txt
 		ReadMe.docx = ReadMe.docx
 		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
@@ -15,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "encryption_lib.test", "ency
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "encryption_lib", "encyption-lib-core\encryption_lib.csproj", "{5A62165E-EF76-4ED2-B470-4465D79E9A5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_Asp.Net_Mvc_WebApplication", "Example_Asp.Net_Mvc_WebApplication\Example_Asp.Net_Mvc_WebApplication.csproj", "{454E4A74-6D31-4F98-9E2C-DE2CB2E3241F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example_Asp.Net_Mvc_WebApplication", "Example_Asp.Net_Mvc_WebApplication\Example_Asp.Net_Mvc_WebApplication.csproj", "{454E4A74-6D31-4F98-9E2C-DE2CB2E3241F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

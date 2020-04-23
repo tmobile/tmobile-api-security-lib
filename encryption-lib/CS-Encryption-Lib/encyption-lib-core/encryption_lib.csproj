@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Carl Prothman</Authors>
     <Company>T-Mobile</Company>
-    <Product>JSON Web Encryption (JWE) Builder - .NET Core</Product>
+    <Product>JSON Web Encryption (JWE) Builder</Product>
     <Description>This component will encrypt your PII data as a JWE token using a public RSA key.</Description>
     <Copyright>© 2020 T-Mobile</Copyright>
     <PackageReleaseNotes>JWE Builder</PackageReleaseNotes>
@@ -18,7 +18,7 @@
     <NeutralLanguage />
     <PackageTags>JWE, RSA, RSA_OAEP_256, A256GCM</PackageTags>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

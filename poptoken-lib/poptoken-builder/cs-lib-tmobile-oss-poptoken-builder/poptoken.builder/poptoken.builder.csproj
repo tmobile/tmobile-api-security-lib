@@ -2,11 +2,38 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>com.tmobile.oss.security.taap.poptoken.builder</PackageId>
+    <Authors>Carl Prothman</Authors>
+    <Company>T-Mobile</Company>
+    <Product>Proof Of Possession (PoP) Token Builder</Product>
+    <Description>This component will create a Proof Of Possession (PoP) Token using .NET Core 3.1 
+and .NET Standard 2.0
+</Description>
+    <Copyright>© 2020 T-Mobile</Copyright>
+    <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cprothm1/tmobile-api-security-lib</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Proof Of Possession, PoP, RSA, RsaSha256, JWS</PackageTags>
+    <PackageIcon>T-Mobile.png</PackageIcon>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.5.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\encryption-lib\CS-Encryption-Lib\encyption-lib-core\license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\..\encryption-lib\CS-Encryption-Lib\encyption-lib-core\T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
