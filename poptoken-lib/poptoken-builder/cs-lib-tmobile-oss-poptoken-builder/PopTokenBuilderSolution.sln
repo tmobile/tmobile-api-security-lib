@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{50C71235
 	ProjectSection(SolutionItems) = preProject
 		poptoken.builder\license.txt = poptoken.builder\license.txt
 		ReadMe.docx = ReadMe.docx
+		poptoken.builder\readme.md = poptoken.builder\readme.md
 		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
 EndProject
