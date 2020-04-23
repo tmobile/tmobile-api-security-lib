@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{50C71235-9039-4942-8158-65E691685A54}"
 	ProjectSection(SolutionItems) = preProject
+		poptoken.builder\license.txt = poptoken.builder\license.txt
 		ReadMe.docx = ReadMe.docx
 		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
