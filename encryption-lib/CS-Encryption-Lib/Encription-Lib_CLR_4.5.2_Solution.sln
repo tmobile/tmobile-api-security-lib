@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encyption-lib_4.5.2", "encyption-lib_4.5.2\encyption-lib_4.5.2.csproj", "{26D0754E-F340-4F80-AF96-08AABB9572EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib_4.5.2.test", "encyption-lib_4.5.2.test\encription-lib_4.5.2.test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_Asp.Net_Mvc_WebApplication_4.5.2", "Example_Asp.Net_Mvc_WebApplication_4.5.2\Example_Asp.Net_Mvc_WebApplication_4.5.2.csproj", "{5A536255-28D3-470D-96EA-F71F569EEA0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26D0754E-F340-4F80-AF96-08AABB9572EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D0754E-F340-4F80-AF96-08AABB9572EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D0754E-F340-4F80-AF96-08AABB9572EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D0754E-F340-4F80-AF96-08AABB9572EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C457E56-17E1-4635-B182-6FB46CE34761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C457E56-17E1-4635-B182-6FB46CE34761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C457E56-17E1-4635-B182-6FB46CE34761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C457E56-17E1-4635-B182-6FB46CE34761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA563C5A-4BCD-4438-A6BD-D49CD55A65E5}
+	EndGlobalSection
+EndGlobal
