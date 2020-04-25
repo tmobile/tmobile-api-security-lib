@@ -7,8 +7,8 @@
     <ProjectGuid>{26D0754E-F340-4F80-AF96-08AABB9572EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassLibrary1</RootNamespace>
-    <AssemblyName>ClassLibrary1</AssemblyName>
+    <RootNamespace>com.tmobile.oss.security.taap.jwe</RootNamespace>
+    <AssemblyName>com.tmobile.oss.security.taap.jwe</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
