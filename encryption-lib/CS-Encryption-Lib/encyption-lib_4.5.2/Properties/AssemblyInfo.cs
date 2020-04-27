@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("com.tmobile.oss.security.taap.jwe")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("com.tmobile.oss.security.taap.jwe - CLR 4.5.2")]
+[assembly: AssemblyDescription("This component will encrypt your PII data as a JWE token using a public RSA or EC key.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("com.tmobile.oss.security.taap.jwe")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("T-Mobile")]
+[assembly: AssemblyProduct("JSON Web Encryption (JWE) Builder")]
+[assembly: AssemblyCopyright("© 2020 T-Mobile")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3dd5cf74-e943-450e-a63e-095021e1b343")]
+[assembly: Guid("5DDA00FF-D6C6-4424-9BE8-69EEFA06B192")]
 
 // Version information for an assembly consists of the following four values:
 //

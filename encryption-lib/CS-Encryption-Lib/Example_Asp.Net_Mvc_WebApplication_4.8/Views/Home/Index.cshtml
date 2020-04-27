@@ -1,0 +1,29 @@
+﻿@model Example_Asp.Net_Mvc_WebApplication_4._5._2.Models.EncryptedJweViewModel
+
+<div class="text-center">
+    <h2 class="display-6">JSON Web Encryption (JWE) Example Using Asp.Net MVC and .Net 4.5.2</h2>
+</div>
+
+<div class="text-left">
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "encryptionForm" }))
+    {
+        <p>
+            <label class="errorMessage">@Model.ErrorMessage</label>
+        </p>
+        <p>
+            <label>Enter in a phone number:</label><br />
+            @Html.TextBoxFor(m => m.PhoneNumber)<br />
+            <input type="submit" name="submitButton" value="Encrypt">
+        </p>
+        <p>
+            <label>Encrypted JWE:</label><br />
+            <textarea name="encryptedJwe" form="encryptionForm">@Model.EncryptedJwe</textarea>
+            <input type="submit" name="submitButton" value="Decrypt">
+        </p>
+        <p>
+            <label>Decrypted phone number:</label><br />
+            <input type="text" name="decryptedPhoneNumber" value="@Model.DecryptedPhoneNumber" />
+        </p>
+    }
+</div>

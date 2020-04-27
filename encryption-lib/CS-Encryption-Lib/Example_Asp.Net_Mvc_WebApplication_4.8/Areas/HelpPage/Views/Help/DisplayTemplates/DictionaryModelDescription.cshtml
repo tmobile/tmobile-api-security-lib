@@ -1,0 +1,4 @@
+@using Example_Asp.Net_Mvc_WebApplication_4._5._2.Areas.HelpPage.ModelDescriptions
+@model DictionaryModelDescription
+Dictionary of @Html.DisplayFor(m => Model.KeyModelDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.KeyModelDescription }) [key]
+and @Html.DisplayFor(m => Model.ValueModelDescription.ModelType, "ModelDescriptionLink", new { modelDescription = Model.ValueModelDescription }) [value]

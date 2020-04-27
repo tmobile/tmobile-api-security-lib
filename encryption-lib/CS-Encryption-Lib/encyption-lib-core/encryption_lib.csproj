@@ -8,7 +8,7 @@
     <Authors>Carl Prothman</Authors>
     <Company>T-Mobile</Company>
     <Product>JSON Web Encryption (JWE) Builder</Product>
-    <Description>This component will encrypt your PII data as a JWE token using a public RSA key.</Description>
+    <Description>This component will encrypt your PII data as a JWE token using a public RSA or EC key.</Description>
     <Copyright>© 2020 T-Mobile</Copyright>
     <PackageReleaseNotes>JWE Builder</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
@@ -18,8 +18,28 @@
     <NeutralLanguage />
     <PackageTags>JWE, RSA, RSA_OAEP_256, A256GCM</PackageTags>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <ApplicationIcon>T-Mobile.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\PublishProfiles\**" />
+    <EmbeddedResource Remove="Properties\PublishProfiles\**" />
+    <None Remove="Properties\PublishProfiles\**" />
+    <None Include="T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="T-Mobile.ico" />
+    <None Remove="T-Mobile.png" />
+    <None Remove="T-Mobile.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="1.2.1">
@@ -36,10 +56,18 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="T-Mobile.png">
+    <Content Include="T-Mobile.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="T-Mobile.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

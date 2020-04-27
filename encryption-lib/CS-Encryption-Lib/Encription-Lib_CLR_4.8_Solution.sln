@@ -11,9 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		ReadMe.pdf = ReadMe.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib", "encyption-lib\encription-lib.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib_4_8", "encyption-lib\encription-lib_4_8.csproj", "{3DD5CF74-E943-450E-A63E-095021E1B343}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib.test", "encyption-lib.test\encription-lib.test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "encription-lib_4_8.test", "encyption-lib.test\encription-lib_4_8.test.csproj", "{2C457E56-17E1-4635-B182-6FB46CE34761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_Asp.Net_Mvc_WebApplication_4.8", "Example_Asp.Net_Mvc_WebApplication_4.8\Example_Asp.Net_Mvc_WebApplication_4.8.csproj", "{5A536255-28D3-470D-96EA-F71F569EEA0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{2C457E56-17E1-4635-B182-6FB46CE34761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C457E56-17E1-4635-B182-6FB46CE34761}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C457E56-17E1-4635-B182-6FB46CE34761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A536255-28D3-470D-96EA-F71F569EEA0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
