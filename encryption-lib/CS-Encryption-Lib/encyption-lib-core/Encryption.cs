@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+using Jose.keys;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Security.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;

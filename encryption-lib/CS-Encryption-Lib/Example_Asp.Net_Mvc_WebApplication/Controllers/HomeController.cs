@@ -2,11 +2,8 @@
 using Example_Asp.Net_Mvc_WebApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Example_Asp.Net_Mvc_WebApplication.Controllers
@@ -23,10 +20,12 @@ namespace Example_Asp.Net_Mvc_WebApplication.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var encryptedJweViewModel = new EncryptedJweViewModel();
-            encryptedJweViewModel.PhoneNumber = "(555) 555-5555";
-            encryptedJweViewModel.ErrorMessage = " ";
-            encryptedJweViewModel.EncryptedJwe = string.Empty;
+            var encryptedJweViewModel = new EncryptedJweViewModel()
+            {
+                PhoneNumber = "(555) 555-5555",
+                ErrorMessage = " ",
+                EncryptedJwe = string.Empty
+            };
 
             return View(encryptedJweViewModel);
         }

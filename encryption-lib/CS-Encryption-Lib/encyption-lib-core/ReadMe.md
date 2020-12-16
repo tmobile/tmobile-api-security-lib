@@ -1,8 +1,7 @@
 ﻿**JSON Web Encryption (JWE) component**
 
-o .NET 4.8  and .NET Standard 2.0, using RSA or EC keys.
-o .NET Core 3.1 and .NET Standard 2.0, using RSA key only.  
-    - EC key is not support yet for .NET Core 3.1
+o .NET 4.8  and .NET Standard 2.1, using RSA or EC keys.
+o .NET Core 3.1 and .NET Standard 2.1, using RSA or EC keys.
 
 Obtains public RSA and/or EC keys from a JWKS REST Service
 o Caches the public keys 
