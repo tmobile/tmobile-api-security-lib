@@ -39,8 +39,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         private string issuer;
         private HashSet<KeyValuePair<string, string>> ehtsKeyValueMap;
 
-        internal string privateKeyXmlRsa;
-        internal RsaSecurityKey rsaSecurityKey;
+        internal string _privateKeyXmlOrPemRsa;
+        internal RsaSecurityKey _rsaSecurityKey;
 
         /// <summary>
         /// Default Constructor
@@ -95,13 +95,13 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         }
 
         /// <summary>
-        /// Signs the PoP token using the specified rsaSecurityKeyPemString.
+        /// Signs the PoP token using RSA private key in XML or PEM format
         /// </summary>
-        /// <param name="privateKeyXmlRsa">The RSA private key in XML format</param>
+        /// <param name="privateKeyXmlRsa">The RSA private key in XML or PEM format</param>
         /// <returns>The PopTokenBuilder</returns>
-        public PopTokenBuilder SignWith(string privateKeyXmlRsa)
+        public PopTokenBuilder SignWith(string privateKeyXmlOrPemRsa)
         {
-            this.privateKeyXmlRsa = privateKeyXmlRsa;
+            this._privateKeyXmlOrPemRsa = privateKeyXmlOrPemRsa;
             return this;
         }
 
@@ -145,16 +145,12 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
                     throw new PopTokenBuilderException("The ehtsKeyValueMap should not contain more than " + MAX_NUMBER_OF_EHTS + " entries");
                 }
 
-                if (this.rsaSecurityKey == null &&
-                    string.IsNullOrEmpty(this.privateKeyXmlRsa))
+                if (string.IsNullOrEmpty(this._privateKeyXmlOrPemRsa))
                 {
-                    throw new PopTokenBuilderException("Either rsaSecurityKey or privateKeyXmlRsa should be provided to sign the PoP token");
+                    throw new PopTokenBuilderException("The privateKeyXmlRsa should be provided to SignWith the PoP token");
                 }
 
-                var rsa = RSA.Create();
-                rsa.KeySize = 2048;
-                rsa.FromXmlRsaPemKey(this.privateKeyXmlRsa);
-                this.rsaSecurityKey = new RsaSecurityKey(rsa);
+                this._rsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(this._privateKeyXmlOrPemRsa);
 
                 var ehts = BuildEhtsString(this.ehtsKeyValueMap);
                 var edts = CalculateEdtsSha256Base64Hash(this.ehtsKeyValueMap);
@@ -162,16 +158,16 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
                 var version = this.Version;
                 var issuedAt = this.IssuedAt;
                 var expires = GetExpiration(issuedAt);
-                var signingCredentials = new SigningCredentials(this.rsaSecurityKey, SecurityAlgorithms.RsaSha256);
+                var signingCredentials = new SigningCredentials(this._rsaSecurityKey, SecurityAlgorithms.RsaSha256);
                 var securityTokenDescriptor = new SecurityTokenDescriptor()
                 {
                     Subject = new ClaimsIdentity(new List<Claim>
-                    {
-                        new Claim("ehts", ehts),
-                        new Claim("edts", edts),
-                        new Claim("v", version),
-                        new Claim("jti", jti)
-                    }),
+                {
+                    new Claim("ehts", ehts),
+                    new Claim("edts", edts),
+                    new Claim("v", version),
+                    new Claim("jti", jti)
+                }),
                     Audience = this.audience,
                     Issuer = this.issuer,
                     NotBefore = issuedAt,
@@ -181,7 +177,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
                 };
 
                 var jsonWebTokenHandler = new JsonWebTokenHandler();
-				return jsonWebTokenHandler.CreateToken(securityTokenDescriptor); // Any instance members are not guaranteed to be thread safe.
+                return jsonWebTokenHandler.CreateToken(securityTokenDescriptor); // Any instance members are not guaranteed to be thread safe.
             }
             catch (PopTokenBuilderException)
             {

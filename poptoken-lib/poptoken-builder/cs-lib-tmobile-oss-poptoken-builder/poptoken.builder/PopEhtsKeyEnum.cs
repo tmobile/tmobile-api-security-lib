@@ -44,7 +44,28 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         [Description("http-method")]
         HttpMethod,
 
+        [Description("GET")]
+        Get,
+
         [Description("POST")]
-        Post
+        Post,
+
+        [Description("PUT")]
+        Put,
+
+        [Description("PATCH")]
+        Patch,
+
+        [Description("HEAD")]
+        Head,
+
+        [Description("OPTIONS")]
+        Options,
+
+        [Description("TRACE")]
+        Trace,
+
+        [Description("CONNECT")]
+        Connect
     };
 }

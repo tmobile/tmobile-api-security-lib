@@ -21,6 +21,7 @@
     <AssemblyVersion>1.0.3.0</AssemblyVersion>
     <PackageReleaseNotes>Updated component to use .NET Standzard 2.1.
 Updated Microsoft.IdentityModel.JasonWebTokens component to 6.8.0</PackageReleaseNotes>
+    <RootNamespace>com.tmobile.oss.security.taap.poptoken.builder</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
