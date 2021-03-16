@@ -21,15 +21,26 @@ using System.Security.Cryptography;
 
 namespace com.tmobile.oss.security.taap.poptoken.builder
 {
+    /// <summary>
+    /// PopToken Builder Utils
+    /// </summary>
     public class PopTokenBuilderUtils
 	{
 		private static readonly JsonWebTokenHandler _jsonWebTokenHandler;
 
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
 		static PopTokenBuilderUtils()
 		{
             _jsonWebTokenHandler = new JsonWebTokenHandler();
 		}
 
+        /// <summary>
+        /// Create Rsa Security Key
+        /// </summary>
+        /// <param name="rsaKeyPKCS8PemOrXml">Rsa Key PKCS8 Pem Or Xml</param>
+        /// <returns>RsaSecurityKey</returns>
         public static RsaSecurityKey CreateRsaSecurityKey(string rsaKeyPKCS8PemOrXml)
         {
             var rsa = RSA.Create();
@@ -56,6 +67,14 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
             return new RsaSecurityKey(rsa);
         }
 
+        /// <summary>
+        /// Validate Token
+        /// </summary>
+        /// <param name="popToken">PopToken</param>
+        /// <param name="issuer">Issuer</param>
+        /// <param name="audience">Audience</param>
+        /// <param name="rsaSecurityKey">Rsa Security Key</param>
+        /// <returns></returns>
         public static TokenValidationResult ValidateToken(string popToken, string issuer, string audience, RsaSecurityKey rsaSecurityKey)
         {
             var tokenValidationParameters = new TokenValidationParameters()

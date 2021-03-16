@@ -79,8 +79,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act         
             var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                            .SignWith(_privateRsaKeyPem)    // PEM format
-                                            .Build();
+                                          .SignWith(_privateRsaKeyPem)    // PEM format
+                                          .Build();
 
             var publicRsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(_publicRsaKeyPem); // PEM format
             var tokenValidationResult = PopTokenBuilderUtils.ValidateToken(popToken, issuer, audience, publicRsaSecurityKey);
@@ -111,8 +111,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act         
             var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                            .SignWith(_privateRsaKeyXml)  // XML format
-                                            .Build();
+                                          .SignWith(_privateRsaKeyXml)  // XML format
+                                          .Build();
 
             var publicRsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(_publicRsaKeyXml); // XML format
             var tokenValidationResult = PopTokenBuilderUtils.ValidateToken(popToken, issuer, audience, publicRsaSecurityKey);
@@ -147,8 +147,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act         
             var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                            .SignWith(_privateRsaKeyPem)   // Pem format
-                                            .Build();
+                                          .SignWith(_privateRsaKeyPem)   // Pem format
+                                          .Build();
 
             var publicRsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(_publicRsaKeyPem); // Pem format
             var tokenValidationResult = PopTokenBuilderUtils.ValidateToken(popToken, issuer, audience, publicRsaSecurityKey);
@@ -182,8 +182,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act         
             var popToken = popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                            .SignWith(_privateRsaKeyXml)   // XML format
-                                            .Build();
+                                          .SignWith(_privateRsaKeyXml)   // XML format
+                                          .Build();
 
             var publicRsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(_publicRsaKeyXml); // XML format
             var tokenValidationResult = PopTokenBuilderUtils.ValidateToken(popToken, issuer, audience, publicRsaSecurityKey);
@@ -207,8 +207,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act
             popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
-                                          .SignWith(_privateRsaKeyPem)
-                                          .Build();
+                           .SignWith(_privateRsaKeyPem)
+                           .Build();
             // Assert
             // Expected: PopTokenBuilderException
         }
@@ -229,8 +229,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act
             popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
-                                          .SignWith(_privateRsaKeyPem)
-                                          .Build();
+                           .SignWith(_privateRsaKeyPem)
+                           .Build();
             // Assert
             // Expected: PopTokenBuilderException
         }
@@ -251,8 +251,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act
             popTokenBuilder.SetEhtsKeyValueMap(ehtsKeyValueMap)
-                                          .SignWith(_privateRsaKeyPem)
-                                          .Build();
+                           .SignWith(_privateRsaKeyPem)
+                           .Build();
             // Assert
             // Expected: PopTokenBuilderException
         }
@@ -275,8 +275,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act
             popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                          .SignWith(_privateRsaKeyPem)
-                                          .Build();
+                           .SignWith(_privateRsaKeyPem)
+                           .Build();
             // Assert
             // Expected: PopTokenBuilderException
         }
@@ -299,8 +299,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 
             // Act
             popTokenBuilder.SetEhtsKeyValueMap(hashMapKeyValuePair)
-                                          .SignWith(_privateRsaKeyPem)
-                                          .Build();
+                           .SignWith(_privateRsaKeyPem)
+                           .Build();
             // Assert
             // Expected: PopTokenBuilderException
         }

@@ -22,8 +22,16 @@ using System.Xml;
 
 namespace com.tmobile.oss.security.taap.poptoken.builder
 {
+    /// <summary>
+    /// Extensions
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Get Description
+        /// </summary>
+        /// <param name="enumItem">Enum Item</param>
+        /// <returns>Description</returns>
         public static string GetDescription(this Enum enumItem)
         {
             return enumItem.GetType()
@@ -33,6 +41,11 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
                            .FirstOrDefault() ?? enumItem.ToString();
         }
 
+        /// <summary>
+        /// From Xml Rsa Pem Key
+        /// </summary>
+        /// <param name="rsa">RSA</param>
+        /// <param name="xmlRsaXmlKey">XmlRsaXmlKey</param>
         public static void FromXmlRsaPemKey(this RSA rsa, string xmlRsaXmlKey)
         {
             if (string.IsNullOrEmpty(xmlRsaXmlKey) ||
