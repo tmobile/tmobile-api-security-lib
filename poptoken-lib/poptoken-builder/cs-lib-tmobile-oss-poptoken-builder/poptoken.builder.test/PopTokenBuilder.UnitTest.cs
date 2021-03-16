@@ -68,11 +68,11 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
         {
             // Arrange
             var keyValuePairDictionary = new Dictionary<string, string>
-        {
-            { PopEhtsKeyEnum.Authorization.GetDescription(), "Basic UtKV75JJbVAewOrkHMXhLbiQ11SS" },
-            { PopEhtsKeyEnum.Uri.GetDescription(), "/oauth2/v6/tokens" },
-            { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
-        };
+            {
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Basic UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/oauth2/v6/tokens" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+            };
 
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
@@ -100,11 +100,11 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
         {
             // Arrange
             var keyValuePairDictionary = new Dictionary<string, string>
-        {
-            { PopEhtsKeyEnum.Authorization.GetDescription(), "Basic UtKV75JJbVAewOrkHMXhLbiQ11SS" },
-            { PopEhtsKeyEnum.Uri.GetDescription(), "/oauth2/v6/tokens" },
-            { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
-        };
+            {
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Basic UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/oauth2/v6/tokens" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+            };
 
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
@@ -133,14 +133,14 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
         {
             // Arrange
             var keyValuePairDictionary = new Dictionary<string, string>
-        {
-            { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
-            { PopEhtsKeyEnum.CacheControl.GetDescription(), PopEhtsKeyEnum.NoCache.GetDescription() },
-            { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
-            { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
-            { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
-            { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
-        };
+            {
+                { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
+                { PopEhtsKeyEnum.CacheControl.GetDescription(), PopEhtsKeyEnum.NoCache.GetDescription() },
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
 
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
@@ -168,14 +168,14 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
         {
             // Arrange
             var keyValuePairDictionary = new Dictionary<string, string>
-        {
-            { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
-            { PopEhtsKeyEnum.CacheControl.GetDescription(), PopEhtsKeyEnum.NoCache.GetDescription() },
-            { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
-            { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
-            { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
-            { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
-        };
+            {
+                { PopEhtsKeyEnum.ContentType.GetDescription(), PopEhtsKeyEnum.ApplicationJson.GetDescription() },
+                { PopEhtsKeyEnum.CacheControl.GetDescription(), PopEhtsKeyEnum.NoCache.GetDescription() },
+                { PopEhtsKeyEnum.Authorization.GetDescription(), "Bearer UtKV75JJbVAewOrkHMXhLbiQ11SS" },
+                { PopEhtsKeyEnum.Uri.GetDescription(), "/commerce/v1/orders" },
+                { PopEhtsKeyEnum.HttpMethod.GetDescription(), PopEhtsKeyEnum.Post.GetDescription() },
+                { PopEhtsKeyEnum.Body.GetDescription(), "{\"orderId\": 100, \"product\": \"Mobile Phone\"}" }
+            };
 
             var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(keyValuePairDictionary);
             var popTokenBuilder = new PopTokenBuilder(audience, issuer);
