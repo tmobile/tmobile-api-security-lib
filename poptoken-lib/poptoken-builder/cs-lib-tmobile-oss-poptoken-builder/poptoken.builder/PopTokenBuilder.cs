@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.JsonWebTokens;
-using System.Runtime.CompilerServices;
+using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Security.Cryptography;
-using System.Text;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
-[assembly: InternalsVisibleTo("com.tmobile.oss.security.taap.poptoken.builder.test")]
 namespace com.tmobile.oss.security.taap.poptoken.builder
 {
     /// <summary>
@@ -35,12 +33,11 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         private const int POP_TOKEN_VALIDITY_DURATION_IN_MILLIS = 2 * 60 * 1000;
         private const int MAX_NUMBER_OF_EHTS = 100;
         private const string POP_TOKEN_VERSION = "1";
-        private string audience;
-        private string issuer;
-        private HashSet<KeyValuePair<string, string>> ehtsKeyValueMap;
-
-        internal string _privateKeyXmlOrPemRsa;
-        internal RsaSecurityKey _rsaSecurityKey;
+        private readonly string _audience;
+        private readonly string _issuer;
+        private HashSet<KeyValuePair<string, string>> _ehtsKeyValueMap;
+        private string _privateKeyXmlOrPemRsa;
+        private RsaSecurityKey _rsaSecurityKey;
 
         /// <summary>
         /// Default Constructor
@@ -54,8 +51,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         /// </summary>
         public PopTokenBuilder(string audience, string issuer) : this()
         {
-            this.audience = audience;
-            this.issuer = issuer;
+            _audience = audience;
+            _issuer = issuer;
         }
 
         /// <summary>
@@ -90,7 +87,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         /// <returns>The PopTokenBuilder</returns>
         public PopTokenBuilder SetEhtsKeyValueMap(HashSet<KeyValuePair<string, string>> ehtsKeyValueMap)
         {
-            this.ehtsKeyValueMap = ehtsKeyValueMap;
+            _ehtsKeyValueMap = ehtsKeyValueMap;
             return this;
         }
 
@@ -101,7 +98,12 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         /// <returns>The PopTokenBuilder</returns>
         public PopTokenBuilder SignWith(string privateKeyXmlOrPemRsa)
         {
-            this._privateKeyXmlOrPemRsa = privateKeyXmlOrPemRsa;
+            if (string.IsNullOrEmpty(privateKeyXmlOrPemRsa))
+            {
+                throw new PopTokenBuilderException("A privateKeyXmlOrPemRsa shall be provided to sign the PoP token");
+            }
+
+            _privateKeyXmlOrPemRsa = privateKeyXmlOrPemRsa;
             return this;
         }
 
@@ -133,32 +135,32 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
         {
             try
             {
-                if (this.ehtsKeyValueMap == null ||
-                    this.ehtsKeyValueMap.Count == 0 ||
-                    DoesContainAnyEmptyKeysOrValues(this.ehtsKeyValueMap))
+                if (_ehtsKeyValueMap == null ||
+                    _ehtsKeyValueMap.Count == 0 ||
+                    DoesContainAnyEmptyKeysOrValues(_ehtsKeyValueMap))
                 {
                     throw new PopTokenBuilderException("The ehtsKeyValueMap should not be null or empty and should not contain any null or empty ehts keys or values");
                 }
 
-                if (this.ehtsKeyValueMap.Count > MAX_NUMBER_OF_EHTS)
+                if (_ehtsKeyValueMap.Count > MAX_NUMBER_OF_EHTS)
                 {
                     throw new PopTokenBuilderException("The ehtsKeyValueMap should not contain more than " + MAX_NUMBER_OF_EHTS + " entries");
                 }
 
-                if (string.IsNullOrEmpty(this._privateKeyXmlOrPemRsa))
+                if (string.IsNullOrEmpty(_privateKeyXmlOrPemRsa))
                 {
                     throw new PopTokenBuilderException("The privateKeyXmlRsa should be provided to SignWith the PoP token");
                 }
 
-                this._rsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(this._privateKeyXmlOrPemRsa);
+                _rsaSecurityKey = PopTokenBuilderUtils.CreateRsaSecurityKey(_privateKeyXmlOrPemRsa);
 
-                var ehts = BuildEhtsString(this.ehtsKeyValueMap);
-                var edts = CalculateEdtsSha256Base64Hash(this.ehtsKeyValueMap);
+                var ehts = BuildEhtsString(_ehtsKeyValueMap);
+                var edts = CalculateEdtsSha256Base64Hash(_ehtsKeyValueMap);
                 var jti = GetUniqueIdentifier();
-                var version = this.Version;
-                var issuedAt = this.IssuedAt;
+                var version = Version;
+                var issuedAt = IssuedAt;
                 var expires = GetExpiration(issuedAt);
-                var signingCredentials = new SigningCredentials(this._rsaSecurityKey, SecurityAlgorithms.RsaSha256);
+                var signingCredentials = new SigningCredentials(_rsaSecurityKey, SecurityAlgorithms.RsaSha256);
                 var securityTokenDescriptor = new SecurityTokenDescriptor()
                 {
                     Subject = new ClaimsIdentity(new List<Claim>
@@ -168,8 +170,8 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
                     new Claim("v", version),
                     new Claim("jti", jti)
                 }),
-                    Audience = this.audience,
-                    Issuer = this.issuer,
+                    Audience = _audience,
+                    Issuer = _issuer,
                     NotBefore = issuedAt,
                     IssuedAt = issuedAt,
                     Expires = expires,

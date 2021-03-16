@@ -2,12 +2,12 @@
 using System;
 using System.Security.Cryptography;
 
-namespace com.tmobile.oss.security.taap.poptoken.builder.test
+namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 {
     [TestClass]
     public class ExtensionsTest
     {
-        enum noDescriptionsEnum { FooBar };
+        enum NoDescriptionsEnum { FooBar };
 
         [TestMethod]
         public void Extensions_GetDescription_Found_Test()
@@ -32,7 +32,7 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void Extensions_GetDescription_NotFound_Test()
         {
             // Arrange
-            var fooBar = noDescriptionsEnum.FooBar;
+            var fooBar = NoDescriptionsEnum.FooBar;
 
             // Act
             var fooBarDescription = fooBar.GetDescription();

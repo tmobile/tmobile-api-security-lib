@@ -25,8 +25,8 @@ Updated Microsoft.IdentityModel.JasonWebTokens component to 6.8.0</PackageReleas
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.8.0" />
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.9.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.9.0" />
   </ItemGroup>
 
   <ItemGroup>

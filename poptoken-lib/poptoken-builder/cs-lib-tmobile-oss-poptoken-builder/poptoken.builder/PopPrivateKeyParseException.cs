@@ -23,12 +23,10 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 	/// </summary>
 	public class PopPrivateKeyParseException : PopTokenBuilderException
 	{
-		private const long serialVersionUID = 1L;
-
-		/// <summary>
-		/// Constructs the PopPrivateKeyParseException using the specified message. </summary>
-		/// <param name="message"> The exception message </param>
-		public PopPrivateKeyParseException(string message) :
+        /// <summary>
+        /// Constructs the PopPrivateKeyParseException using the specified message. </summary>
+        /// <param name="message"> The exception message </param>
+        public PopPrivateKeyParseException(string message) :
 			base(message)
 		{
 		}

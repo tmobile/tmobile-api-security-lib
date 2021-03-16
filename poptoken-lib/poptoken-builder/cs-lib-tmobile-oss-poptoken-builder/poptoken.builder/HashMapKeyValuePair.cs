@@ -33,10 +33,9 @@ namespace com.tmobile.oss.security.taap.poptoken.builder
 		/// <returns>keyValuePair</returns>
 		public static V Get<K, V>(this IDictionary<K, V> dictionary, K key)
 		{
-			V keyValuePair;
-			dictionary.TryGetValue(key, out keyValuePair);
+            dictionary.TryGetValue(key, out V keyValuePair);
 
-			return keyValuePair;
+            return keyValuePair;
 		}
 
 		/// <summary>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace com.tmobile.oss.security.taap.poptoken.builder.test
+namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 {
     [TestClass]
     public class PopPrivateKeyParseExceptionTest

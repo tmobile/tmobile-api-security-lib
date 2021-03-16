@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace com.tmobile.oss.security.taap.poptoken.builder.test
+namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 {
     [TestClass]
     public class PopTokenBuilderExceptionTest

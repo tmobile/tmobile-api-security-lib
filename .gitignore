@@ -68,3 +68,6 @@
 /poptoken-lib/poptoken-validator/cs-lib-tmobile-oss-poptoken-validator/poptoken-validator.MSTest/obj
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/.vs/PopTokenSolution/v16/.suo
 /poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/.vs/PopTokenSolution/config/applicationhost.config
+/poptoken-lib/poptoken-validator/cs-lib-tmobile-oss-poptoken-validator/poptoken-validator/obj
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/TestResults
+/poptoken-lib/poptoken-builder/cs-lib-tmobile-oss-poptoken-builder/poptoken.builder.test/poptoken.builder.mstest.csproj.user

@@ -1,28 +1,30 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace com.tmobile.oss.security.taap.poptoken.builder.test
+namespace com.tmobile.oss.security.taap.poptoken.builder.mstest
 {
     [TestClass]
     public class HashMapKeyValuePairTest
     {
-        private Dictionary<string, string> dictionary;
+        private Dictionary<string, string> _dictionary;
 
         [TestInitialize]
         public void TestInitialize()
         {
             // Arrange
-            dictionary = new Dictionary<string, string>();
-            dictionary.Add("Key1", "Value1");
-            dictionary.Add("Key2", "Value2");
-            dictionary.Add("Key3", "Value3");
+            _dictionary = new Dictionary<string, string>
+            {
+                { "Key1", "Value1" },
+                { "Key2", "Value2" },
+                { "Key3", "Value3" }
+            };
         }
 
         [TestMethod]
         public void HashMapKeyValuePair_Set_Test()
         {
             // Act
-            var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(dictionary);
+            var hashMapKeyValuePair = HashMapKeyValuePair.Set<string, string>(_dictionary);
 
             // Assert
             Assert.IsNotNull(hashMapKeyValuePair);
@@ -33,9 +35,9 @@ namespace com.tmobile.oss.security.taap.poptoken.builder.test
         public void HashMapKeyValuePair_Get_Test()
         {
             // Act
-            var value1 = HashMapKeyValuePair.Get<string, string>(dictionary, "Key1");
-            var value2 = HashMapKeyValuePair.Get<string, string>(dictionary, "Key2");
-            var value3 = HashMapKeyValuePair.Get<string, string>(dictionary, "Key3");
+            var value1 = HashMapKeyValuePair.Get<string, string>(_dictionary, "Key1");
+            var value2 = HashMapKeyValuePair.Get<string, string>(_dictionary, "Key2");
+            var value3 = HashMapKeyValuePair.Get<string, string>(_dictionary, "Key3");
 
             // Assert
             Assert.AreEqual("Value1", value1);

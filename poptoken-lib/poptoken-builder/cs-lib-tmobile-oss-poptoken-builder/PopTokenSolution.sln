@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{50C71235
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "poptoken.builder", "poptoken.builder\poptoken.builder.csproj", "{2810BDAB-63E0-4CA1-9359-17CFAE27541B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "poptoken.builder.test", "poptoken.builder.test\poptoken.builder.test.csproj", "{10C37AC6-CB1D-4379-955B-DD5518DD4567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "poptoken.builder.mstest", "poptoken.builder.test\poptoken.builder.mstest.csproj", "{10C37AC6-CB1D-4379-955B-DD5518DD4567}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
