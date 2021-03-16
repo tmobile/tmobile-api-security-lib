@@ -6,7 +6,7 @@
     <Authors>Carl Prothman</Authors>
     <Company>T-Mobile</Company>
     <Product>Proof Of Possession (PoP) Token Builder</Product>
-    <Description>This component will create a Proof Of Possession (PoP) Token using .NET Core 3.1 and .NET Standard 2.1
+    <Description>This component will create a Proof Of Possession (PoP) Token .NET Standard 2.1
 </Description>
     <Copyright>© 2020 T-Mobile</Copyright>
     <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
@@ -17,11 +17,15 @@
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <PackageReleaseNotes>Updated component to use .NET Standzard 2.1.
 Updated Microsoft.IdentityModel.JasonWebTokens component to 6.8.0</PackageReleaseNotes>
     <RootNamespace>com.tmobile.oss.security.taap.poptoken.builder</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
