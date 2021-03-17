@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>com.tmobile.oss.security.taap.poptoken.builder</PackageId>
+    <Authors>Carl Prothman</Authors>
+    <Company>T-Mobile</Company>
+    <Product>Proof Of Possession (PoP) Token Builder</Product>
+    <Description>This component will create a Proof Of Possession (PoP) Token .NET Standard 2.1
+</Description>
+    <Copyright>© 2020 T-Mobile</Copyright>
+    <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cprothm1/tmobile-api-security-lib</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>Proof Of Possession, PoP, RSA, RsaSha256, JWS</PackageTags>
+    <PackageIcon>T-Mobile.png</PackageIcon>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <PackageReleaseNotes>Updated component to use .NET Standzard 2.1.
+Updated Microsoft.IdentityModel.JasonWebTokens component to 6.9.0.
+Updated Builder to accept PEM or XML Key format.</PackageReleaseNotes>
+    <RootNamespace>com.tmobile.oss.security.taap.poptoken.builder</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.9.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\encryption-lib\CS-Encryption-Lib\encyption-lib-core\license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\..\..\encryption-lib\CS-Encryption-Lib\encyption-lib-core\T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

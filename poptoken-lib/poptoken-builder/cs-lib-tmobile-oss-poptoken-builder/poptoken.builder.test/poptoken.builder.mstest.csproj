@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <AssemblyName>poptoken.builder.mstest</AssemblyName>
+
+    <RootNamespace>com.tmobile.oss.security.taap.poptoken.builder.mstest</RootNamespace>
+
+    <NoWarn>CS1591</NoWarn>
+
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.9.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\poptoken.builder\poptoken.builder.csproj" />
+  </ItemGroup>
+
+</Project>

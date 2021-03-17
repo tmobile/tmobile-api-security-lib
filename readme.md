@@ -1,4 +1,4 @@
-# T-Mobile API Security Libraries
+﻿# T-Mobile API Security Libraries
 
 ## Overview
 
@@ -7,15 +7,25 @@
 ## Directory Structure
 
 ```bash
-└── tmobile-api-security-lib                                # T-Mobile API Security Lib Parent Directory
-    └── poptoken-lib                                        # PoP Token Lib Parent Directory
-        ├── poptoken-builder                                # PoP Token Builder Lib Parent Directory
-        │   ├── java-lib-tmobile-oss-poptoken-builder       # Java PoP Token Builder Lib
-        │   ├── js-lib-tmobile-oss-poptoken-builder         # JavaScript PoP Token Builder Lib
-        │   ├── android-lib-tmobile-oss-poptoken-builder    # Android PoP Token Builder Lib
-        │   └── ios-lib-tmobile-oss-poptoken-builder        # iOS PoP Token Builder Lib
-        └── poptoken-validator                              # PoP Token Validator Lib Parent Directory
-            └── java-lib-tmobile-oss-poptoken-validator     # Java PoP Token Validator Lib
+└── tmobile-api-security-lib                                 # T-Mobile API Security Lib Parent Directory
+    │
+    ├── poptoken-lib                                         # PoP Token Lib Parent Directory
+    │    ├── poptoken-builder                                # PoP Token Builder Lib Parent Directory
+    │    │   ├── java-lib-tmobile-oss-poptoken-builder       # Java PoP Token Builder Lib
+    │    │   ├── js-lib-tmobile-oss-poptoken-builder         # JavaScript PoP Token Builder Lib
+    │    │   ├── android-lib-tmobile-oss-poptoken-builder    # Android PoP Token Builder Lib
+    │    │   ├── ios-lib-tmobile-oss-poptoken-builder        # iOS PoP Token Builder Lib
+    │    │   └── C#-lib-tmobile-oss-poptoken-builder         # C# .NetCore PoP Token Builder Lib
+    │    │
+    │    └── poptoken-validator                              # PoP Token Validator Lib Parent Directory
+    │        └── java-lib-tmobile-oss-poptoken-validator     # Java PoP Token Validator Lib
+    │
+    └── encryption-lib                                       # Encryption (JWE) Lib Parent Directory
+        └── C#-Encryption-Lib                                # C# Encryption Lib
+            ├── encyption-lib 				     # C# Encryption Lib .NET 4.8 Class Library
+            ├── encyption-lib.test 			     # C# Encryption Lib .NET 4.8 MS Test
+            ├── encyption-lib-core                           # C# Encryption Lib .NET Core 3.1 Standard Library 2.0
+            └── encyption-lib-core.test                      # C# Encryption Lib .NET Core 3.1 MS Test
 ```
 
 ## Available Libraries 

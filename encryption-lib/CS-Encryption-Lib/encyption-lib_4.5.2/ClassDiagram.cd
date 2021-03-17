@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="com.tmobile.oss.security.taap.jwe.Constants">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.Encryption" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Encryption.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.EncryptionException">
+    <Position X="0.5" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception\EncryptionException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.InvalidHeaderException">
+    <Position X="0.75" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exception\InvalidHeaderException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.KeyResolver" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAYCAIAAACAAAABABECAAACAAAAIAAAAQAACAABAACA=</HashCode>
+      <FileName>KeyResolver.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.Jwks">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Jwks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="com.tmobile.oss.security.taap.jwe.JwksService" BaseTypeListCollapsed="true">
+    <Position X="5" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAAAABAAAAAA=</HashCode>
+      <FileName>Services\JwksService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.178" Collapsed="true" />
+  </Class>
+  <Interface Name="com.tmobile.oss.security.taap.jwe.IEncryption">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>IEncryption.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.tmobile.oss.security.taap.jwe.IKeyResolver">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAABACAAACAAAAIAAAAAAAAAABAACA=</HashCode>
+      <FileName>IKeyResolver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="com.tmobile.oss.security.taap.jwe.IJwksService">
+    <Position X="5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IJwksService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>com.tmobile.oss.security.taap.jwe</AssemblyName>
+    <RootNamespace>com.tmobile.oss.security.taap.jwe</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Carl Prothman</Authors>
+    <Company>T-Mobile</Company>
+    <Product>JSON Web Encryption (JWE) Builder</Product>
+    <Description>This component will encrypt your PII data as a JWE token using a public RSA or EC key.</Description>
+    <Copyright>© 2020 T-Mobile</Copyright>
+    <PackageReleaseNotes>JWE Builder</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/tmobile/tmobile-api-security-lib</PackageProjectUrl>
+    <PackageIcon>T-Mobile.png</PackageIcon>
+    <RepositoryUrl>https://github.com/cprothm1/tmobile-api-security-lib</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <NeutralLanguage />
+    <PackageTags>JWE, RSA, RSA_OAEP_256, A256GCM</PackageTags>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <Version>1.0.4</Version>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <ApplicationIcon>T-Mobile.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\PublishProfiles\**" />
+    <EmbeddedResource Remove="Properties\PublishProfiles\**" />
+    <None Remove="Properties\PublishProfiles\**" />
+    <None Include="T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="T-Mobile.ico" />
+    <None Remove="T-Mobile.png" />
+    <None Remove="T-Mobile.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="jose-jwt" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <Content Include="T-Mobile.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="T-Mobile.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
